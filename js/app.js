@@ -534,7 +534,7 @@ function populateDwellersList() {
     
     // Get dweller IDs that are exploring in wasteland teams
     const exploringDwellerIds = new Set();
-    const wastelandTeams = currentData.wasteland?.teams || currentData.wasteland || [];
+    const wastelandTeams = currentData.vault?.wasteland?.teams || [];
     wastelandTeams.forEach(team => {
         if (team.members && Array.isArray(team.members)) {
             team.members.forEach(member => {
@@ -792,16 +792,16 @@ function updateDwellerData() {
         if (!dweller.equipedWeapon) dweller.equipedWeapon = {};
         dweller.equipedWeapon.id = weaponElem.value;
         dweller.equipedWeapon.type = 'Weapon';
-        // Also update if spelled correctly
-        if (dweller.equippedWeapon) dweller.equippedWeapon.id = weaponElem.value;
+        dweller.equipedWeapon.hasBeenAssigned = false;
+        dweller.equipedWeapon.hasRandonWeaponBeenAssigned = false;
     }
     
     if (outfitElem && outfitElem.value) {
         if (!dweller.equipedOutfit) dweller.equipedOutfit = {};
         dweller.equipedOutfit.id = outfitElem.value;
         dweller.equipedOutfit.type = 'Outfit';
-        // Also update if spelled correctly
-        if (dweller.equippedOutfit) dweller.equippedOutfit.id = outfitElem.value;
+        dweller.equipedOutfit.hasBeenAssigned = false;
+        dweller.equipedOutfit.hasRandonWeaponBeenAssigned = false;
     }
     
     jsonEditor.value = JSON.stringify(currentData, null, 2);
@@ -863,14 +863,14 @@ function populateWastelandTeams() {
     const teamsList = document.getElementById('wastelandTeamsList');
     if (!teamsList) return;
     
-    if (!currentData || !currentData.wasteland) {
+    if (!currentData || !currentData.vault || !currentData.vault.wasteland) {
         teamsList.innerHTML = '<div class="empty-state">📂 No vault loaded yet!<br><small>Upload a save file to get started</small></div>';
         return;
     }
     
     teamsList.innerHTML = '';
     
-    const teams = currentData.wasteland.teams || currentData.wasteland || [];
+    const teams = currentData.vault.wasteland.teams || [];
     
     if (teams.length === 0) {
         teamsList.innerHTML = '<div class="empty-state">🏜️ No teams in the wasteland<br><small>Send dwellers on quests to see them here</small></div>';
@@ -919,7 +919,7 @@ function selectWastelandTeam(team, index) {
 }
 
 function updateWastelandTeam() {
-    if (!currentWastelandTeam || !currentData.wasteland) return;
+    if (!currentWastelandTeam || !currentData.vault.wasteland) return;
     
     const team = currentWastelandTeam.data;
     
