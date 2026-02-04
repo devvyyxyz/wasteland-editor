@@ -234,28 +234,51 @@ function restoreBackup(index) {
 
 // Toast notification
 function showToast(message) {
+    // Create toast container if it doesn't exist
+    let toastContainer = document.getElementById('toast-container');
+    if (!toastContainer) {
+        toastContainer = document.createElement('div');
+        toastContainer.id = 'toast-container';
+        toastContainer.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 10000;
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 10px;
+            pointer-events: none;
+        `;
+        document.body.appendChild(toastContainer);
+    }
+    
     const toast = document.createElement('div');
+    toast.className = 'toast-message';
     toast.style.cssText = `
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
         background: #8B4513;
         color: #F5DEB3;
         padding: 15px 20px;
         border-radius: 5px;
         font-family: Georgia, serif;
-        z-index: 10000;
         border: 2px solid #654321;
         box-shadow: 0 4px 8px rgba(0,0,0,0.3);
         animation: slideIn 0.3s ease-out;
+        pointer-events: auto;
+        max-width: 300px;
     `;
     
     toast.textContent = message;
-    document.body.appendChild(toast);
+    toastContainer.appendChild(toast);
     
     setTimeout(() => {
         toast.style.animation = 'slideOut 0.3s ease-out';
-        setTimeout(() => toast.remove(), 300);
+        setTimeout(() => {
+            toast.remove();
+            // Remove container if no toasts left
+            if (toastContainer.children.length === 0) {
+                toastContainer.remove();
+            }
+        }, 300);
     }, 3000);
 }
 
