@@ -215,7 +215,10 @@
                         <div class="dwellers-list-container">
                             <h3>Dwellers</h3>
                             <input type="text" id="dwellerSearch" class="search-input" placeholder="Search dwellers...">
-                            <div id="dwellersList" class="dwellers-list"></div>
+                            <div id="dwellersEmptyState" class="empty-state">
+                                <i class="fas fa-folder"></i> No vault loaded yet!<br><small>Upload a save file to get started</small>
+                            </div>
+                            <div id="dwellersList" class="dwellers-list" style="display:none;"></div>
                         </div>
                         <div id="dwellerDetails" class="dweller-details" style="display:none;">
                             <a href="#" class="back-link">← Back</a>
@@ -338,7 +341,10 @@
                         <div class="rooms-list-container">
                             <h3><i class="fas fa-door-open"></i> Vault Rooms</h3>
                             <input type="text" id="roomSearch" class="search-input" placeholder="Search rooms...">
-                            <div id="roomsList" class="rooms-list"></div>
+                            <div id="roomsEmptyState" class="empty-state">
+                                <i class="fas fa-folder"></i> No vault loaded yet!<br><small>Upload a save file to get started</small>
+                            </div>
+                            <div id="roomsList" class="rooms-list" style="display:none;"></div>
                         </div>
                         
                         <div id="roomDetails" class="room-details" style="display:none;">
@@ -441,7 +447,10 @@
                 <!-- WASTELAND TAB -->
                 <div id="wasteland" class="tab-content">
                     <div class="wasteland-panel">
-                        <div class="panel-section">
+                        <div id="wastelandEmptyState" class="empty-state">
+                            <i class="fas fa-folder"></i> No vault loaded yet!<br><small>Upload a save file to get started</small>
+                        </div>
+                        <div id="wastelandContent" class="panel-section" style="display:none;">
                             <h3><i class="fas fa-people-group"></i> Wasteland Teams</h3>
                             <input type="text" id="wastelandSearch" class="search-input" placeholder="Search teams...">
                             <div id="wastelandTeamsList" class="wasteland-teams-list"></div>
@@ -525,11 +534,15 @@
                 <!-- INVENTORY TAB -->
                 <div id="inventory" class="tab-content">
                     <div class="inventory-panel">
+                        <div id="inventoryEmptyState" class="empty-state">
+                            <i class="fas fa-folder"></i> No vault loaded yet!<br><small>Upload a save file to get started</small>
+                        </div>
+                        <div id="inventoryContent" style="display:none;">
                         <!-- Inventory Subtabs -->
                         <div class="inventory-subtabs">
-                            <button class="inventory-subtab-btn active" data-subtab="weapons">🔫 Weapons</button>
-                            <button class="inventory-subtab-btn" data-subtab="outfits">👔 Outfits</button>
-                            <button class="inventory-subtab-btn" data-subtab="junk">🔧 Junk</button>
+                            <button class="inventory-subtab-btn active" data-subtab="weapons"><i class="fas fa-gun"></i> Weapons</button>
+                            <button class="inventory-subtab-btn" data-subtab="outfits"><i class="fas fa-vest"></i> Outfits</button>
+                            <button class="inventory-subtab-btn" data-subtab="junk"><i class="fas fa-wrench"></i> Junk</button>
                         </div>
 
                         <!-- Weapons Inventory -->
@@ -538,7 +551,7 @@
                                 <h3><i class="fas fa-gun"></i> Weapon Storage</h3>
                                 <div class="inventory-actions">
                                     <input type="text" id="weaponSearch" class="search-input" placeholder="Search weapons...">
-                                    <button class="btn btn-secondary" id="addWeaponBtn">➕ Add Weapon</button>
+                                    <button class="btn btn-secondary" id="addWeaponBtn"><i class="fas fa-plus"></i> Add Weapon</button>
                                 </div>
                             </div>
                             <div id="weaponsList" class="inventory-list"></div>
@@ -550,7 +563,7 @@
                                 <h3><i class="fas fa-shirt"></i> Outfit Storage</h3>
                                 <div class="inventory-actions">
                                     <input type="text" id="outfitSearch" class="search-input" placeholder="Search outfits...">
-                                    <button class="btn btn-secondary" id="addOutfitBtn">➕ Add Outfit</button>
+                                    <button class="btn btn-secondary" id="addOutfitBtn"><i class="fas fa-plus"></i> Add Outfit</button>
                                 </div>
                             </div>
                             <div id="outfitsList" class="inventory-list"></div>
@@ -562,10 +575,11 @@
                                 <h3><i class="fas fa-box"></i> Junk Storage</h3>
                                 <div class="inventory-actions">
                                     <input type="text" id="junkSearch" class="search-input" placeholder="Search junk...">
-                                    <button class="btn btn-secondary" id="addJunkBtn">➕ Add Junk</button>
+                                    <button class="btn btn-secondary" id="addJunkBtn"><i class="fas fa-plus"></i> Add Junk</button>
                                 </div>
                             </div>
                             <div id="junkList" class="inventory-list"></div>
+                        </div>
                         </div>
                     </div>
                 </div>

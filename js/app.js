@@ -225,6 +225,12 @@ function handleFileUpload(e) {
                 populateSeasonPassData();
                 populateVaultStats();
                 
+                // Show content, hide empty states
+                showWastelandContent();
+                showInventoryContent();
+                showDwellersContent();
+                showRoomsContent();
+                
                 // Create initial backup
                 createBackup('Initial Load');
             } else {
@@ -310,6 +316,27 @@ function disableEditorUI() {
     const inputs = document.querySelectorAll('.tab-content input, .tab-content select, .tab-content button');
     inputs.forEach(input => input.disabled = true);
     document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('editor-disabled'));
+    
+    // Hide wasteland and inventory content
+    const wastelandContent = document.getElementById('wastelandContent');
+    const inventoryContent = document.getElementById('inventoryContent');
+    const dwellersList = document.getElementById('dwellersList');
+    const roomsList = document.getElementById('roomsList');
+    
+    const wastelandEmptyState = document.getElementById('wastelandEmptyState');
+    const inventoryEmptyState = document.getElementById('inventoryEmptyState');
+    const dwellersEmptyState = document.getElementById('dwellersEmptyState');
+    const roomsEmptyState = document.getElementById('roomsEmptyState');
+    
+    if (wastelandContent) wastelandContent.style.display = 'none';
+    if (inventoryContent) inventoryContent.style.display = 'none';
+    if (dwellersList) dwellersList.style.display = 'none';
+    if (roomsList) roomsList.style.display = 'none';
+    
+    if (wastelandEmptyState) wastelandEmptyState.style.display = 'block';
+    if (inventoryEmptyState) inventoryEmptyState.style.display = 'block';
+    if (dwellersEmptyState) dwellersEmptyState.style.display = 'block';
+    if (roomsEmptyState) roomsEmptyState.style.display = 'block';
     
     // Reset all fields to defaults
     resetEditorFields();
@@ -1005,6 +1032,42 @@ function populateInventory() {
     populateOutfits();
     // Populate junk
     populateJunk();
+}
+
+function showWastelandContent() {
+    const emptyState = document.getElementById('wastelandEmptyState');
+    const content = document.getElementById('wastelandContent');
+    if (emptyState && content && currentData) {
+        emptyState.style.display = 'none';
+        content.style.display = 'block';
+    }
+}
+
+function showInventoryContent() {
+    const emptyState = document.getElementById('inventoryEmptyState');
+    const content = document.getElementById('inventoryContent');
+    if (emptyState && content && currentData) {
+        emptyState.style.display = 'none';
+        content.style.display = 'block';
+    }
+}
+
+function showDwellersContent() {
+    const emptyState = document.getElementById('dwellersEmptyState');
+    const list = document.getElementById('dwellersList');
+    if (emptyState && list && currentData) {
+        emptyState.style.display = 'none';
+        list.style.display = 'block';
+    }
+}
+
+function showRoomsContent() {
+    const emptyState = document.getElementById('roomsEmptyState');
+    const list = document.getElementById('roomsList');
+    if (emptyState && list && currentData) {
+        emptyState.style.display = 'none';
+        list.style.display = 'block';
+    }
 }
 
 function populateWeapons() {
