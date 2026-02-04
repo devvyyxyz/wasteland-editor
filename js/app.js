@@ -155,6 +155,7 @@ function handleFileUpload(e) {
                 
                 jsonEditor.value = JSON.stringify(currentData, null, 2);
                 updateFileSize();
+                enableEditorUI();
                 populateVaultData();
                 populateDwellersList();
                 populateRoomsList();
@@ -166,6 +167,7 @@ function handleFileUpload(e) {
                 const errorMsg = result.error || 'Unknown error parsing file';
                 errorMessage.textContent = errorMsg;
                 currentData = null;
+                disableEditorUI();
             }
             
         } catch (error) {
@@ -233,6 +235,19 @@ function restoreBackup(index) {
 }
 
 // Toast notification
+// Enable/Disable Editor UI
+function enableEditorUI() {
+    const inputs = document.querySelectorAll('.tab-content input, .tab-content select, .tab-content button');
+    inputs.forEach(input => input.disabled = false);
+    document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('editor-disabled'));
+}
+
+function disableEditorUI() {
+    const inputs = document.querySelectorAll('.tab-content input, .tab-content select, .tab-content button');
+    inputs.forEach(input => input.disabled = true);
+    document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('editor-disabled'));
+}
+
 function showToast(message) {
     // Create toast container if it doesn't exist
     let toastContainer = document.getElementById('toast-container');
@@ -311,14 +326,23 @@ function populateVaultData() {
 
 // Populate Dwellers List
 function populateDwellersList() {
-    if (!currentData || !currentData.dwellers) return;
-    
     const dwellersList = document.getElementById('dwellersList');
     if (!dwellersList) return;
+    
+    if (!currentData || !currentData.dwellers) {
+        dwellersList.innerHTML = '<div class="empty-state">📂 No vault loaded yet!<br><small>Upload a save file to get started</small></div>';
+        return;
+    }
     
     dwellersList.innerHTML = '';
     
     const dwellers = currentData.dwellers.dwellers || [];
+    
+    if (dwellers.length === 0) {
+        dwellersList.innerHTML = '<div class="empty-state">😔 No dwellers found in this vault</div>';
+        return;
+    }
+    
     dwellers.forEach((dweller, index) => {
         const item = document.createElement('div');
         item.className = 'dweller-item';
@@ -457,14 +481,23 @@ function saveDwellerChanges() {
 
 // Populate Rooms List
 function populateRoomsList() {
-    if (!currentData || !currentData.vault) return;
-    
     const roomsList = document.getElementById('roomsList');
     if (!roomsList) return;
+    
+    if (!currentData || !currentData.vault) {
+        roomsList.innerHTML = '<div class="empty-state">📂 No vault loaded yet!<br><small>Upload a save file to get started</small></div>';
+        return;
+    }
     
     roomsList.innerHTML = '';
     
     const rooms = currentData.vault.rooms || [];
+    
+    if (rooms.length === 0) {
+        roomsList.innerHTML = '<div class="empty-state">🏗️ No rooms listed here :(<br><small>Your vault appears to be empty</small></div>';
+        return;
+    }
+    
     rooms.forEach((room, index) => {
         const item = document.createElement('div');
         item.className = 'dweller-item room-item';
@@ -1278,6 +1311,11 @@ document.addEventListener('DOMContentLoaded', () => {
             closeRoomEditor();
         }
     });
+    
+    // Initialize UI in disabled state
+    disableEditorUI();
+    populateDwellersList();
+    populateRoomsList();
     
     console.log('Wasteland Editor Enhanced - Rustic Paper Edition loaded successfully');
     showToast('Wasteland Editor Ready');
