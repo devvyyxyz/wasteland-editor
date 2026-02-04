@@ -725,11 +725,28 @@ function selectDweller(dweller, index) {
         trackFieldChange('dwellerHappiness');
     }
     
-    // Appearance
+    // Appearance - Convert integer color values to hex
     const skinColorElem = document.getElementById('dwellerSkinColor');
     const hairColorElem = document.getElementById('dwellerHairColor');
-    if (skinColorElem && dweller.skinColor) skinColorElem.value = dweller.skinColor;
-    if (hairColorElem && dweller.hairColor) hairColorElem.value = dweller.hairColor;
+    
+    if (skinColorElem && dweller.skinColor !== undefined) {
+        // Convert integer (ARGB format) to hex color
+        // Example: 4290152550 → 0xFFE5A676 → #e5a676
+        const hexColor = '#' + (dweller.skinColor & 0xFFFFFF).toString(16).padStart(6, '0');
+        skinColorElem.value = hexColor;
+        storeOriginalValue('dwellerSkinColor', hexColor);
+    }
+    
+    if (hairColorElem && dweller.hairColor !== undefined) {
+        // Convert integer (ARGB format) to hex color
+        // Example: 4285094227 → 0xFFAB8D53 → #ab8d53
+        const hexColor = '#' + (dweller.hairColor & 0xFFFFFF).toString(16).padStart(6, '0');
+        hairColorElem.value = hexColor;
+        storeOriginalValue('dwellerHairColor', hexColor);
+    }
+    
+    trackFieldChange('dwellerSkinColor');
+    trackFieldChange('dwellerHairColor');
     
     // Update SPECIAL stats - array of objects with {value, mod, exp}
     const statsArray = dweller.stats?.stats || [];
@@ -787,11 +804,23 @@ function updateDwellerData() {
     const happinessElem = document.getElementById('dwellerHappiness');
     if (happinessElem) dweller.happiness.happinessValue = parseInt(happinessElem.value) || 50;
     
-    // Appearance
+    // Appearance - Convert hex colors back to integer (ARGB format)
     const skinColorElem = document.getElementById('dwellerSkinColor');
     const hairColorElem = document.getElementById('dwellerHairColor');
-    if (skinColorElem) dweller.skinColor = skinColorElem.value;
-    if (hairColorElem) dweller.hairColor = hairColorElem.value;
+    
+    if (skinColorElem && skinColorElem.value) {
+        // Convert hex color (#RRGGBB) to integer with full alpha channel
+        // Example: #3498db → 0xFF3498DB → 4283215067
+        const rgb = parseInt(skinColorElem.value.replace('#', ''), 16);
+        dweller.skinColor = (0xFF000000 | rgb) >>> 0; // >>> 0 converts to unsigned 32-bit integer
+    }
+    
+    if (hairColorElem && hairColorElem.value) {
+        // Convert hex color (#RRGGBB) to integer with full alpha channel
+        // Example: #2c1810 → 0xFF2C1810 → 4283215887
+        const rgb = parseInt(hairColorElem.value.replace('#', ''), 16);
+        dweller.hairColor = (0xFF000000 | rgb) >>> 0; // >>> 0 converts to unsigned 32-bit integer
+    }
     
     // SPECIAL stats - array of objects with {value, mod, exp}
     if (!dweller.stats) dweller.stats = {};
