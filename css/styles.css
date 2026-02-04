@@ -1995,7 +1995,7 @@ footer p {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(139, 69, 19, 0.8);
     z-index: 1000;
     justify-content: center;
     align-items: center;
@@ -2006,7 +2006,7 @@ footer p {
 }
 
 .inventory-modal-content {
-    background: var(--secondary-bg);
+    background: var(--paper-color);
     padding: 30px;
     border-radius: 12px;
     border: 2px solid var(--primary-color);

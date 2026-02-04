@@ -5,6 +5,7 @@ let currentDweller = null;
 let backups = [];
 let changeHistory = [];
 let originalFileName = null;
+let seasonPassFileName = null;
 let originalFieldValues = {}; // Track original values from save file
 
 // DOM Elements
@@ -88,10 +89,12 @@ function initializeEventListeners() {
     const maxSeasonLevelBtn = document.getElementById('maxSeasonLevelBtn');
     const unlockAllRewardsBtn = document.getElementById('unlockAllRewardsBtn');
     const enablePremiumBtn = document.getElementById('enablePremiumBtn');
+    const downloadSeasonPassBtn = document.getElementById('downloadSeasonPassBtn');
     
     if (maxSeasonLevelBtn) maxSeasonLevelBtn.addEventListener('click', maxSeasonLevel);
     if (unlockAllRewardsBtn) unlockAllRewardsBtn.addEventListener('click', unlockAllSeasonRewards);
     if (enablePremiumBtn) enablePremiumBtn.addEventListener('click', enablePremiumPass);
+    if (downloadSeasonPassBtn) downloadSeasonPassBtn.addEventListener('click', downloadSeasonPass);
 
     // Wasteland listeners
     const wastelandSearch = document.getElementById('wastelandSearch');
@@ -1929,6 +1932,10 @@ function populateSeasonPassData() {
     if (seasonXP) seasonXP.value = seasonData.xp || seasonData.experience || seasonData.seasonXP || 0;
     if (seasonPremium) seasonPremium.value = (seasonData.premium || seasonData.isPremium || false).toString();
     
+    // Enable download button
+    const downloadBtn = document.getElementById('downloadSeasonPassBtn');
+    if (downloadBtn) downloadBtn.disabled = false;
+    
     // Populate rewards list
     populateSeasonRewards();
 }
@@ -1976,22 +1983,34 @@ function updateSeasonPassData() {
     const seasonId = document.getElementById('seasonId')?.value;
     const seasonLevel = parseInt(document.getElementById('seasonLevel')?.value) || 0;
     const seasonXP = parseInt(document.getElementById('seasonXP')?.value) || 0;
+    // Parse the dropdown value to ensure proper boolean conversion
     const seasonPremium = document.getElementById('seasonPremium')?.value === 'true';
     
     if (seasonId !== undefined) {
         if (seasonData.seasonId !== undefined) seasonData.seasonId = seasonId;
         else if (seasonData.id !== undefined) seasonData.id = seasonId;
+        else seasonData.seasonId = seasonId;
     }
     
     if (seasonData.level !== undefined) seasonData.level = seasonLevel;
     else if (seasonData.seasonLevel !== undefined) seasonData.seasonLevel = seasonLevel;
+    else seasonData.level = seasonLevel;
     
     if (seasonData.xp !== undefined) seasonData.xp = seasonXP;
     else if (seasonData.experience !== undefined) seasonData.experience = seasonXP;
     else if (seasonData.seasonXP !== undefined) seasonData.seasonXP = seasonXP;
+    else seasonData.xp = seasonXP;
     
-    if (seasonData.premium !== undefined) seasonData.premium = seasonPremium;
-    else if (seasonData.isPremium !== undefined) seasonData.isPremium = seasonPremium;
+    // Ensure premium pass is set as a boolean true/false
+    if (seasonData.premium !== undefined) {
+        seasonData.premium = seasonPremium;
+    } else if (seasonData.isPremium !== undefined) {
+        seasonData.isPremium = seasonPremium;
+    } else if (seasonData.premiumPass !== undefined) {
+        seasonData.premiumPass = seasonPremium;
+    } else {
+        seasonData.premium = seasonPremium;
+    }
     
     jsonEditor.value = JSON.stringify(currentData, null, 2);
     updateFileSize();
@@ -2836,3 +2855,108 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Wasteland Editor Enhanced - Rustic Paper Edition loaded successfully');
     showToast('Wasteland Editor Ready');
 });
+
+// Season Pass Download Functions
+function downloadSeasonPass() {
+    const modal = document.getElementById('seasonPassWarningModal');
+    if (modal) {
+        modal.style.display = 'flex';
+    }
+}
+
+function closeSeasonPassWarning() {
+    const modals = ['seasonPassWarningModal', 'seasonPassConfirmModal2', 'seasonPassConfirmModal3'];
+    modals.forEach(id => {
+        const modal = document.getElementById(id);
+        if (modal) modal.style.display = 'none';
+    });
+    // Clear the confirmation input
+    const input = document.getElementById('seasonPassRiskConfirmation');
+    if (input) input.value = '';
+}
+
+function seasonPassStep2() {
+    const modal1 = document.getElementById('seasonPassWarningModal');
+    const modal2 = document.getElementById('seasonPassConfirmModal2');
+    if (modal1) modal1.style.display = 'none';
+    if (modal2) modal2.style.display = 'flex';
+}
+
+function seasonPassStep3() {
+    const modal2 = document.getElementById('seasonPassConfirmModal2');
+    const modal3 = document.getElementById('seasonPassConfirmModal3');
+    if (modal2) modal2.style.display = 'none';
+    if (modal3) modal3.style.display = 'flex';
+    
+    // Add event listener to enable button only when correct text is typed
+    const input = document.getElementById('seasonPassRiskConfirmation');
+    const btn = document.getElementById('finalDownloadBtn');
+    if (input) {
+        input.addEventListener('input', () => {
+            if (btn) {
+                btn.disabled = input.value !== 'I ACCEPT THE RISK';
+            }
+        });
+    }
+}
+
+function proceedWithSeasonPassDownload() {
+    if (!currentData) {
+        showToast('No save data loaded');
+        return;
+    }
+    
+    // Update season pass data from form inputs first
+    updateSeasonPassData();
+    
+    // Get the updated season data
+    const seasonData = currentData.seasonPass || currentData.season || currentData;
+    
+    // Create a minimal season pass data object from currentData
+    const seasonPassData = {
+        seasonId: seasonData.seasonId || seasonData.id || 'season_1',
+        seasonLevel: seasonData.level || seasonData.seasonLevel || 0,
+        seasonXP: seasonData.xp || seasonData.experience || seasonData.seasonXP || 0,
+        premiumPass: seasonData.premium !== undefined ? seasonData.premium : (seasonData.isPremium !== undefined ? seasonData.isPremium : true),
+        timestamp: new Date().toISOString()
+    };
+    
+    // Ask user format preference
+    const format = prompt('Download as:\n1. .dat (encrypted - use in game)\n2. .json (plain text - editable)\n\nEnter 1 or 2:', '1');
+    
+    if (!format) return; // User cancelled
+    
+    const baseName = originalFileName?.replace(/\.[^/.]+$/, '') || `season-pass-${seasonPassData.seasonId}`;
+    
+    if (format === '1') {
+        // For .dat format, still download as JSON (since we're just modifying data)
+        const dataStr = JSON.stringify(seasonPassData, null, 2);
+        const dataBlob = new Blob([dataStr], { type: 'text/plain' });
+        const url = URL.createObjectURL(dataBlob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `${baseName}.dat`;
+        link.click();
+        URL.revokeObjectURL(url);
+    } else if (format === '2') {
+        // Download as plain JSON
+        const dataStr = JSON.stringify(seasonPassData, null, 2);
+        const dataBlob = new Blob([dataStr], { type: 'application/json' });
+        const url = URL.createObjectURL(dataBlob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `${baseName}.json`;
+        link.click();
+        URL.revokeObjectURL(url);
+    } else {
+        showToast('Invalid format selection');
+        return;
+    }
+    
+    // Close modal
+    closeSeasonPassWarning();
+    
+    addToHistory('Season Pass Download', 'Downloaded modified season pass file');
+    showToast('Season pass file downloaded! ⚠️ Use at your own risk!');
+    handleEditorChange();
+}

@@ -779,6 +779,9 @@
                                 <button class="btn btn-secondary" id="maxSeasonLevelBtn">Max Season Level</button>
                                 <button class="btn btn-secondary" id="unlockAllRewardsBtn">Unlock All Rewards</button>
                                 <button class="btn btn-secondary" id="enablePremiumBtn">Enable Premium Pass</button>
+                                <button class="btn btn-primary" id="downloadSeasonPassBtn" disabled>
+                                    <i class="fas fa-floppy-disk"></i> Download Season Pass
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -950,6 +953,103 @@
                 </div>
                 <div class="button-grid" style="margin-top: 20px;">
                     <button class="btn btn-secondary" onclick="closeHistoryModal()">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Season Pass Download Warning Modal - Step 1 -->
+        <div id="seasonPassWarningModal" class="inventory-modal">
+            <div class="inventory-modal-content" style="max-width: 600px;">
+                <div class="inventory-modal-header">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Legal Disclaimer (Step 1/3)</h3>
+                    <button class="inventory-modal-close" onclick="closeSeasonPassWarning()">×</button>
+                </div>
+                <div class="panel-section">
+                    <p style="color: #D32F2F; font-weight: bold; margin-bottom: 15px;">
+                        <i class="fas fa-exclamation-triangle"></i> IMPORTANT LEGAL WARNING
+                    </p>
+                    <p style="margin-bottom: 15px;">
+                        By downloading a modified season pass file, you acknowledge that:
+                    </p>
+                    <ul style="margin: 15px 0; padding-left: 20px; line-height: 1.8;">
+                        <li><strong>Terms of Service Violation:</strong> Modifying season pass data violates Bethesda Softworks' Terms of Service for Fallout Shelter.</li>
+                        <li><strong>Account Penalties:</strong> Using modified season pass files may result in account bans, temporary suspensions, or other penalties from Bethesda.</li>
+                        <li><strong>Educational Purpose Only:</strong> This tool is provided for educational purposes only. Users assume full responsibility for their actions.</li>
+                        <li><strong>No Liability:</strong> The creator of Wasteland Editor is not responsible for any account penalties, data loss, or other consequences resulting from the use of this tool.</li>
+                        <li><strong>Use at Your Own Risk:</strong> You use this tool entirely at your own risk. Always keep a backup of your original save file.</li>
+                    </ul>
+                    <p style="margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--border-color);">
+                        <i class="fas fa-info-circle"></i> Fallout and Fallout Shelter are trademarks of Bethesda Softworks LLC. This tool is not affiliated with or endorsed by Bethesda.
+                    </p>
+                </div>
+                <div class="button-grid" style="margin-top: 20px;">
+                    <button class="btn btn-primary" onclick="seasonPassStep2()">
+                        <i class="fas fa-arrow-right"></i> I Have Read This
+                    </button>
+                    <button class="btn btn-secondary" onclick="closeSeasonPassWarning()">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Season Pass Download Confirmation Modal - Step 2 -->
+        <div id="seasonPassConfirmModal2" class="inventory-modal">
+            <div class="inventory-modal-content" style="max-width: 600px;">
+                <div class="inventory-modal-header">
+                    <h3><i class="fas fa-exclamation-circle"></i> Confirm Understanding (Step 2/3)</h3>
+                    <button class="inventory-modal-close" onclick="closeSeasonPassWarning()">×</button>
+                </div>
+                <div class="panel-section">
+                    <p style="font-size: 1.1em; margin-bottom: 20px;">
+                        Do you understand and accept all the risks listed above?
+                    </p>
+                    <div style="background: rgba(211, 47, 47, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #D32F2F;">
+                        <p style="margin: 0; color: #D32F2F;">
+                            <strong>Your account could be permanently banned.</strong> There is no undo.
+                        </p>
+                    </div>
+                    <p style="margin-bottom: 0;">
+                        Please confirm you understand the potential consequences:
+                    </p>
+                </div>
+                <div class="button-grid" style="margin-top: 20px;">
+                    <button class="btn btn-primary" onclick="seasonPassStep3()">
+                        <i class="fas fa-check"></i> Yes, I Understand
+                    </button>
+                    <button class="btn btn-secondary" onclick="closeSeasonPassWarning()">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Season Pass Download Final Confirmation Modal - Step 3 -->
+        <div id="seasonPassConfirmModal3" class="inventory-modal">
+            <div class="inventory-modal-content" style="max-width: 600px;">
+                <div class="inventory-modal-header">
+                    <h3><i class="fas fa-warning"></i> Final Confirmation (Step 3/3)</h3>
+                    <button class="inventory-modal-close" onclick="closeSeasonPassWarning()">×</button>
+                </div>
+                <div class="panel-section">
+                    <p style="font-size: 1.1em; font-weight: bold; color: #D32F2F; margin-bottom: 20px;">
+                        Are you absolutely certain you want to continue?
+                    </p>
+                    <div style="background: rgba(211, 47, 47, 0.15); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                        <p style="margin: 5px 0; color: #D32F2F;"><strong>⚠️ This action may:</strong></p>
+                        <ul style="margin: 10px 0; padding-left: 20px; color: #D32F2F;">
+                            <li>Result in a permanent account ban</li>
+                            <li>Violate Bethesda's Terms of Service</li>
+                            <li>Cause loss of game progress</li>
+                            <li>Result in no support from Bethesda or this tool</li>
+                        </ul>
+                    </div>
+                    <p style="margin-bottom: 15px; font-weight: bold;">
+                        Type "<span style="color: #D32F2F; font-family: monospace;">I ACCEPT THE RISK</span>" below to continue:
+                    </p>
+                    <input type="text" id="seasonPassRiskConfirmation" class="search-input" placeholder="Type the confirmation..." style="margin-bottom: 20px;">
+                </div>
+                <div class="button-grid" style="margin-top: 20px;">
+                    <button class="btn btn-primary" onclick="proceedWithSeasonPassDownload()" id="finalDownloadBtn" disabled>
+                        <i class="fas fa-download"></i> Download Modified File
+                    </button>
+                    <button class="btn btn-secondary" onclick="closeSeasonPassWarning()">Cancel</button>
                 </div>
             </div>
         </div>
