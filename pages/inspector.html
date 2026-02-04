@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fallout Shelter Save Inspector - Read-Only Analysis</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎮 Fallout Shelter Save Inspector</h1>
+            <p>READ-ONLY Analysis Tool - Educational & Research Purposes Only</p>
+            
+            <div class="nav-section">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-link">Editor</a>
+                    <a href="inspector.html" class="nav-link active">File Inspector</a>
+                </div>
+            </div>
+        </header>
+
+        <div class="notice">
+            <strong>⚠️ IMPORTANT:</strong> This tool performs READ-ONLY inspection only. 
+            No modifications are made. This is for analysis and educational purposes. 
+            Respect game licenses and Terms of Service.
+        </div>
+
+        <div class="upload-section">
+            <label class="upload-label">
+                📁 Select Save File to Analyze
+            </label>
+            <input type="file" id="fileInput" accept=".sav,.dat,.json">
+            <p style="margin-top: 15px; color: #a0a0a0; font-size: 0.9em;">
+                Supported: .sav, .dat, .json files
+            </p>
+        </div>
+
+        <div id="statusMessage" class="status"></div>
+
+        <div id="resultsSection" class="results-section">
+            <!-- File Information -->
+            <div class="section">
+                <h2>📊 File Information</h2>
+                <div class="file-info">
+                    <div class="info-item">
+                        <strong>File Name</strong>
+                        <code id="fileName">-</code>
+                    </div>
+                    <div class="info-item">
+                        <strong>File Size</strong>
+                        <code id="fileSize">-</code>
+                    </div>
+                    <div class="info-item">
+                        <strong>Encoding</strong>
+                        <code id="encoding">-</code>
+                    </div>
+                    <div class="info-item">
+                        <strong>Magic Bytes</strong>
+                        <code id="magicBytes">-</code>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analysis Results -->
+            <div class="section">
+                <h2>🔍 Analysis Results</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="label">Likely Encrypted</div>
+                        <div class="value" id="isEncrypted">-</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="label">Likely Compressed</div>
+                        <div class="value" id="isCompressed">-</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="label">Shannon Entropy</div>
+                        <div class="value" id="entropy">-</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Warnings -->
+            <div class="section">
+                <h2>⚠️ Analysis Notes</h2>
+                <ul id="warningsList" style="margin-left: 20px; list-style: none;">
+                </ul>
+            </div>
+
+            <!-- Readable Strings -->
+            <div class="section">
+                <h2>📝 Readable Strings (Read-Only)</h2>
+                <p style="color: #a0a0a0; margin-bottom: 15px;">
+                    Showing up to 50 readable ASCII strings found in the file. 
+                    This is for analysis only.
+                </p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Offset</th>
+                            <th>Length</th>
+                            <th>String Content</th>
+                        </tr>
+                    </thead>
+                    <tbody id="stringsTable">
+                        <tr><td colspan="3">No strings found</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Statistics -->
+            <div class="section">
+                <h2>📈 Statistics</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="label">Total Readable Strings</div>
+                        <div class="value" id="totalStrings">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="label">Largest String</div>
+                        <div class="value" id="largestString">0 chars</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="label">Estimated Data Blocks</div>
+                        <div class="value" id="dataBlocks">0</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Export Options -->
+            <div class="section">
+                <h2>💾 Export Analysis</h2>
+                <div class="button-group">
+                    <button onclick="exportJSON()">📄 Export as JSON</button>
+                    <button onclick="exportHTML()">🌐 Export as HTML</button>
+                    <button onclick="location.reload()">🔄 Analyze Another File</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="disclaimer">
+            <h3>⚠️ LEGAL & ETHICAL DISCLAIMER</h3>
+            <ul>
+                <li>✅ <strong>Allowed:</strong> Analyzing your own save files for research</li>
+                <li>✅ <strong>Allowed:</strong> Understanding file structures for educational purposes</li>
+                <li>✅ <strong>Allowed:</strong> Creating read-only inspection tools</li>
+                <li>❌ <strong>NOT Allowed:</strong> Bypassing premium/paid content restrictions</li>
+                <li>❌ <strong>NOT Allowed:</strong> Modifying monetization or entitlement flags</li>
+                <li>❌ <strong>NOT Allowed:</strong> Violating Bethesda's Terms of Service</li>
+                <li>❌ <strong>NOT Allowed:</strong> Distributing modified saves with paid content unlocked</li>
+            </ul>
+            <p style="margin-top: 15px;">
+                This tool respects game licenses and intellectual property rights. 
+                Use responsibly for legitimate purposes only.
+            </p>
+        </div>
+    </div>
+
+    <script src="../js/save-inspector.js"></script>
+    <script>
+        let inspector = null;
+
+        document.getElementById('fileInput').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            showStatus('Processing...', 'info');
+
+            try {
+                const arrayBuffer = await file.arrayBuffer();
+                inspector = new SaveFileInspector();
+                
+                if (!inspector.loadEncodedFile(arrayBuffer, file.name)) {
+                    showStatus('Error: Could not load file', 'error');
+                    return;
+                }
+
+                displayResults();
+                showStatus('Analysis complete!', 'success');
+                document.getElementById('resultsSection').classList.add('active');
+            } catch (error) {
+                showStatus(`Error: ${error.message}`, 'error');
+                console.error(error);
+            }
+        });
+
+        function displayResults() {
+            const report = inspector.generateReport();
+            
+            // File info
+            document.getElementById('fileName').textContent = report.fileName;
+            document.getElementById('fileSize').textContent = 
+                `${(report.fileSize / 1024).toFixed(2)} KB`;
+            document.getElementById('encoding').textContent = report.encoding;
+            document.getElementById('magicBytes').textContent = 
+                report.analysis.magicBytes;
+
+            // Analysis
+            document.getElementById('isEncrypted').textContent = 
+                report.analysis.isLikelyEncrypted ? '⚠️ YES' : '✅ NO';
+            document.getElementById('isCompressed').textContent = 
+                report.analysis.isCompressed ? '✅ YES' : '❌ NO';
+            document.getElementById('entropy').textContent = 
+                report.statistics.entropy.toFixed(2);
+
+            // Warnings
+            const warningsList = document.getElementById('warningsList');
+            warningsList.innerHTML = report.warnings
+                .map(w => `<li style="margin-bottom: 8px;">
+                    <span class="warning">${w}</span>
+                </li>`)
+                .join('');
+
+            // Strings
+            const tbody = document.getElementById('stringsTable');
+            if (report.readableStrings.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="3" style="color: #a0a0a0;">No readable strings found</td></tr>';
+            } else {
+                tbody.innerHTML = report.readableStrings
+                    .map(s => `<tr>
+                        <td><code>0x${s.offset.toString(16).toUpperCase().padStart(8, '0')}</code></td>
+                        <td>${s.length}</td>
+                        <td><code>${escapeHtml(s.string)}</code></td>
+                    </tr>`)
+                    .join('');
+            }
+
+            // Statistics
+            document.getElementById('totalStrings').textContent = 
+                report.statistics.totalStrings;
+            document.getElementById('largestString').textContent = 
+                report.statistics.largestString + ' chars';
+            document.getElementById('dataBlocks').textContent = 
+                report.dataTypes.likelyNumbers;
+        }
+
+        function showStatus(message, type) {
+            const status = document.getElementById('statusMessage');
+            status.textContent = message;
+            status.className = `status show ${type}`;
+        }
+
+        function exportJSON() {
+            if (!inspector) return;
+            const json = inspector.exportJSON();
+            downloadFile(json, 'save-analysis.json', 'application/json');
+        }
+
+        function exportHTML() {
+            if (!inspector) return;
+            const html = inspector.exportHTML();
+            downloadFile(html, 'save-analysis.html', 'text/html');
+        }
+
+        function downloadFile(content, filename, type) {
+            const blob = new Blob([content], { type });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text.replace(/[&<>"']/g, m => map[m]);
+        }
+    </script>
+</body>
+</html>

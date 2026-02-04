@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wasteland Editor - Fallout Shelter Save Editor</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Wasteland Editor</h1>
+            <p class="subtitle">Fallout Shelter Save File Editor</p>
+            
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active">Editor</a>
+                <a href="pages/inspector.html" class="nav-link">File Inspector</a>
+            </div>
+        </header>
+
+        <main>
+            <section class="control-panel">
+                <div class="file-upload-section">
+                    <label for="fileInput" class="upload-label">
+                        <span class="upload-icon">📁</span>
+                        <span>Upload Save File</span>
+                    </label>
+                    <input type="file" id="fileInput" accept=".json,.dat,.sav" hidden>
+                    <div id="fileInfo" class="file-info"></div>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="downloadBtn" class="btn btn-primary" disabled>
+                        💾 Download Save
+                    </button>
+                    <button id="formatBtn" class="btn btn-secondary" disabled>
+                        ✨ Format JSON
+                    </button>
+                    <button id="clearBtn" class="btn btn-secondary" disabled>
+                        🗑️ Clear
+                    </button>
+                </div>
+            </section>
+
+            <section class="editor-section">
+                <div class="editor-tabs">
+                    <button class="tab-btn active" data-tab="vault">Vault</button>
+                    <button class="tab-btn" data-tab="dwellers">Dwellers</button>
+                    <button class="tab-btn" data-tab="rooms">Rooms</button>
+                    <button class="tab-btn" data-tab="wasteland">Wasteland</button>
+                    <button class="tab-btn" data-tab="others">Others</button>
+                    <button class="tab-btn" data-tab="raw">Raw JSON</button>
+                </div>
+
+                <!-- VAULT TAB -->
+                <div id="vault" class="tab-content active">
+                    <div class="vault-panel">
+                        <div class="panel-section">
+                            <h3>Vault Settings</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Vault Name:</label>
+                                    <input type="text" id="vaultName" placeholder="Enter vault name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Vault Number:</label>
+                                    <input type="number" id="vaultNumber" min="0" max="999" placeholder="0">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel-section">
+                            <h3>Resources</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Caps:</label>
+                                    <input type="number" id="caps" min="0" placeholder="0">
+                                </div>
+                                <div class="form-group">
+                                    <label>Food:</label>
+                                    <input type="number" id="food" min="0" placeholder="0">
+                                </div>
+                                <div class="form-group">
+                                    <label>Water:</label>
+                                    <input type="number" id="water" min="0" placeholder="0">
+                                </div>
+                                <div class="form-group">
+                                    <label>Power:</label>
+                                    <input type="number" id="power" min="0" placeholder="0">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>RadAway:</label>
+                                    <input type="number" id="radaway" min="0" placeholder="0">
+                                </div>
+                                <div class="form-group">
+                                    <label>Stimpacks:</label>
+                                    <input type="number" id="stimpacks" min="0" placeholder="0">
+                                </div>
+                                <div class="form-group">
+                                    <label>Nuka Cola:</label>
+                                    <input type="number" id="nukacola" min="0" placeholder="0">
+                                </div>
+                                <div class="form-group">
+                                    <label>Nuka Cola Quantum:</label>
+                                    <input type="number" id="nukaquantum" min="0" placeholder="0">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel-section">
+                            <h3>Lunchboxes & Special Items</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Lunch Boxes:</label>
+                                    <input type="number" id="lunchboxCount" min="0" placeholder="0">
+                                </div>
+                                <div class="form-group">
+                                    <label>Mr. Handies:</label>
+                                    <input type="number" id="handyCount" min="0" placeholder="0">
+                                </div>
+                                <div class="form-group">
+                                    <label>Pet Carriers:</label>
+                                    <input type="number" id="petCarrierCount" min="0" placeholder="0">
+                                </div>
+                                <div class="form-group">
+                                    <label>Starter Packs:</label>
+                                    <input type="number" id="starterPackCount" min="0" placeholder="0">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel-section">
+                            <h3>Bulk Actions</h3>
+                            <div class="button-grid">
+                                <button class="btn btn-secondary" id="unlockRoomsBtn">Unlock All Rooms</button>
+                                <button class="btn btn-secondary" id="unlockRecipesBtn">Unlock All Recipes</button>
+                                <button class="btn btn-secondary" id="maxAllStatsBtn">Max All Dweller Stats</button>
+                                <button class="btn btn-secondary" id="maxHappinessBtn">Max All Happiness</button>
+                                <button class="btn btn-secondary" id="healAllBtn">Heal All Dwellers</button>
+                                <button class="btn btn-secondary" id="clearEmergenciesBtn">Clear All Emergencies</button>
+                                <button class="btn btn-secondary" id="unlockThemesBtn">Unlock All Themes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DWELLERS TAB -->
+                <div id="dwellers" class="tab-content">
+                    <div class="dwellers-panel">
+                        <div class="dwellers-list-container">
+                            <h3>Dwellers</h3>
+                            <input type="text" id="dwellerSearch" class="search-input" placeholder="Search dwellers...">
+                            <div id="dwellersList" class="dwellers-list"></div>
+                        </div>
+                        <div id="dwellerDetails" class="dweller-details" style="display:none;">
+                            <a href="#" class="back-link">← Back</a>
+                            <div class="panel-section">
+                                <h3 id="dwellerName">Dweller</h3>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>First Name:</label>
+                                        <input type="text" id="dwellerFirstName" placeholder="First name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Last Name:</label>
+                                        <input type="text" id="dwellerLastName" placeholder="Last name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Gender:</label>
+                                        <select id="dwellerGender">
+                                            <option value="1">Female</option>
+                                            <option value="2">Male</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel-section">
+                                <h3>Appearance</h3>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Skin Color:</label>
+                                        <input type="color" id="dwellerSkinColor">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Hair Color:</label>
+                                        <input type="color" id="dwellerHairColor">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel-section">
+                                <h3>Stats & Health</h3>
+                                <div class="stats-grid">
+                                    <div class="stat-item"><label>S:</label><input type="number" id="stat-s" min="1" max="10" placeholder="1"></div>
+                                    <div class="stat-item"><label>P:</label><input type="number" id="stat-p" min="1" max="10" placeholder="1"></div>
+                                    <div class="stat-item"><label>E:</label><input type="number" id="stat-e" min="1" max="10" placeholder="1"></div>
+                                    <div class="stat-item"><label>C:</label><input type="number" id="stat-c" min="1" max="10" placeholder="1"></div>
+                                    <div class="stat-item"><label>I:</label><input type="number" id="stat-i" min="1" max="10" placeholder="1"></div>
+                                    <div class="stat-item"><label>A:</label><input type="number" id="stat-a" min="1" max="10" placeholder="1"></div>
+                                    <div class="stat-item"><label>L:</label><input type="number" id="stat-l" min="1" max="10" placeholder="1"></div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Level:</label>
+                                        <input type="number" id="dwellerLevel" min="1" placeholder="1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Experience:</label>
+                                        <input type="number" id="dwellerExp" min="0" placeholder="0">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Health:</label>
+                                        <input type="number" id="dwellerHealth" min="0" placeholder="0">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Happiness (%):</label>
+                                        <input type="number" id="dwellerHappiness" min="0" max="100" placeholder="100">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel-section">
+                                <h3>Equipment</h3>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Outfit:</label>
+                                        <select id="dwellerOutfit"></select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Weapon:</label>
+                                        <select id="dwellerWeapon"></select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="button-grid">
+                                <button class="btn btn-secondary" id="maxStatsBtn">Max All Stats</button>
+                                <button class="btn btn-secondary" id="saveDwellerBtn">Save Changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ROOMS TAB -->
+                <div id="rooms" class="tab-content">
+                    <div class="rooms-panel">
+                        <h3>Vault Rooms</h3>
+                        <div id="roomsList" class="rooms-list"></div>
+                    </div>
+                </div>
+
+                <!-- WASTELAND TAB -->
+                <div id="wasteland" class="tab-content">
+                    <div class="wasteland-panel">
+                        <div class="tabs-secondary">
+                            <button class="tab-secondary active" data-subtab="wasteland-dwellers">Dweller Teams</button>
+                            <button class="tab-secondary" data-subtab="wasteland-others">Actor Teams</button>
+                        </div>
+                        
+                        <div id="wasteland-dwellers" class="subtab-content active">
+                            <h3>Wasteland Dweller Teams</h3>
+                            <div id="wastelandDwellersList" class="wasteland-list"></div>
+                        </div>
+
+                        <div id="wasteland-others" class="subtab-content">
+                            <h3>Wasteland Actor Teams</h3>
+                            <div id="wastelandActorsList" class="wasteland-list"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- OTHERS TAB -->
+                <div id="others" class="tab-content">
+                    <div class="others-panel">
+                        <h3>Other Characters</h3>
+                        <div id="othersList" class="others-list"></div>
+                    </div>
+                </div>
+
+                <!-- RAW JSON TAB -->
+                <div id="raw" class="tab-content">
+                    <textarea id="jsonEditor" class="json-editor" placeholder="Raw JSON editor..."></textarea>
+                </div>
+
+                <div class="editor-info">
+                    <span id="fileSize">Size: 0 B</span>
+                    <span id="errorMessage" class="error"></span>
+                </div>
+            </section>
+
+            <section class="search-section">
+                <input type="text" id="searchInput" class="search-box" placeholder="🔍 Search in JSON...">
+                <div id="searchResults" class="search-results"></div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Wasteland Editor v1.0 | Fallout Shelter Save File Editor</p>
+        </footer>
+    </div>
+
+    <script src="js/sjcl.min.js"></script>
+    <script src="js/decryptor.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
