@@ -41,19 +41,32 @@ function initializeEventListeners() {
     });
 
     // Bulk action buttons
-    ['unlockRoomsBtn', 'unlockRecipesBtn', 'maxAllStatsBtn', 'maxHappinessBtn', 
-     'healAllBtn', 'clearEmergenciesBtn', 'unlockThemesBtn'].forEach(id => {
+    ['unlockRoomsBtn', 'maxAllStatsBtn', 'maxHappinessBtn', 
+     'healAllBtn', 'clearEmergenciesBtn', 'unlockThemesBtn', 'showRecipesEditorBtn'].forEach(id => {
         const elem = document.getElementById(id);
         if (elem) {
             if (id === 'unlockRoomsBtn') elem.addEventListener('click', unlockAllRooms);
-            else if (id === 'unlockRecipesBtn') elem.addEventListener('click', unlockAllRecipes);
             else if (id === 'maxAllStatsBtn') elem.addEventListener('click', maxAllDwellerStats);
             else if (id === 'maxHappinessBtn') elem.addEventListener('click', maxAllHappiness);
             else if (id === 'healAllBtn') elem.addEventListener('click', healAllDwellers);
             else if (id === 'clearEmergenciesBtn') elem.addEventListener('click', clearAllEmergencies);
             else if (id === 'unlockThemesBtn') elem.addEventListener('click', unlockAllThemes);
+            else if (id === 'showRecipesEditorBtn') elem.addEventListener('click', showRecipesEditor);
         }
     });
+
+    // Recipes editor listeners
+    const saveRecipesBtn = document.getElementById('saveRecipesBtn');
+    const closeRecipesBtn = document.getElementById('closeRecipesEditorBtn');
+    const recipeSelectAllBtn = document.getElementById('recipeSelectAllBtn');
+    const recipeDeselectAllBtn = document.getElementById('recipeDeselectAllBtn');
+    const recipeSearchInput = document.getElementById('recipeSearchInput');
+    
+    if (saveRecipesBtn) saveRecipesBtn.addEventListener('click', saveRecipesChanges);
+    if (closeRecipesBtn) closeRecipesBtn.addEventListener('click', closeRecipesEditor);
+    if (recipeSelectAllBtn) recipeSelectAllBtn.addEventListener('click', recipeSelectAll);
+    if (recipeDeselectAllBtn) recipeDeselectAllBtn.addEventListener('click', recipeDeselectAll);
+    if (recipeSearchInput) recipeSearchInput.addEventListener('input', (e) => filterRecipes(e.target.value));
 
     // Dweller panel listeners
     ['dwellerFirstName', 'dwellerLastName', 'dwellerGender', 'dwellerLevel', 'dwellerExp',
@@ -589,6 +602,106 @@ function unlockAllRecipes() {
     jsonEditor.value = JSON.stringify(currentData, null, 2);
     updateFileSize();
     showToast('All recipes unlocked!');
+}
+
+// Recipes Editor Functions
+function populateRecipesList() {
+    if (!currentData || !currentData.recipes) {
+        showToast('No recipes found in save file');
+        return;
+    }
+    
+    const recipesList = document.getElementById('recipesList');
+    if (!recipesList) return;
+    
+    recipesList.innerHTML = '';
+    
+    const recipes = currentData.recipes || [];
+    
+    if (recipes.length === 0) {
+        recipesList.innerHTML = '<p style="padding: 20px; text-align: center; color: #999;">No recipes found</p>';
+        return;
+    }
+    
+    recipes.forEach((recipe, index) => {
+        // Check if recipe is locked (missing locked property or explicitly set to true)
+        const isLocked = recipe.locked !== false;
+        
+        // Try multiple property names for recipe identifier
+        let recipeName = recipe.name || recipe.Name || recipe.title || recipe.Title || recipe.recipeId || recipe.id || `Recipe ${index + 1}`;
+        
+        // Make sure it's a string
+        recipeName = String(recipeName).trim() || `Recipe ${index + 1}`;
+        
+        const checkboxDiv = document.createElement('div');
+        checkboxDiv.className = 'recipe-checkbox';
+        checkboxDiv.innerHTML = `
+            <input type="checkbox" id="recipe-${index}" ${!isLocked ? 'checked' : ''} data-recipe-index="${index}">
+            <label for="recipe-${index}">${recipeName}</label>
+        `;
+        
+        checkboxDiv.querySelector('input').addEventListener('change', () => {
+            // Just track changes, save happens on Save button
+        });
+        
+        recipesList.appendChild(checkboxDiv);
+    });
+}
+
+function showRecipesEditor() {
+    populateRecipesList();
+    const panel = document.getElementById('recipesEditorPanel');
+    if (panel) {
+        panel.style.display = 'block';
+        panel.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+function closeRecipesEditor() {
+    const panel = document.getElementById('recipesEditorPanel');
+    if (panel) {
+        panel.style.display = 'none';
+    }
+}
+
+function saveRecipesChanges() {
+    if (!currentData || !currentData.recipes) return;
+    
+    const checkboxes = document.querySelectorAll('#recipesList input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        const index = parseInt(checkbox.dataset.recipeIndex);
+        if (currentData.recipes[index]) {
+            currentData.recipes[index].locked = !checkbox.checked;
+        }
+    });
+    
+    createBackup('Edit Recipes');
+    jsonEditor.value = JSON.stringify(currentData, null, 2);
+    updateFileSize();
+    closeRecipesEditor();
+    showToast('Recipe changes saved!');
+}
+
+function recipeSelectAll() {
+    document.querySelectorAll('#recipesList input[type="checkbox"]').forEach(checkbox => {
+        checkbox.checked = true;
+    });
+}
+
+function recipeDeselectAll() {
+    document.querySelectorAll('#recipesList input[type="checkbox"]').forEach(checkbox => {
+        checkbox.checked = false;
+    });
+}
+
+function filterRecipes(searchTerm) {
+    const items = document.querySelectorAll('.recipe-checkbox');
+    const term = searchTerm.toLowerCase();
+    
+    items.forEach(item => {
+        const label = item.querySelector('label').textContent.toLowerCase();
+        item.style.display = label.includes(term) ? 'flex' : 'none';
+    });
 }
 
 // Clear All Emergencies

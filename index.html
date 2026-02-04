@@ -135,7 +135,6 @@
                             <h3>Bulk Actions</h3>
                             <div class="button-grid">
                                 <button class="btn btn-secondary" id="unlockRoomsBtn">Unlock All Rooms</button>
-                                <button class="btn btn-secondary" id="unlockRecipesBtn">Unlock All Recipes</button>
                                 <button class="btn btn-secondary" id="maxAllStatsBtn">Max All Dweller Stats</button>
                                 <button class="btn btn-secondary" id="maxHappinessBtn">Max All Happiness</button>
                                 <button class="btn btn-secondary" id="healAllBtn">Heal All Dwellers</button>
@@ -357,8 +356,27 @@
                 <!-- OTHERS TAB -->
                 <div id="others" class="tab-content">
                     <div class="others-panel">
-                        <h3>Other Characters</h3>
-                        <div id="othersList" class="others-list"></div>
+                        <div class="panel-section">
+                            <h3>Other Characters</h3>
+                            <div id="othersList" class="others-list"></div>
+                        </div>
+
+                        <div class="panel-section">
+                            <h3>Recipes Manager</h3>
+                            <button class="btn btn-secondary" id="showRecipesEditorBtn" style="margin-bottom: 15px;">📋 Edit Recipes</button>
+                            <div id="recipesEditorPanel" style="display:none;">
+                                <div style="margin-bottom: 15px;">
+                                    <button class="btn btn-small" id="recipeSelectAllBtn">Select All</button>
+                                    <button class="btn btn-small" id="recipeDeselectAllBtn">Deselect All</button>
+                                    <input type="text" id="recipeSearchInput" class="search-input" placeholder="Search recipes...">
+                                </div>
+                                <div id="recipesList" class="recipes-checklist"></div>
+                                <div style="margin-top: 15px; display: flex; gap: 10px;">
+                                    <button class="btn btn-primary" id="saveRecipesBtn">Save Recipe Changes</button>
+                                    <button class="btn btn-secondary" id="closeRecipesEditorBtn">Close</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

@@ -1036,3 +1036,57 @@ footer {
     border-color: #ccc;
     color: #888;
 }
+
+/* Recipes Editor Styles */
+.recipes-checklist {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.recipe-checkbox {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.recipe-checkbox:hover {
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary-color);
+}
+
+.recipe-checkbox input[type="checkbox"] {
+    margin-right: 8px;
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+}
+
+.recipe-checkbox label {
+    margin: 0;
+    cursor: pointer;
+    flex: 1;
+    font-size: 0.9rem;
+}
+
+.recipe-checkbox input[type="checkbox"]:checked + label {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.btn-small {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+}
