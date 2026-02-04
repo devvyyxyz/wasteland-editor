@@ -598,7 +598,8 @@ function populateDwellersList() {
             const level = dweller.experience?.currentLevel || 1;
             const health = dweller.health?.healthValue || dweller.health?.maxHealth || 100;
             const fullName = `${dweller.name || ''} ${dweller.lastName || ''}`.trim() || 'Unknown';
-            item.textContent = `${fullName} (Lvl ${level} • HP: ${health})`;
+            const genderIcon = dweller.gender === 2 ? '<i class="fas fa-mars" style="color: #4A90E2;"></i>' : '<i class="fas fa-venus" style="color: #E91E63;"></i>';
+            item.innerHTML = `${genderIcon} ${fullName} (Lvl ${level} • HP: ${health})`;
             item.addEventListener('click', () => selectDweller(dweller, index));
             dwellersList.appendChild(item);
         });
@@ -617,7 +618,8 @@ function populateDwellersList() {
             const level = dweller.experience?.currentLevel || 1;
             const health = dweller.health?.healthValue || dweller.health?.maxHealth || 100;
             const fullName = `${dweller.name || ''} ${dweller.lastName || ''}`.trim() || 'Unknown';
-            item.textContent = `${fullName} (Lvl ${level} • HP: ${health})`;
+            const genderIcon = dweller.gender === 2 ? '<i class="fas fa-mars" style="color: #4A90E2;"></i>' : '<i class="fas fa-venus" style="color: #E91E63;"></i>';
+            item.innerHTML = `${genderIcon} ${fullName} (Lvl ${level} • HP: ${health})`;
             item.addEventListener('click', () => selectDweller(dweller, index));
             dwellersList.appendChild(item);
         });
