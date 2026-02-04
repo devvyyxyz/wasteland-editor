@@ -1329,6 +1329,12 @@ function updateVaultData() {
     const vault = currentData.vault;
     vault.VaultName = document.getElementById('vaultName')?.value || '';
     
+    // Save vault number as VaultMode
+    const vaultNumberElem = document.getElementById('vaultNumber');
+    if (vaultNumberElem) {
+        vault.VaultMode = vaultNumberElem.value || '0';
+    }
+    
     if (!vault.storage) vault.storage = {};
     if (!vault.storage.resources) vault.storage.resources = {};
     
@@ -1362,93 +1368,80 @@ function populateItemData() {
         // Reset to zero if no data
         ['lunchboxCount', 'handyCount', 'petCarrierCount', 'starterPackCount'].forEach(id => {
             const elem = document.getElementById(id);
-            if (elem) elem.value = '0';
+            if (elem) {
+                elem.value = '0';
+                storeOriginalValue(id, '0');
+                trackFieldChange(id);
+            }
         });
         return;
     }
     
-    const items = currentData.vault.inventory?.items || [];
-    let lunchboxes = 0, handies = 0, pets = 0, starter = 0;
+    const vault = currentData.vault;
     
-    items.forEach(item => {
-        const id = item.id || '';
-        if (id.includes('Lunchbox')) lunchboxes += item.quantity || 1;
-        if (id.includes('Handy')) handies += item.quantity || 1;
-        if (id.includes('Pet')) pets += item.quantity || 1;
-        if (id.includes('Starter')) starter += item.quantity || 1;
-    });
+    // Lunchboxes are stored at vault.LunchBoxesCount (not in inventory.items!)
+    const lunchboxCount = vault.LunchBoxesCount || 0;
+    const lunchboxElem = document.getElementById('lunchboxCount');
+    if (lunchboxElem) {
+        lunchboxElem.value = lunchboxCount;
+        storeOriginalValue('lunchboxCount', lunchboxCount);
+        trackFieldChange('lunchboxCount');
+    }
     
-    const counts = {
-        'lunchboxCount': lunchboxes,
-        'handyCount': handies,
-        'petCarrierCount': pets,
-        'starterPackCount': starter
-    };
+    // Mr. Handies, Pet Carriers, and Starter Packs are in storage.resources
+    const resources = vault.storage?.resources || {};
+    const handyCount = Math.floor(resources.MrHandy || 0);
+    const petCount = Math.floor(resources.PetCarrier || 0);
+    const starterCount = 0; // Starter packs don't exist in actual save files
     
-    Object.entries(counts).forEach(([elemId, count]) => {
-        const elem = document.getElementById(elemId);
-        if (elem) {
-            elem.value = count;
-            storeOriginalValue(elemId, count);
-            trackFieldChange(elemId);
-        }
-    });
+    const handyElem = document.getElementById('handyCount');
+    const petElem = document.getElementById('petCarrierCount');
+    const starterElem = document.getElementById('starterPackCount');
+    
+    if (handyElem) {
+        handyElem.value = handyCount;
+        storeOriginalValue('handyCount', handyCount);
+        trackFieldChange('handyCount');
+    }
+    if (petElem) {
+        petElem.value = petCount;
+        storeOriginalValue('petCarrierCount', petCount);
+        trackFieldChange('petCarrierCount');
+    }
+    if (starterElem) {
+        starterElem.value = starterCount;
+        storeOriginalValue('starterPackCount', starterCount);
+        trackFieldChange('starterPackCount');
+    }
 }
 
 // Update Item Counts
 function updateItemCounts() {
     if (!currentData || !currentData.vault) return;
     
-    // Ensure vault.inventory.items array exists
-    if (!currentData.vault.inventory) currentData.vault.inventory = {};
-    if (!currentData.vault.inventory.items) currentData.vault.inventory.items = [];
+    const vault = currentData.vault;
+    
+    // Ensure storage structure exists
+    if (!vault.storage) vault.storage = {};
+    if (!vault.storage.resources) vault.storage.resources = {};
     
     // Get new values from inputs
     const lunchboxCount = parseInt(document.getElementById('lunchboxCount')?.value) || 0;
     const handyCount = parseInt(document.getElementById('handyCount')?.value) || 0;
     const petCarrierCount = parseInt(document.getElementById('petCarrierCount')?.value) || 0;
-    const starterPackCount = parseInt(document.getElementById('starterPackCount')?.value) || 0;
+    // Note: Starter packs don't exist in actual save files
     
-    // Remove existing special items
-    currentData.vault.inventory.items = currentData.vault.inventory.items.filter(item => {
-        const id = item.id || '';
-        return !id.includes('Lunchbox') && !id.includes('Handy') && !id.includes('Pet') && !id.includes('Starter');
-    });
+    // Lunchboxes are stored at vault.LunchBoxesCount (not in inventory!)
+    vault.LunchBoxesCount = lunchboxCount;
     
-    // Add lunchboxes
-    if (lunchboxCount > 0) {
-        currentData.vault.inventory.items.push({
-            id: 'Lunchbox',
-            type: 'Lunchbox',
-            quantity: lunchboxCount
-        });
-    }
+    // Mr. Handies and Pet Carriers are in storage.resources
+    vault.storage.resources.MrHandy = handyCount;
+    vault.storage.resources.PetCarrier = petCarrierCount;
     
-    // Add Mr. Handies
-    if (handyCount > 0) {
-        currentData.vault.inventory.items.push({
-            id: 'HandyMan',
-            type: 'HandyMan',
-            quantity: handyCount
-        });
-    }
-    
-    // Add Pet Carriers
-    if (petCarrierCount > 0) {
-        currentData.vault.inventory.items.push({
-            id: 'PetCarrier',
-            type: 'PetCarrier',
-            quantity: petCarrierCount
-        });
-    }
-    
-    // Add Starter Packs
-    if (starterPackCount > 0) {
-        currentData.vault.inventory.items.push({
-            id: 'StarterPack',
-            type: 'StarterPack',
-            quantity: starterPackCount
-        });
+    // Also update storage.bonus if it exists (mirrors resources)
+    if (vault.storage.bonus) {
+        vault.storage.bonus.MrHandy = 0;
+        vault.storage.bonus.PetCarrier = 0;
     }
     
     jsonEditor.value = JSON.stringify(currentData, null, 2);
