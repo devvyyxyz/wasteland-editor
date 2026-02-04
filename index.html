@@ -571,6 +571,36 @@
             </section>
         </main>
 
+        <!-- Add Inventory Modal -->
+        <div id="addInventoryModal" class="inventory-modal">
+            <div class="inventory-modal-content">
+                <div class="inventory-modal-header">
+                    <h3 id="modalTitle">Add Item</h3>
+                    <button class="inventory-modal-close" onclick="closeInventoryModal()">×</button>
+                </div>
+                <div class="panel-section">
+                    <div class="form-row">
+                        <label for="modalItemSelect">Select Item:</label>
+                        <select id="modalItemSelect" class="form-control">
+                            <option value="">Choose...</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <label for="modalQuantity">Quantity:</label>
+                        <input type="number" id="modalQuantity" class="form-control" value="1" min="1">
+                    </div>
+                    <div class="form-row" id="modalDamageRow" style="display:none;">
+                        <label for="modalDamage">Damage:</label>
+                        <input type="number" id="modalDamage" class="form-control" value="10" min="1">
+                    </div>
+                </div>
+                <div class="button-grid" style="margin-top: 20px;">
+                    <button class="btn btn-primary" onclick="confirmAddInventoryItem()">Add Item</button>
+                    <button class="btn btn-secondary" onclick="closeInventoryModal()">Cancel</button>
+                </div>
+            </div>
+        </div>
+
         <footer>
             <p>Wasteland Editor v1.0 | Fallout Shelter Save File Editor</p>
         </footer>

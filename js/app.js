@@ -907,30 +907,85 @@ function deleteInventoryItem(index, type) {
     showToast('Item deleted!');
 }
 
+let currentModalType = '';
+
 function addInventoryItem(type) {
-    const itemName = prompt(`Enter ${type} name:`);
-    if (!itemName) return;
+    currentModalType = type;
+    const modal = document.getElementById('addInventoryModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalSelect = document.getElementById('modalItemSelect');
+    const modalDamageRow = document.getElementById('modalDamageRow');
     
-    const quantity = prompt('Enter quantity:', '1');
-    if (quantity === null) return;
+    // Set modal title
+    modalTitle.textContent = `Add ${type.charAt(0).toUpperCase() + type.slice(1)}`;
     
-    const qty = parseInt(quantity);
-    if (isNaN(qty) || qty < 1) {
+    // Clear and populate select dropdown
+    modalSelect.innerHTML = '<option value="">Choose...</option>';
+    
+    let items = {};
+    if (type === 'weapon') {
+        items = WEAPONS;
+        modalDamageRow.style.display = 'none'; // Damage is predefined in weapon data
+    } else if (type === 'outfit') {
+        items = OUTFITS;
+        modalDamageRow.style.display = 'none';
+    } else if (type === 'junk') {
+        items = JUNK;
+        modalDamageRow.style.display = 'none';
+    }
+    
+    // Populate dropdown with sorted items
+    Object.entries(items).sort((a, b) => a[1].localeCompare(b[1])).forEach(([key, value]) => {
+        if (key !== 'None' && key !== 'Fist') { // Skip "None" options
+            const option = document.createElement('option');
+            option.value = key;
+            option.textContent = value;
+            modalSelect.appendChild(option);
+        }
+    });
+    
+    // Reset quantity
+    document.getElementById('modalQuantity').value = 1;
+    
+    // Show modal
+    modal.classList.add('active');
+}
+
+function closeInventoryModal() {
+    const modal = document.getElementById('addInventoryModal');
+    modal.classList.remove('active');
+    currentModalType = '';
+}
+
+function confirmAddInventoryItem() {
+    const modalSelect = document.getElementById('modalItemSelect');
+    const quantity = parseInt(document.getElementById('modalQuantity').value) || 1;
+    
+    if (!modalSelect.value) {
+        showToast('Please select an item!');
+        return;
+    }
+    
+    if (quantity < 1) {
         showToast('Invalid quantity!');
         return;
     }
     
+    const itemId = modalSelect.value;
+    const itemName = modalSelect.options[modalSelect.selectedIndex].text;
+    
     const newItem = {
-        id: itemName.toLowerCase().replace(/\s+/g, '_'),
+        id: itemId,
         name: itemName,
-        type: type === 'weapon' ? 'Weapon' : type === 'outfit' ? 'Outfit' : 'Junk',
-        quantity: qty
+        type: currentModalType === 'weapon' ? 'Weapon' : currentModalType === 'outfit' ? 'Outfit' : 'Junk',
+        quantity: quantity
     };
     
-    if (type === 'weapon') {
-        newItem.damage = parseInt(prompt('Enter damage value:', '10')) || 10;
+    if (currentModalType === 'weapon') {
+        // Set default damage based on weapon type
+        newItem.damage = 10;
         newItem.damageType = 'Normal';
-    } else if (type === 'outfit') {
+    } else if (currentModalType === 'outfit') {
         newItem.stats = {};
     }
     
@@ -944,7 +999,9 @@ function addInventoryItem(type) {
     jsonEditor.value = JSON.stringify(currentData, null, 2);
     updateFileSize();
     populateInventory();
-    showToast(`${type} added!`);
+    showToast(`${itemName} added!`);
+    
+    closeInventoryModal();
 }
 
 function filterInventory(type, searchTerm) {
