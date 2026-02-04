@@ -457,17 +457,13 @@ function selectDweller(dweller, index) {
     if (skinColorElem && dweller.skinColor) skinColorElem.value = dweller.skinColor;
     if (hairColorElem && dweller.hairColor) hairColorElem.value = dweller.hairColor;
     
-    // Update SPECIAL stats (check multiple possible locations)
-    // Try stats.stats.SPECIAL first, then fallback to other possible structures
-    let specialArray = dweller.stats?.stats?.SPECIAL || 
-                       dweller.stats?.SPECIAL || 
-                       dweller.SPECIAL || [];
-    
+    // Update SPECIAL stats - array of objects with {value, mod, exp}
+    const statsArray = dweller.stats?.stats || [];
     const statIds = ['stat-s', 'stat-p', 'stat-e', 'stat-c', 'stat-i', 'stat-a', 'stat-l'];
     
     statIds.forEach((id, i) => {
         const elem = document.getElementById(id);
-        if (elem) elem.value = specialArray[i] || 1;
+        if (elem) elem.value = statsArray[i]?.value || 1;
     });
 }
 
@@ -511,15 +507,22 @@ function updateDwellerData() {
     if (skinColorElem) dweller.skinColor = skinColorElem.value;
     if (hairColorElem) dweller.hairColor = hairColorElem.value;
     
-    // SPECIAL stats (stored as array in stats.stats.SPECIAL)
+    // SPECIAL stats - array of objects with {value, mod, exp}
     if (!dweller.stats) dweller.stats = {};
-    if (!dweller.stats.stats) dweller.stats.stats = {};
-    if (!dweller.stats.stats.SPECIAL) dweller.stats.stats.SPECIAL = [1, 1, 1, 1, 1, 1, 1];
+    if (!dweller.stats.stats) dweller.stats.stats = [];
+    
+    // Ensure we have at least 7 stat objects
+    while (dweller.stats.stats.length < 7) {
+        dweller.stats.stats.push({ value: 1, mod: 0, exp: 0 });
+    }
     
     const statIds = ['stat-s', 'stat-p', 'stat-e', 'stat-c', 'stat-i', 'stat-a', 'stat-l'];
     statIds.forEach((id, i) => {
         const elem = document.getElementById(id);
-        if (elem) dweller.stats.stats.SPECIAL[i] = parseInt(elem.value) || 1;
+        if (elem) {
+            if (!dweller.stats.stats[i]) dweller.stats.stats[i] = { value: 1, mod: 0, exp: 0 };
+            dweller.stats.stats[i].value = parseInt(elem.value) || 1;
+        }
     });
     
     jsonEditor.value = JSON.stringify(currentData, null, 2);
