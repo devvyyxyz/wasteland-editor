@@ -1230,3 +1230,44 @@ footer {
 .editor-disabled textarea {
     cursor: not-allowed;
 }
+
+/* Wasteland Tab Styles */
+.wasteland-panel {
+    display: grid;
+    grid-template-columns: 35% 1fr;
+    gap: 20px;
+}
+
+.wasteland-teams-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.wasteland-team-item {
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.9);
+    border-left: 4px solid var(--accent-color);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.wasteland-team-item:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: translateX(5px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.wasteland-team-item.active {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: #FFF5E6;
+    border-left-color: var(--accent-color);
+}
+
+.wasteland-details {
+    flex: 1;
+}

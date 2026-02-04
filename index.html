@@ -337,19 +337,83 @@
                 <!-- WASTELAND TAB -->
                 <div id="wasteland" class="tab-content">
                     <div class="wasteland-panel">
-                        <div class="tabs-secondary">
-                            <button class="tab-secondary active" data-subtab="wasteland-dwellers">Dweller Teams</button>
-                            <button class="tab-secondary" data-subtab="wasteland-others">Actor Teams</button>
+                        <div class="panel-section">
+                            <h3>Wasteland Teams</h3>
+                            <input type="text" id="wastelandSearch" class="search-input" placeholder="Search teams...">
+                            <div id="wastelandTeamsList" class="wasteland-teams-list"></div>
                         </div>
                         
-                        <div id="wasteland-dwellers" class="subtab-content active">
-                            <h3>Wasteland Dweller Teams</h3>
-                            <div id="wastelandDwellersList" class="wasteland-list"></div>
-                        </div>
+                        <div id="wastelandTeamDetails" class="wasteland-details" style="display:none;">
+                            <a href="#" class="back-link">← Back</a>
+                            <div class="panel-section">
+                                <h3 id="wastelandTeamName">Team</h3>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>
+                                            Team ID:
+                                            <span class="info-icon" title="Unique identifier for this team">ⓘ</span>
+                                        </label>
+                                        <input type="text" id="teamId" placeholder="Team ID" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>
+                                            Status:
+                                            <span class="info-icon" title="Current team status">ⓘ</span>
+                                        </label>
+                                        <select id="teamStatus">
+                                            <option value="exploring">Exploring</option>
+                                            <option value="returning">Returning</option>
+                                            <option value="idle">Idle</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
 
-                        <div id="wasteland-others" class="subtab-content">
-                            <h3>Wasteland Actor Teams</h3>
-                            <div id="wastelandActorsList" class="wasteland-list"></div>
+                            <div class="panel-section">
+                                <h3>Quest Information</h3>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>
+                                            Quest ID:
+                                            <span class="info-icon" title="Current quest identifier">ⓘ</span>
+                                        </label>
+                                        <input type="text" id="teamQuestId" placeholder="Quest ID">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>
+                                            Quest Progress:
+                                            <span class="info-icon" title="Progress percentage (0-100)">ⓘ</span>
+                                        </label>
+                                        <input type="number" id="teamQuestProgress" min="0" max="100" placeholder="0">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel-section">
+                                <h3>Resources</h3>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>
+                                            Caps Collected:
+                                            <span class="info-icon" title="Caps collected during exploration">ⓘ</span>
+                                        </label>
+                                        <input type="number" id="teamCaps" min="0" placeholder="0">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>
+                                            Items Found:
+                                            <span class="info-icon" title="Number of items collected">ⓘ</span>
+                                        </label>
+                                        <input type="number" id="teamItems" min="0" placeholder="0">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="button-grid">
+                                <button class="btn btn-secondary" id="recallTeamBtn">Recall Team</button>
+                                <button class="btn btn-secondary" id="maxTeamResourcesBtn">Max Resources</button>
+                                <button class="btn btn-primary" id="saveTeamBtn">Save Changes</button>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -82,6 +82,22 @@ function initializeEventListeners() {
     if (unlockAllRewardsBtn) unlockAllRewardsBtn.addEventListener('click', unlockAllSeasonRewards);
     if (enablePremiumBtn) enablePremiumBtn.addEventListener('click', enablePremiumPass);
 
+    // Wasteland listeners
+    const wastelandSearch = document.getElementById('wastelandSearch');
+    const saveTeamBtn = document.getElementById('saveTeamBtn');
+    const recallTeamBtn = document.getElementById('recallTeamBtn');
+    const maxTeamResourcesBtn = document.getElementById('maxTeamResourcesBtn');
+    const wastelandBackBtn = document.getElementById('wastelandBackBtn');
+    
+    if (wastelandSearch) wastelandSearch.addEventListener('input', (e) => filterWastelandTeams(e.target.value));
+    if (saveTeamBtn) saveTeamBtn.addEventListener('click', updateWastelandTeam);
+    if (recallTeamBtn) recallTeamBtn.addEventListener('click', recallTeam);
+    if (maxTeamResourcesBtn) maxTeamResourcesBtn.addEventListener('click', maxTeamResources);
+    if (wastelandBackBtn) wastelandBackBtn.addEventListener('click', () => {
+        document.getElementById('wastelandTeamDetails').style.display = 'none';
+        document.querySelectorAll('.wasteland-team-item').forEach(item => item.classList.remove('active'));
+    });
+
     // Dweller panel listeners
     ['dwellerFirstName', 'dwellerLastName', 'dwellerGender', 'dwellerLevel', 'dwellerExp',
      'dwellerHealth', 'dwellerHappiness', 'dwellerSkinColor', 'dwellerHairColor',
@@ -159,6 +175,7 @@ function handleFileUpload(e) {
                 populateVaultData();
                 populateDwellersList();
                 populateRoomsList();
+                populateWastelandTeams();
                 populateSeasonPassData();
                 
                 // Create initial backup
@@ -507,6 +524,131 @@ function populateRoomsList() {
     });
 }
 
+// Wasteland Teams Functions
+let currentWastelandTeam = null;
+
+function populateWastelandTeams() {
+    const teamsList = document.getElementById('wastelandTeamsList');
+    if (!teamsList) return;
+    
+    if (!currentData || !currentData.wasteland) {
+        teamsList.innerHTML = '<div class="empty-state">📂 No vault loaded yet!<br><small>Upload a save file to get started</small></div>';
+        return;
+    }
+    
+    teamsList.innerHTML = '';
+    
+    const teams = currentData.wasteland.teams || currentData.wasteland || [];
+    
+    if (teams.length === 0) {
+        teamsList.innerHTML = '<div class="empty-state">🏜️ No teams in the wasteland<br><small>Send dwellers on quests to see them here</small></div>';
+        return;
+    }
+    
+    teams.forEach((team, index) => {
+        const item = document.createElement('div');
+        item.className = 'wasteland-team-item';
+        
+        const teamName = team.name || team.id || `Team ${index + 1}`;
+        const status = team.status || team.state || 'exploring';
+        
+        item.textContent = `${teamName} - ${status}`;
+        item.addEventListener('click', () => selectWastelandTeam(team, index));
+        teamsList.appendChild(item);
+    });
+}
+
+function selectWastelandTeam(team, index) {
+    currentWastelandTeam = { data: team, index: index };
+    
+    document.querySelectorAll('.wasteland-team-item').forEach(item => item.classList.remove('active'));
+    event.target.closest('.wasteland-team-item').classList.add('active');
+    
+    const teamDetails = document.getElementById('wastelandTeamDetails');
+    if (teamDetails) teamDetails.style.display = 'block';
+    
+    // Populate form
+    const teamName = document.getElementById('wastelandTeamName');
+    if (teamName) teamName.textContent = team.name || team.id || `Team ${index + 1}`;
+    
+    const teamId = document.getElementById('teamId');
+    const teamStatus = document.getElementById('teamStatus');
+    const teamQuestId = document.getElementById('teamQuestId');
+    const teamQuestProgress = document.getElementById('teamQuestProgress');
+    const teamCaps = document.getElementById('teamCaps');
+    const teamItems = document.getElementById('teamItems');
+    
+    if (teamId) teamId.value = team.id || '';
+    if (teamStatus) teamStatus.value = team.status || team.state || 'exploring';
+    if (teamQuestId) teamQuestId.value = team.questId || team.quest?.id || '';
+    if (teamQuestProgress) teamQuestProgress.value = team.progress || team.quest?.progress || 0;
+    if (teamCaps) teamCaps.value = team.caps || team.resources?.caps || 0;
+    if (teamItems) teamItems.value = team.items?.length || team.itemCount || 0;
+}
+
+function updateWastelandTeam() {
+    if (!currentWastelandTeam || !currentData.wasteland) return;
+    
+    const team = currentWastelandTeam.data;
+    
+    const teamStatus = document.getElementById('teamStatus')?.value;
+    const teamQuestId = document.getElementById('teamQuestId')?.value;
+    const teamQuestProgress = parseInt(document.getElementById('teamQuestProgress')?.value) || 0;
+    const teamCaps = parseInt(document.getElementById('teamCaps')?.value) || 0;
+    const teamItems = parseInt(document.getElementById('teamItems')?.value) || 0;
+    
+    if (team.status !== undefined) team.status = teamStatus;
+    else if (team.state !== undefined) team.state = teamStatus;
+    
+    if (team.questId !== undefined) team.questId = teamQuestId;
+    else if (team.quest?.id !== undefined) team.quest.id = teamQuestId;
+    
+    if (team.progress !== undefined) team.progress = teamQuestProgress;
+    else if (team.quest?.progress !== undefined) team.quest.progress = teamQuestProgress;
+    
+    if (team.caps !== undefined) team.caps = teamCaps;
+    else if (team.resources?.caps !== undefined) team.resources.caps = teamCaps;
+    
+    if (team.itemCount !== undefined) team.itemCount = teamItems;
+    
+    jsonEditor.value = JSON.stringify(currentData, null, 2);
+    updateFileSize();
+    populateWastelandTeams();
+    showToast('Team updated!');
+}
+
+function recallTeam() {
+    if (!currentWastelandTeam) return;
+    
+    const team = currentWastelandTeam.data;
+    
+    if (team.status !== undefined) team.status = 'returning';
+    else if (team.state !== undefined) team.state = 'returning';
+    
+    if (team.progress !== undefined) team.progress = 100;
+    else if (team.quest?.progress !== undefined) team.quest.progress = 100;
+    
+    updateWastelandTeam();
+    showToast('Team recalled!');
+}
+
+function maxTeamResources() {
+    if (!currentWastelandTeam) return;
+    
+    const team = currentWastelandTeam.data;
+    
+    if (team.caps !== undefined) team.caps = 999999;
+    else if (team.resources?.caps !== undefined) team.resources.caps = 999999;
+    else if (!team.resources) team.resources = { caps: 999999 };
+    else team.caps = 999999;
+    
+    if (team.itemCount !== undefined) team.itemCount = 999;
+    
+    selectWastelandTeam(team, currentWastelandTeam.index);
+    updateWastelandTeam();
+    showToast('Team resources maximized!');
+}
+
 // Update Vault Data
 function updateVaultData() {
     if (!currentData || !currentData.vault) return;
@@ -772,6 +914,16 @@ function filterRecipes(searchTerm) {
     items.forEach(item => {
         const label = item.querySelector('label').textContent.toLowerCase();
         item.style.display = label.includes(term) ? 'flex' : 'none';
+    });
+}
+
+function filterWastelandTeams(searchTerm) {
+    const items = document.querySelectorAll('.wasteland-team-item');
+    const term = searchTerm.toLowerCase();
+    
+    items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        item.style.display = text.includes(term) ? 'flex' : 'none';
     });
 }
 
