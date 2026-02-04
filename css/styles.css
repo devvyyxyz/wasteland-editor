@@ -967,6 +967,25 @@ footer p {
     transform: translateY(-2px);
 }
 
+.footer-section {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(139, 69, 19, 0.2);
+    color: rgba(44, 24, 16, 0.7);
+}
+
+.footer-section h3 {
+    color: rgba(139, 69, 19, 0.8);
+    margin-bottom: 12px;
+    font-size: 1em;
+}
+
+.footer-section p {
+    font-weight: 400;
+    font-size: 0.9em;
+    line-height: 1.5;
+}
+
 /* Change History */
 .history-list {
     display: flex;

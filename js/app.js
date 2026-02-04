@@ -200,7 +200,7 @@ function handleFileUpload(e) {
                 currentData = result.data;
                 originalData = JSON.parse(JSON.stringify(currentData));
                 
-                fileInfo.textContent = `<i class="fas fa-file"></i> Loaded: ${file.name} (${formatFileSize(file.size)})`;
+                fileInfo.textContent = `Loaded: ${file.name} (${formatFileSize(file.size)})`;
                 errorMessage.textContent = '';
                 downloadBtn.disabled = false;
                 formatBtn.disabled = false;
@@ -588,7 +588,7 @@ function populateDwellersList() {
     if (inVaultDwellers.length > 0) {
         const inVaultHeader = document.createElement('div');
         inVaultHeader.className = 'dweller-section-header';
-        inVaultHeader.textContent = `<i class="fas fa-building-columns"></i> IN VAULT (${inVaultDwellers.length})`;
+        inVaultHeader.innerHTML = `<i class="fas fa-home"></i> IN VAULT (${inVaultDwellers.length})`;
         dwellersList.appendChild(inVaultHeader);
         
         inVaultDwellers.forEach(({ dweller, index }) => {
@@ -606,7 +606,7 @@ function populateDwellersList() {
     if (exploringDwellers.length > 0) {
         const exploringHeader = document.createElement('div');
         exploringHeader.className = 'dweller-section-header exploring';
-        exploringHeader.textContent = `<i class="fas fa-globe"></i> EXPLORING (${exploringDwellers.length})`;
+        exploringHeader.innerHTML = `<i class="fas fa-globe"></i> EXPLORING (${exploringDwellers.length})`;
         dwellersList.appendChild(exploringHeader);
         
         exploringDwellers.forEach(({ dweller, index }) => {
