@@ -2929,15 +2929,22 @@ function proceedWithSeasonPassDownload() {
     const baseName = originalFileName?.replace(/\.[^/.]+$/, '') || `season-pass-${seasonPassData.seasonId}`;
     
     if (format === '1') {
-        // For .dat format, still download as JSON (since we're just modifying data)
-        const dataStr = JSON.stringify(seasonPassData, null, 2);
-        const dataBlob = new Blob([dataStr], { type: 'text/plain' });
-        const url = URL.createObjectURL(dataBlob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = `${baseName}.dat`;
-        link.click();
-        URL.revokeObjectURL(url);
+        // Encrypt and download as .dat for in-game use
+        const result = SaveDecryptor.encrypt(seasonPassData);
+        if (result.success) {
+            const dataBlob = new Blob([result.data], { type: 'text/plain' });
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `${baseName}.dat`;
+            link.click();
+            URL.revokeObjectURL(url);
+            addToHistory('Season Pass Download', 'Downloaded encrypted .dat file');
+            showToast('Season pass file downloaded as encrypted .dat!');
+        } else {
+            showToast(`Encryption error: ${result.error}`);
+            return;
+        }
     } else if (format === '2') {
         // Download as plain JSON
         const dataStr = JSON.stringify(seasonPassData, null, 2);
