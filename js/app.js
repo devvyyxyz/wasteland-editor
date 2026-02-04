@@ -1379,8 +1379,23 @@ function populateItemData() {
     
     const vault = currentData.vault;
     
-    // Lunchboxes are stored at vault.LunchBoxesCount (not in inventory.items!)
-    const lunchboxCount = vault.LunchBoxesCount || 0;
+    // Extract counts from LunchBoxesByType array
+    // Array of type codes: 0=Lunchbox, 1=MrHandy, 2=PetCarrier, 3=StarterPack
+    let lunchboxCount = 0;
+    let handyCount = 0;
+    let petCount = 0;
+    let starterCount = 0;
+    
+    if (vault.LunchBoxesByType && Array.isArray(vault.LunchBoxesByType)) {
+        for (const typeCode of vault.LunchBoxesByType) {
+            if (typeCode === 0) lunchboxCount++;
+            else if (typeCode === 1) handyCount++;
+            else if (typeCode === 2) petCount++;
+            else if (typeCode === 3) starterCount++;
+        }
+    }
+    
+    // Set UI values
     const lunchboxElem = document.getElementById('lunchboxCount');
     if (lunchboxElem) {
         lunchboxElem.value = lunchboxCount;
@@ -1388,26 +1403,21 @@ function populateItemData() {
         trackFieldChange('lunchboxCount');
     }
     
-    // Mr. Handies, Pet Carriers, and Starter Packs are in storage.resources
-    const resources = vault.storage?.resources || {};
-    const handyCount = Math.floor(resources.MrHandy || 0);
-    const petCount = Math.floor(resources.PetCarrier || 0);
-    const starterCount = 0; // Starter packs don't exist in actual save files
-    
     const handyElem = document.getElementById('handyCount');
-    const petElem = document.getElementById('petCarrierCount');
-    const starterElem = document.getElementById('starterPackCount');
-    
     if (handyElem) {
         handyElem.value = handyCount;
         storeOriginalValue('handyCount', handyCount);
         trackFieldChange('handyCount');
     }
+    
+    const petElem = document.getElementById('petCarrierCount');
     if (petElem) {
         petElem.value = petCount;
         storeOriginalValue('petCarrierCount', petCount);
         trackFieldChange('petCarrierCount');
     }
+    
+    const starterElem = document.getElementById('starterPackCount');
     if (starterElem) {
         starterElem.value = starterCount;
         storeOriginalValue('starterPackCount', starterCount);
@@ -1421,27 +1431,30 @@ function updateItemCounts() {
     
     const vault = currentData.vault;
     
-    // Ensure storage structure exists
-    if (!vault.storage) vault.storage = {};
-    if (!vault.storage.resources) vault.storage.resources = {};
-    
     // Get new values from inputs
     const lunchboxCount = parseInt(document.getElementById('lunchboxCount')?.value) || 0;
     const handyCount = parseInt(document.getElementById('handyCount')?.value) || 0;
     const petCarrierCount = parseInt(document.getElementById('petCarrierCount')?.value) || 0;
-    // Note: Starter packs don't exist in actual save files
+    const starterPackCount = parseInt(document.getElementById('starterPackCount')?.value) || 0;
     
-    // Lunchboxes are stored at vault.LunchBoxesCount (not in inventory!)
-    vault.LunchBoxesCount = lunchboxCount;
+    // Update LunchBoxesCount - total of all special items
+    vault.LunchBoxesCount = lunchboxCount + handyCount + petCarrierCount + starterPackCount;
     
-    // Mr. Handies and Pet Carriers are in storage.resources
-    vault.storage.resources.MrHandy = handyCount;
-    vault.storage.resources.PetCarrier = petCarrierCount;
+    // Rebuild LunchBoxesByType array - critical for game to recognize items!
+    // Array of type codes: 0=Lunchbox, 1=MrHandy, 2=PetCarrier, 3=StarterPack
+    vault.LunchBoxesByType = [];
     
-    // Also update storage.bonus if it exists (mirrors resources)
-    if (vault.storage.bonus) {
-        vault.storage.bonus.MrHandy = 0;
-        vault.storage.bonus.PetCarrier = 0;
+    for (let i = 0; i < lunchboxCount; i++) {
+        vault.LunchBoxesByType.push(0);
+    }
+    for (let i = 0; i < handyCount; i++) {
+        vault.LunchBoxesByType.push(1);
+    }
+    for (let i = 0; i < petCarrierCount; i++) {
+        vault.LunchBoxesByType.push(2);
+    }
+    for (let i = 0; i < starterPackCount; i++) {
+        vault.LunchBoxesByType.push(3);
     }
     
     jsonEditor.value = JSON.stringify(currentData, null, 2);
