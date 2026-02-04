@@ -30,6 +30,14 @@
     --original-color: #228B22;
 }
 
+/* Resource Icon Styling */
+.resource-icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 4px;
+    color: var(--primary-color);
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -260,9 +268,16 @@ main {
 .action-buttons {
     display: flex;
     gap: 10px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
+}
+
+.action-buttons .btn {
+    flex: 1;
+    min-width: 150px;
+    padding: 30px 20px;
+    justify-content: center;
 }
 
 .btn {
@@ -310,9 +325,16 @@ main {
 }
 
 .button-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 10px;
+}
+
+.button-grid .btn {
+    flex: 1 1 calc(50% - 5px);
+    min-width: 200px;
+    min-height: 44px;
+    justify-content: center;
 }
 
 /* Form Styling */
@@ -330,6 +352,15 @@ main {
     font-size: 0.95em;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-group label i {
+    font-size: 1.1em;
+    width: 20px;
+    text-align: center;
 }
 
 .form-group input,
@@ -454,6 +485,13 @@ main {
     text-transform: uppercase;
     letter-spacing: 0.5px;
     font-size: 0.9em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .tab-btn:hover {

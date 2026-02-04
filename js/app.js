@@ -200,7 +200,7 @@ function handleFileUpload(e) {
                 currentData = result.data;
                 originalData = JSON.parse(JSON.stringify(currentData));
                 
-                fileInfo.textContent = `📄 Loaded: ${file.name} (${formatFileSize(file.size)})`;
+                fileInfo.textContent = `<i class="fas fa-file"></i> Loaded: ${file.name} (${formatFileSize(file.size)})`;
                 errorMessage.textContent = '';
                 downloadBtn.disabled = false;
                 formatBtn.disabled = false;
@@ -378,7 +378,7 @@ function trackFieldChange(fieldId) {
         // Add modified indicator
         const indicator = document.createElement('span');
         indicator.className = 'field-indicator field-indicator-modified';
-        indicator.textContent = '●';
+        indicator.innerHTML = '<i class="fas fa-circle"></i>';
         indicator.title = `Modified (Original: ${originalValue})`;
         elem.parentElement.appendChild(indicator);
     } else {
@@ -388,7 +388,7 @@ function trackFieldChange(fieldId) {
         // Add original indicator
         const indicator = document.createElement('span');
         indicator.className = 'field-indicator field-indicator-original';
-        indicator.textContent = '✓';
+        indicator.innerHTML = '<i class="fas fa-check"></i>';
         indicator.title = 'Original value from save file';
         elem.parentElement.appendChild(indicator);
     }
@@ -519,7 +519,7 @@ function populateDwellersList() {
     if (!dwellersList) return;
     
     if (!currentData || !currentData.dwellers) {
-        dwellersList.innerHTML = '<div class="empty-state">📂 No vault loaded yet!<br><small>Upload a save file to get started</small></div>';
+        dwellersList.innerHTML = '<div class="empty-state"><i class="fas fa-folder"></i> No vault loaded yet!<br><small>Upload a save file to get started</small></div>';
         return;
     }
     
@@ -528,7 +528,7 @@ function populateDwellersList() {
     const dwellers = currentData.dwellers.dwellers || [];
     
     if (dwellers.length === 0) {
-        dwellersList.innerHTML = '<div class="empty-state">😔 No dwellers found in this vault</div>';
+        dwellersList.innerHTML = '<div class="empty-state"><i class="fas fa-frown"></i> No dwellers found in this vault</div>';
         return;
     }
     
@@ -561,7 +561,7 @@ function populateDwellersList() {
     if (inVaultDwellers.length > 0) {
         const inVaultHeader = document.createElement('div');
         inVaultHeader.className = 'dweller-section-header';
-        inVaultHeader.textContent = `🏛️ IN VAULT (${inVaultDwellers.length})`;
+        inVaultHeader.textContent = `<i class="fas fa-building-columns"></i> IN VAULT (${inVaultDwellers.length})`;
         dwellersList.appendChild(inVaultHeader);
         
         inVaultDwellers.forEach(({ dweller, index }) => {
@@ -579,7 +579,7 @@ function populateDwellersList() {
     if (exploringDwellers.length > 0) {
         const exploringHeader = document.createElement('div');
         exploringHeader.className = 'dweller-section-header exploring';
-        exploringHeader.textContent = `🌍 EXPLORING (${exploringDwellers.length})`;
+        exploringHeader.textContent = `<i class="fas fa-globe"></i> EXPLORING (${exploringDwellers.length})`;
         dwellersList.appendChild(exploringHeader);
         
         exploringDwellers.forEach(({ dweller, index }) => {
@@ -834,7 +834,7 @@ function populateRoomsList() {
     if (!roomsList) return;
     
     if (!currentData || !currentData.vault) {
-        roomsList.innerHTML = '<div class="empty-state">📂 No vault loaded yet!<br><small>Upload a save file to get started</small></div>';
+        roomsList.innerHTML = '<div class="empty-state"><i class="fas fa-folder"></i> No vault loaded yet!<br><small>Upload a save file to get started</small></div>';
         return;
     }
     
@@ -843,7 +843,7 @@ function populateRoomsList() {
     const rooms = currentData.vault.rooms || [];
     
     if (rooms.length === 0) {
-        roomsList.innerHTML = '<div class="empty-state">🏗️ No rooms listed here :(<br><small>Your vault appears to be empty</small></div>';
+        roomsList.innerHTML = '<div class="empty-state"><i class="fas fa-person-digging"></i> No rooms listed here :(<br><small>Your vault appears to be empty</small></div>';
         return;
     }
     
@@ -864,7 +864,7 @@ function populateWastelandTeams() {
     if (!teamsList) return;
     
     if (!currentData || !currentData.vault || !currentData.vault.wasteland) {
-        teamsList.innerHTML = '<div class="empty-state">📂 No vault loaded yet!<br><small>Upload a save file to get started</small></div>';
+        teamsList.innerHTML = '<div class="empty-state"><i class="fas fa-folder"></i> No vault loaded yet!<br><small>Upload a save file to get started</small></div>';
         return;
     }
     
@@ -873,7 +873,7 @@ function populateWastelandTeams() {
     const teams = currentData.vault.wasteland.teams || [];
     
     if (teams.length === 0) {
-        teamsList.innerHTML = '<div class="empty-state">🏜️ No teams in the wasteland<br><small>Send dwellers on quests to see them here</small></div>';
+        teamsList.innerHTML = '<div class="empty-state"><i class="fas fa-mountain-sun"></i> No teams in the wasteland<br><small>Send dwellers on quests to see them here</small></div>';
         return;
     }
     
@@ -1019,7 +1019,7 @@ function populateWeapons() {
                     || [];
     
     if (weapons.length === 0) {
-        weaponsList.innerHTML = '<div class="empty-state">🔫 No weapons in storage<br><small>Add weapons to see them here</small></div>';
+        weaponsList.innerHTML = '<div class="empty-state"><i class="fas fa-gun"></i> No weapons in storage<br><small>Add weapons to see them here</small></div>';
         return;
     }
     
@@ -1041,7 +1041,7 @@ function populateOutfits() {
                     || [];
     
     if (outfits.length === 0) {
-        outfitsList.innerHTML = '<div class="empty-state">👔 No outfits in storage<br><small>Add outfits to see them here</small></div>';
+        outfitsList.innerHTML = '<div class="empty-state"><i class="fas fa-vest"></i> No outfits in storage<br><small>Add outfits to see them here</small></div>';
         return;
     }
     
@@ -1063,7 +1063,7 @@ function populateJunk() {
                 || [];
     
     if (junk.length === 0) {
-        junkList.innerHTML = '<div class="empty-state">🔧 No junk in storage<br><small>Add junk items to see them here</small></div>';
+        junkList.innerHTML = '<div class="empty-state"><i class="fas fa-wrench"></i> No junk in storage<br><small>Add junk items to see them here</small></div>';
         return;
     }
     
@@ -1087,7 +1087,7 @@ function createInventoryItem(item, index, type) {
         detailsHTML = `<span class="inventory-item-stat"><strong>DMG ${damage}</strong></span>`;
     } else if (type === 'outfit') {
         const stats = item.stats || {};
-        const bonus = Object.keys(stats).length > 0 ? '✓' : '—';
+        const bonus = Object.keys(stats).length > 0 ? '<i class=\"fas fa-check\" style=\"color: green;\"></i>' : '—';
         detailsHTML = `<span class="inventory-item-stat"><strong>${bonus}</strong></span>`;
     } else if (type === 'junk') {
         detailsHTML = `<span class="inventory-item-stat"><strong>Item</strong></span>`;

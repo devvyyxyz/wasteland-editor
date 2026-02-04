@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <header>
-            <h1>🎮 Fallout Shelter Save Inspector</h1>
+            <h1><i class="fas fa-gamepad"></i> Fallout Shelter Save Inspector</h1>
             <p>READ-ONLY Analysis Tool - Educational & Research Purposes Only</p>
             
             <div class="nav-section">
@@ -21,14 +21,14 @@
         </header>
 
         <div class="notice">
-            <strong>⚠️ IMPORTANT:</strong> This tool performs READ-ONLY inspection only. 
+            <strong><i class="fas fa-triangle-exclamation"></i> IMPORTANT:</strong> This tool performs READ-ONLY inspection only. 
             No modifications are made. This is for analysis and educational purposes. 
             Respect game licenses and Terms of Service.
         </div>
 
         <div class="upload-section">
             <label class="upload-label">
-                📁 Select Save File to Analyze
+                <i class="fas fa-folder"></i> Select Save File to Analyze
             </label>
             <input type="file" id="fileInput" accept=".sav,.dat,.json">
             <p style="margin-top: 15px; color: #a0a0a0; font-size: 0.9em;">
@@ -41,7 +41,7 @@
         <div id="resultsSection" class="results-section">
             <!-- File Information -->
             <div class="section">
-                <h2>📊 File Information</h2>
+                <h2><i class="fas fa-chart-bar"></i> File Information</h2>
                 <div class="file-info">
                     <div class="info-item">
                         <strong>File Name</strong>
@@ -64,7 +64,7 @@
 
             <!-- Analysis Results -->
             <div class="section">
-                <h2>🔍 Analysis Results</h2>
+                <h2><i class="fas fa-magnifying-glass"></i> Analysis Results</h2>
                 <div class="stats-grid">
                     <div class="stat-card">
                         <div class="label">Likely Encrypted</div>
@@ -83,14 +83,14 @@
 
             <!-- Warnings -->
             <div class="section">
-                <h2>⚠️ Analysis Notes</h2>
+                <h2><i class="fas fa-triangle-exclamation"></i> Analysis Notes</h2>
                 <ul id="warningsList" style="margin-left: 20px; list-style: none;">
                 </ul>
             </div>
 
             <!-- Readable Strings -->
             <div class="section">
-                <h2>📝 Readable Strings (Read-Only)</h2>
+                <h2><i class="fas fa-note"></i> Readable Strings (Read-Only)</h2>
                 <p style="color: #a0a0a0; margin-bottom: 15px;">
                     Showing up to 50 readable ASCII strings found in the file. 
                     This is for analysis only.
@@ -111,7 +111,7 @@
 
             <!-- Statistics -->
             <div class="section">
-                <h2>📈 Statistics</h2>
+                <h2><i class="fas fa-chart-line"></i> Statistics</h2>
                 <div class="stats-grid">
                     <div class="stat-card">
                         <div class="label">Total Readable Strings</div>
@@ -130,25 +130,25 @@
 
             <!-- Export Options -->
             <div class="section">
-                <h2>💾 Export Analysis</h2>
+                <h2><i class="fas fa-floppy-disk"></i> Export Analysis</h2>
                 <div class="button-group">
-                    <button onclick="exportJSON()">📄 Export as JSON</button>
-                    <button onclick="exportHTML()">🌐 Export as HTML</button>
-                    <button onclick="location.reload()">🔄 Analyze Another File</button>
+                    <button onclick="exportJSON()"><i class="fas fa-file"></i> Export as JSON</button>
+                    <button onclick="exportHTML()"><i class="fas fa-globe"></i> Export as HTML</button>
+                    <button onclick="location.reload()"><i class="fas fa-rotate"></i> Analyze Another File</button>
                 </div>
             </div>
         </div>
 
         <div class="disclaimer">
-            <h3>⚠️ LEGAL & ETHICAL DISCLAIMER</h3>
+            <h3><i class="fas fa-triangle-exclamation"></i> LEGAL & ETHICAL DISCLAIMER</h3>
             <ul>
-                <li>✅ <strong>Allowed:</strong> Analyzing your own save files for research</li>
-                <li>✅ <strong>Allowed:</strong> Understanding file structures for educational purposes</li>
-                <li>✅ <strong>Allowed:</strong> Creating read-only inspection tools</li>
-                <li>❌ <strong>NOT Allowed:</strong> Bypassing premium/paid content restrictions</li>
-                <li>❌ <strong>NOT Allowed:</strong> Modifying monetization or entitlement flags</li>
-                <li>❌ <strong>NOT Allowed:</strong> Violating Bethesda's Terms of Service</li>
-                <li>❌ <strong>NOT Allowed:</strong> Distributing modified saves with paid content unlocked</li>
+                <li><i class="fas fa-check-circle"></i> <strong>Allowed:</strong> Analyzing your own save files for research</li>
+                <li><i class="fas fa-check-circle"></i> <strong>Allowed:</strong> Understanding file structures for educational purposes</li>
+                <li><i class="fas fa-check-circle"></i> <strong>Allowed:</strong> Creating read-only inspection tools</li>
+                <li><i class="fas fa-circle-xmark"></i> <strong>NOT Allowed:</strong> Bypassing premium/paid content restrictions</li>
+                <li><i class="fas fa-circle-xmark"></i> <strong>NOT Allowed:</strong> Modifying monetization or entitlement flags</li>
+                <li><i class="fas fa-circle-xmark"></i> <strong>NOT Allowed:</strong> Violating Bethesda's Terms of Service</li>
+                <li><i class="fas fa-circle-xmark"></i> <strong>NOT Allowed:</strong> Distributing modified saves with paid content unlocked</li>
             </ul>
             <p style="margin-top: 15px;">
                 This tool respects game licenses and intellectual property rights. 
