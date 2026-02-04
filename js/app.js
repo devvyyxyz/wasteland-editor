@@ -5,6 +5,7 @@ let currentDweller = null;
 let backups = [];
 let changeHistory = [];
 let originalFileName = null;
+let originalFieldValues = {}; // Track original values from save file
 
 // DOM Elements
 const fileInput = document.getElementById('fileInput');
@@ -36,12 +37,18 @@ function initializeEventListeners() {
     // Vault panel listeners
     ['vaultName', 'vaultNumber', 'caps', 'food', 'water', 'power', 'radaway', 'stimpacks', 'nukacola', 'nukaquantum'].forEach(id => {
         const elem = document.getElementById(id);
-        if (elem) elem.addEventListener('change', updateVaultData);
+        if (elem) {
+            elem.addEventListener('change', updateVaultData);
+            elem.addEventListener('input', () => trackFieldChange(id));
+        }
     });
 
     ['lunchboxCount', 'handyCount', 'petCarrierCount', 'starterPackCount'].forEach(id => {
         const elem = document.getElementById(id);
-        if (elem) elem.addEventListener('change', updateItemCounts);
+        if (elem) {
+            elem.addEventListener('change', updateItemCounts);
+            elem.addEventListener('input', () => trackFieldChange(id));
+        }
     });
 
     // Bulk action buttons
@@ -128,9 +135,12 @@ function initializeEventListeners() {
     // Dweller panel listeners
     ['dwellerFirstName', 'dwellerLastName', 'dwellerGender', 'dwellerLevel', 'dwellerExp',
      'dwellerHealth', 'dwellerHappiness', 'dwellerSkinColor', 'dwellerHairColor',
-     'dwellerOutfit', 'dwellerWeapon'].forEach(id => {
+     'dwellerOutfit', 'dwellerWeapon', 'dwellerMaxHealth', 'dwellerRadiation'].forEach(id => {
         const elem = document.getElementById(id);
-        if (elem) elem.addEventListener('change', updateDwellerData);
+        if (elem) {
+            elem.addEventListener('change', updateDwellerData);
+            elem.addEventListener('input', () => trackFieldChange(id));
+        }
     });
 
     document.getElementById('dwellerSearch')?.addEventListener('input', debounce(filterDwellers, 300));
@@ -139,6 +149,7 @@ function initializeEventListeners() {
 
     document.querySelectorAll('.stat-item input').forEach(input => {
         input.addEventListener('change', updateDwellerData);
+        input.addEventListener('input', (e) => trackFieldChange(e.target.id));
     });
 
     // Back link
@@ -333,6 +344,67 @@ function resetEditorFields() {
     
     const roomsList = document.getElementById('roomsList');
     if (roomsList) roomsList.innerHTML = '';
+    
+    // Clear original values tracking
+    originalFieldValues = {};
+    clearAllFieldIndicators();
+}
+
+// Track field changes and show visual indicators
+function trackFieldChange(fieldId) {
+    const elem = document.getElementById(fieldId);
+    if (!elem) return;
+    
+    const currentValue = elem.value;
+    const originalValue = originalFieldValues[fieldId];
+    
+    // Remove existing indicator
+    const existingIndicator = elem.parentElement.querySelector('.field-indicator');
+    if (existingIndicator) existingIndicator.remove();
+    
+    if (originalValue === undefined) {
+        // No original value tracked (field not from save file)
+        elem.classList.remove('field-modified', 'field-original');
+        return;
+    }
+    
+    // Compare current to original
+    const isModified = currentValue !== originalValue;
+    
+    if (isModified) {
+        elem.classList.add('field-modified');
+        elem.classList.remove('field-original');
+        
+        // Add modified indicator
+        const indicator = document.createElement('span');
+        indicator.className = 'field-indicator field-indicator-modified';
+        indicator.textContent = '●';
+        indicator.title = `Modified (Original: ${originalValue})`;
+        elem.parentElement.appendChild(indicator);
+    } else {
+        elem.classList.remove('field-modified');
+        elem.classList.add('field-original');
+        
+        // Add original indicator
+        const indicator = document.createElement('span');
+        indicator.className = 'field-indicator field-indicator-original';
+        indicator.textContent = '✓';
+        indicator.title = 'Original value from save file';
+        elem.parentElement.appendChild(indicator);
+    }
+}
+
+// Store original value when loading from save file
+function storeOriginalValue(fieldId, value) {
+    originalFieldValues[fieldId] = String(value);
+}
+
+// Clear all field indicators
+function clearAllFieldIndicators() {
+    document.querySelectorAll('.field-indicator').forEach(el => el.remove());
+    document.querySelectorAll('.field-modified, .field-original').forEach(el => {
+        el.classList.remove('field-modified', 'field-original');
+    });
 }
 
 function showToast(message) {
@@ -389,15 +461,36 @@ function populateVaultData() {
     if (!currentData || !currentData.vault) return;
     
     const vault = currentData.vault;
+    
+    // Vault name
+    const vaultName = vault.VaultName || '';
     const vaultNameElem = document.getElementById('vaultName');
-    if (vaultNameElem) vaultNameElem.value = vault.VaultName || '';
+    if (vaultNameElem) {
+        vaultNameElem.value = vaultName;
+        storeOriginalValue('vaultName', vaultName);
+        trackFieldChange('vaultName');
+    }
+    
+    // Vault number
+    const vaultNumber = vault.VaultMode || 0;
+    const vaultNumberElem = document.getElementById('vaultNumber');
+    if (vaultNumberElem) {
+        vaultNumberElem.value = vaultNumber;
+        storeOriginalValue('vaultNumber', vaultNumber);
+        trackFieldChange('vaultNumber');
+    }
     
     // Resources are stored at vault.storage.resources
     const storage = vault.storage?.resources || {};
     
     // Caps - stored as "Nuka" in the save file
+    const capsValue = Math.floor(storage.Nuka || 0);
     const capsElem = document.getElementById('caps');
-    if (capsElem) capsElem.value = storage.Nuka || 0;
+    if (capsElem) {
+        capsElem.value = capsValue;
+        storeOriginalValue('caps', capsValue);
+        trackFieldChange('caps');
+    }
     
     const fields = {
         'food': 'Food',
@@ -411,7 +504,12 @@ function populateVaultData() {
     
     Object.entries(fields).forEach(([elemId, storageProp]) => {
         const elem = document.getElementById(elemId);
-        if (elem) elem.value = storage[storageProp] || 0;
+        if (elem) {
+            const value = Math.floor(storage[storageProp] || 0);
+            elem.value = value;
+            storeOriginalValue(elemId, value);
+            trackFieldChange(elemId);
+        }
     });
 }
 
@@ -531,30 +629,74 @@ function selectDweller(dweller, index) {
     const firstElem = document.getElementById('dwellerFirstName');
     const lastElem = document.getElementById('dwellerLastName');
     
-    if (firstElem) firstElem.value = nameparts[0] || '';
-    if (lastElem) lastElem.value = nameparts.slice(1).join(' ') || '';
+    if (firstElem) {
+        const firstName = nameparts[0] || '';
+        firstElem.value = firstName;
+        storeOriginalValue('dwellerFirstName', firstName);
+        trackFieldChange('dwellerFirstName');
+    }
+    if (lastElem) {
+        const lastName = nameparts.slice(1).join(' ') || '';
+        lastElem.value = lastName;
+        storeOriginalValue('dwellerLastName', lastName);
+        trackFieldChange('dwellerLastName');
+    }
     
     // Gender
     const genderElem = document.getElementById('dwellerGender');
-    if (genderElem) genderElem.value = dweller.gender || 1;
+    if (genderElem) {
+        const gender = dweller.gender || 1;
+        genderElem.value = gender;
+        storeOriginalValue('dwellerGender', gender);
+    }
     
     // Level and Experience (stored in experience object)
     const levelElem = document.getElementById('dwellerLevel');
     const expElem = document.getElementById('dwellerExp');
-    if (levelElem) levelElem.value = dweller.experience?.currentLevel || 1;
-    if (expElem) expElem.value = dweller.experience?.experienceValue || 0;
+    if (levelElem) {
+        const level = dweller.experience?.currentLevel || 1;
+        levelElem.value = level;
+        storeOriginalValue('dwellerLevel', level);
+        trackFieldChange('dwellerLevel');
+    }
+    if (expElem) {
+        const exp = dweller.experience?.experienceValue || 0;
+        expElem.value = exp;
+        storeOriginalValue('dwellerExp', exp);
+        trackFieldChange('dwellerExp');
+    }
     
     // Health (stored in health object)
     const healthElem = document.getElementById('dwellerHealth');
     const maxHealthElem = document.getElementById('dwellerMaxHealth');
     const radiationElem = document.getElementById('dwellerRadiation');
-    if (healthElem) healthElem.value = dweller.health?.healthValue || dweller.health?.maxHealth || 100;
-    if (maxHealthElem) maxHealthElem.value = dweller.health?.maxHealth || 100;
-    if (radiationElem) radiationElem.value = dweller.health?.radiationValue || 0;
+    if (healthElem) {
+        const health = dweller.health?.healthValue || dweller.health?.maxHealth || 100;
+        healthElem.value = health;
+        storeOriginalValue('dwellerHealth', health);
+        trackFieldChange('dwellerHealth');
+    }
+    if (maxHealthElem) {
+        const maxHealth = dweller.health?.maxHealth || 100;
+        maxHealthElem.value = maxHealth;
+        storeOriginalValue('dwellerMaxHealth', maxHealth);
+        trackFieldChange('dwellerMaxHealth');
+    }
+    if (radiationElem) {
+        const radiation = dweller.health?.radiationValue || 0;
+        radiationElem.value = radiation;
+        storeOriginalValue('dwellerRadiation', radiation);
+        trackFieldChange('dwellerRadiation');
+    }
     
     // Happiness (stored in happiness object)
     const happinessElem = document.getElementById('dwellerHappiness');
-    if (happinessElem) happinessElem.value = Math.round((dweller.happiness?.happinessValue || 50));
+    if (happinessElem) {
+        const happiness = Math.round((dweller.happiness?.happinessValue || 50));
+        happinessElem.value = happiness;
+        storeOriginalValue('dwellerHappiness', happiness);
+        trackFieldChange('dwellerHappiness');
+    }
     
     // Appearance
     const skinColorElem = document.getElementById('dwellerSkinColor');
@@ -568,7 +710,12 @@ function selectDweller(dweller, index) {
     
     statIds.forEach((id, i) => {
         const elem = document.getElementById(id);
-        if (elem) elem.value = statsArray[i]?.value || 1;
+        if (elem) {
+            const value = statsArray[i]?.value || 1;
+            elem.value = value;
+            storeOriginalValue(id, value);
+            trackFieldChange(id);
+        }
     });
     
     // Equipment
@@ -1240,7 +1387,11 @@ function populateItemData() {
     
     Object.entries(counts).forEach(([elemId, count]) => {
         const elem = document.getElementById(elemId);
-        if (elem) elem.value = count;
+        if (elem) {
+            elem.value = count;
+            storeOriginalValue(elemId, count);
+            trackFieldChange(elemId);
+        }
     });
 }
 

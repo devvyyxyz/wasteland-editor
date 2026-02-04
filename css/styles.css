@@ -26,6 +26,8 @@
     --error-color: #8B0000;
     --success-color: #556B2F;
     --warning-color: #CD853F;
+    --modified-color: #FF8C00;
+    --original-color: #228B22;
 }
 
 html {
@@ -318,6 +320,7 @@ main {
     margin-bottom: 15px;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .form-group label {
@@ -345,6 +348,70 @@ main {
     outline: none;
     border-color: var(--accent-color);
     box-shadow: 0 0 8px rgba(212, 165, 116, 0.3);
+}
+
+/* Field change indicators */
+.field-modified {
+    border-color: var(--modified-color) !important;
+    border-width: 2px !important;
+    background: rgba(255, 140, 0, 0.05) !important;
+}
+
+.field-original {
+    border-color: var(--original-color) !important;
+}
+
+.field-indicator {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    font-weight: bold;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.field-indicator-modified {
+    color: var(--modified-color);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.field-indicator-original {
+    color: var(--original-color);
+    opacity: 0.6;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Field change legend */
+.field-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px 15px;
+    background: rgba(139, 69, 19, 0.08);
+    border-radius: 4px;
+    margin-bottom: 15px;
+    font-size: 0.9em;
+    border-left: 3px solid var(--primary-color);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.legend-item span:first-child {
+    font-size: 1.2em;
+    width: 20px;
+    text-align: center;
 }
 
 .form-row {
@@ -1088,6 +1155,7 @@ footer p {
 .form-group {
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .form-group label {
