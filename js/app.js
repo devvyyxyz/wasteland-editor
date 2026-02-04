@@ -1152,19 +1152,39 @@ function maxAllDwellerStats() {
     }
     
     const dwellers = currentData.dwellers.dwellers || [];
-    const maxStats = { strength: 10, perception: 10, endurance: 10, charisma: 10, intelligence: 10, agility: 10, luck: 10 };
+    if (dwellers.length === 0) {
+        showToast('No dwellers in vault');
+        return;
+    }
     
+    let count = 0;
     dwellers.forEach(dweller => {
-        dweller.level = 50;
+        // Update level
+        if (!dweller.experience) dweller.experience = {};
+        dweller.experience.currentLevel = 50;
+        dweller.experience.experienceValue = 999999;
+        
+        // Update SPECIAL stats - array of 7 stat objects
         if (!dweller.stats) dweller.stats = {};
-        Object.assign(dweller.stats, maxStats);
+        if (!dweller.stats.stats) dweller.stats.stats = [];
+        
+        // Ensure we have 7 stats
+        for (let i = 0; i < 7; i++) {
+            if (!dweller.stats.stats[i]) {
+                dweller.stats.stats[i] = { value: 10, mod: 0, exp: 999999 };
+            } else {
+                dweller.stats.stats[i].value = 10;
+                dweller.stats.stats[i].exp = 999999;
+            }
+        }
+        count++;
     });
     
     createBackup('Max All Stats');
     jsonEditor.value = JSON.stringify(currentData, null, 2);
     updateFileSize();
     populateDwellersList();
-    showToast('All dweller stats maximized!');
+    showToast(`Maxed stats for ${count} dwellers!`);
 }
 
 // Max All Happiness
@@ -1175,15 +1195,23 @@ function maxAllHappiness() {
     }
     
     const dwellers = currentData.dwellers.dwellers || [];
+    if (dwellers.length === 0) {
+        showToast('No dwellers in vault');
+        return;
+    }
+    
+    let count = 0;
     dwellers.forEach(dweller => {
-        dweller.happiness = 100;
+        if (!dweller.happiness) dweller.happiness = {};
+        dweller.happiness.happinessValue = 100;
+        count++;
     });
     
     createBackup('Max Happiness');
     jsonEditor.value = JSON.stringify(currentData, null, 2);
     updateFileSize();
     populateDwellersList();
-    showToast('All dwellers at maximum happiness!');
+    showToast(`Maxed happiness for ${count} dwellers!`);
 }
 
 // Heal All Dwellers
@@ -1194,18 +1222,25 @@ function healAllDwellers() {
     }
     
     const dwellers = currentData.dwellers.dwellers || [];
+    if (dwellers.length === 0) {
+        showToast('No dwellers in vault');
+        return;
+    }
+    
+    let count = 0;
     dwellers.forEach(dweller => {
-        if (dweller.health) {
-            const maxHealth = dweller.health.maxHealth || 999;
-            dweller.health.current = maxHealth;
-        }
+        if (!dweller.health) dweller.health = {};
+        const maxHealth = dweller.health.maxHealth || 105;
+        dweller.health.healthValue = maxHealth;
+        dweller.health.radiationValue = 0;
+        count++;
     });
     
     createBackup('Heal All');
     jsonEditor.value = JSON.stringify(currentData, null, 2);
     updateFileSize();
     populateDwellersList();
-    showToast('All dwellers healed!');
+    showToast(`Healed ${count} dwellers!`);
 }
 
 // Unlock All Rooms
@@ -1216,16 +1251,26 @@ function unlockAllRooms() {
     }
     
     const rooms = currentData.vault.rooms || [];
+    if (rooms.length === 0) {
+        showToast('No rooms in vault');
+        return;
+    }
+    
+    let count = 0;
     rooms.forEach(room => {
-        room.state = 'Buildable';
-        room.level = 1;
+        if (room.currentStateName) room.currentStateName = 'Idle';
+        if (room.rushTask !== undefined) room.rushTask = -1;
+        if (room.level && room.level < 3) {
+            room.level = 3;
+            count++;
+        }
     });
     
     createBackup('Unlock Rooms');
     jsonEditor.value = JSON.stringify(currentData, null, 2);
     updateFileSize();
     populateRoomsList();
-    showToast('All rooms unlocked!');
+    showToast(`Upgraded ${count} rooms to level 3!`);
 }
 
 // Unlock All Recipes
@@ -1516,14 +1561,28 @@ function clearAllEmergencies() {
     }
     
     const rooms = currentData.vault.rooms || [];
+    if (rooms.length === 0) {
+        showToast('No rooms in vault');
+        return;
+    }
+    
+    let count = 0;
     rooms.forEach(room => {
-        room.emergencyDone = true;
+        if (room.emergencyDone === false) {
+            room.emergencyDone = true;
+            count++;
+        }
+        // Also reset to Idle state
+        if (room.currentStateName && room.currentStateName !== 'Idle') {
+            room.currentStateName = 'Idle';
+        }
     });
     
     createBackup('Clear Emergencies');
     jsonEditor.value = JSON.stringify(currentData, null, 2);
     updateFileSize();
-    showToast('All room emergencies cleared!');
+    populateRoomsList();
+    showToast(count > 0 ? `Cleared ${count} emergencies!` : 'No emergencies found');
 }
 
 // Unlock All Themes
@@ -1533,10 +1592,12 @@ function unlockAllThemes() {
         return;
     }
     
+    let count = 0;
     if (currentData.specialTheme) {
         Object.keys(currentData.specialTheme).forEach(key => {
-            if (typeof currentData.specialTheme[key] === 'boolean') {
+            if (typeof currentData.specialTheme[key] === 'boolean' && !currentData.specialTheme[key]) {
                 currentData.specialTheme[key] = true;
+                count++;
             }
         });
     }
@@ -1544,7 +1605,7 @@ function unlockAllThemes() {
     createBackup('Unlock Themes');
     jsonEditor.value = JSON.stringify(currentData, null, 2);
     updateFileSize();
-    showToast('All themes unlocked!');
+    showToast(count > 0 ? `Unlocked ${count} themes!` : 'All themes already unlocked!');
 }
 
 // Search Handler
