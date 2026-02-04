@@ -303,10 +303,8 @@ function selectDweller(dweller, index) {
     document.querySelectorAll('.dweller-item').forEach(item => item.classList.remove('active'));
     event.target.closest('.dweller-item').classList.add('active');
     
-    const dwellersList = document.getElementById('dwellersList');
     const dwellerDetails = document.getElementById('dwellerDetails');
     
-    if (dwellersList) dwellersList.style.display = 'none';
     if (dwellerDetails) dwellerDetails.style.display = 'block';
     
     const nameElem = document.getElementById('dwellerName');
@@ -418,8 +416,9 @@ function populateRoomsList() {
     const rooms = currentData.vault.rooms || [];
     rooms.forEach((room, index) => {
         const item = document.createElement('div');
-        item.className = 'dweller-item';
-        item.textContent = `${room.type || 'Unknown'} - Level ${room.level || 1}`;
+        item.className = 'dweller-item room-item';
+        item.textContent = `${room.type || 'Unknown'} - Lvl ${room.level || 1}`;
+        item.addEventListener('click', () => editRoom(index, room));
         roomsList.appendChild(item);
     });
 }
@@ -821,9 +820,82 @@ function debounce(func, wait) {
     };
 }
 
+// Room Editing Functions
+let currentRoomIndex = null;
+
+function editRoom(index, room) {
+    currentRoomIndex = index;
+    
+    // Populate form fields
+    document.getElementById('roomName').value = room.name || '';
+    document.getElementById('roomType').value = room.type || '';
+    document.getElementById('roomLevel').value = room.level || 1;
+    document.getElementById('roomState').value = room.state || 'built';
+    
+    // Numeric fields with defaults
+    document.getElementById('roomPower').value = room.power || 0;
+    document.getElementById('roomFood').value = room.food || 0;
+    document.getElementById('roomWater').value = room.water || 0;
+    document.getElementById('roomRadiation').value = room.radiation || 0;
+    
+    // Show the form
+    const roomDetails = document.getElementById('roomDetails');
+    if (roomDetails) {
+        roomDetails.style.display = 'block';
+        roomDetails.scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    // Highlight selected room
+    document.querySelectorAll('.room-item').forEach((item, i) => {
+        item.classList.toggle('active', i === index);
+    });
+}
+
+function saveRoom() {
+    if (currentRoomIndex === null || !currentData.vault.rooms[currentRoomIndex]) return;
+    
+    const room = currentData.vault.rooms[currentRoomIndex];
+    
+    // Update room properties
+    room.name = document.getElementById('roomName').value;
+    room.type = document.getElementById('roomType').value;
+    room.level = parseInt(document.getElementById('roomLevel').value) || 1;
+    room.state = document.getElementById('roomState').value;
+    room.power = parseInt(document.getElementById('roomPower').value) || 0;
+    room.food = parseInt(document.getElementById('roomFood').value) || 0;
+    room.water = parseInt(document.getElementById('roomWater').value) || 0;
+    room.radiation = parseInt(document.getElementById('roomRadiation').value) || 0;
+    
+    // Refresh list to show updates
+    populateRoomsList();
+    closeRoomEditor();
+    
+    // Mark as modified
+    showToast('Room updated');
+    handleEditorChange();
+}
+
+function closeRoomEditor() {
+    currentRoomIndex = null;
+    const roomDetails = document.getElementById('roomDetails');
+    if (roomDetails) {
+        roomDetails.style.display = 'none';
+    }
+    document.querySelectorAll('.room-item').forEach(item => {
+        item.classList.remove('active');
+    });
+}
+
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     initializeEventListeners();
+    
+    // Add room editor listeners
+    const saveRoomBtn = document.getElementById('saveRoomBtn');
+    const closeRoomBtn = document.getElementById('closeRoomBtn');
+    if (saveRoomBtn) saveRoomBtn.addEventListener('click', saveRoom);
+    if (closeRoomBtn) closeRoomBtn.addEventListener('click', closeRoomEditor);
+    
     console.log('Wasteland Editor Enhanced - Rustic Paper Edition loaded successfully');
     showToast('Wasteland Editor Ready');
 });
