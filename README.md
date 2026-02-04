@@ -48,20 +48,28 @@ A user-friendly, browser-based tool to edit and enhance your Fallout Shelter exp
 |---------|--------|-------------|
 | **Vault Settings** | ✅ Complete | Edit vault name, number, and basic settings |
 | **Resources Manager** | ✅ Complete | Modify Caps, Food, Water, Power, Stimpacks, RadAway, Nuka Cola |
+| **Lunchboxes & Items** | ✅ Complete | Edit lunchboxes, Mr. Handies, Pet Carriers, and special items |
+| **Vault Statistics** | ✅ Complete | View 40+ statistics with visual layout grid |
+| **Vault Layout Visualizer** | ✅ Complete | 3-column grid display of all rooms with color-coded tiers |
 | **Dweller Editor** | ✅ Complete | Edit names, gender, appearance, SPECIAL stats, health, happiness |
+| **Dweller Advanced Fields** | ✅ Complete | Hair style, rarity, pregnancy status, partner ID, assigned room |
+| **Dweller List Sorting** | ✅ Complete | Sort by name, level, health, gender, or happiness (ascending/descending) |
+| **Gender Icons** | ✅ Complete | Color-coded Mars/Venus icons in dweller list |
 | **Equipment System** | ✅ Complete | Assign weapons and outfits from 400+ items |
 | **Room Manager** | ✅ Complete | View and edit room types, levels, and production |
 | **Wasteland Teams** | ✅ Complete | Manage exploration teams and quests |
 | **Inventory System** | ✅ Complete | Add/remove weapons, outfits, and junk items |
-| **Season Pass Editor** | ✅ Complete | Modify season pass level, XP, and rewards |
+| **Season Pass Editor** | ✅ Complete | Modify season pass level, XP, rewards, and premium status |
 | **Recipes Manager** | ✅ Complete | Unlock all craftable weapons and outfits |
 | **Themes Unlocker** | ✅ Complete | Unlock all 9 vault themes |
-| **Vault Statistics** | ✅ Complete | View 40+ statistics about your vault |
 | **Bulk Actions** | ✅ Complete | Max stats, heal all, unlock everything with one click |
 | **Change History** | ✅ Complete | Track all modifications with timestamps |
 | **Save Validation** | ✅ Complete | Verify save file integrity before downloading |
 | **Search Function** | ✅ Complete | Search through JSON data quickly |
 | **Backup System** | ✅ Complete | Auto-backup on load with recovery options |
+| **Warning System** | ✅ Complete | Context-aware warnings for corruption and TOS violations |
+| **Empty State Messages** | ✅ Complete | Helpful prompts when no data is loaded or selected |
+| **SEO Optimization** | ✅ Complete | Full metadata for search engine visibility |
 
 ---
 
