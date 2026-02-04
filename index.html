@@ -193,7 +193,19 @@
                     <div class="dwellers-panel">
                         <div class="dwellers-list-container">
                             <h3>Dwellers</h3>
-                            <input type="text" id="dwellerSearch" class="search-input" placeholder="Search dwellers...">
+                            <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                                <input type="text" id="dwellerSearch" class="search-input" placeholder="Search dwellers..." style="flex: 1;">
+                                <select id="dwellerSort" class="search-input" style="flex: 0 0 180px;">
+                                    <option value="name">Sort by Name</option>
+                                    <option value="level">Sort by Level</option>
+                                    <option value="health">Sort by Health</option>
+                                    <option value="gender">Sort by Gender</option>
+                                    <option value="happiness">Sort by Happiness</option>
+                                </select>
+                                <button id="dwellerSortOrder" class="search-input" style="flex: 0 0 50px; cursor: pointer; text-align: center; background: var(--paper-color); border: 2px solid var(--border-color);" title="Toggle sort order">
+                                    <i class="fas fa-arrow-down-a-z"></i>
+                                </button>
+                            </div>
                             <div id="dwellersEmptyState" class="empty-state">
                                 <i class="fas fa-folder"></i> No vault loaded yet!<br><small>Upload a save file to get started</small>
                             </div>

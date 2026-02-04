@@ -145,6 +145,8 @@ function initializeEventListeners() {
     });
 
     document.getElementById('dwellerSearch')?.addEventListener('input', debounce(filterDwellers, 300));
+    document.getElementById('dwellerSort')?.addEventListener('change', populateDwellersList);
+    document.getElementById('dwellerSortOrder')?.addEventListener('click', toggleDwellerSortOrder);
     document.getElementById('maxStatsBtn')?.addEventListener('click', maxDwellerStats);
     document.getElementById('saveDwellerBtn')?.addEventListener('click', saveDwellerChanges);
 
@@ -541,6 +543,20 @@ function populateVaultData() {
     });
 }
 
+let dwellerSortAscending = true;
+
+function toggleDwellerSortOrder() {
+    dwellerSortAscending = !dwellerSortAscending;
+    const btn = document.getElementById('dwellerSortOrder');
+    if (btn) {
+        btn.innerHTML = dwellerSortAscending 
+            ? '<i class="fas fa-arrow-down-a-z"></i>' 
+            : '<i class="fas fa-arrow-up-z-a"></i>';
+        btn.title = dwellerSortAscending ? 'Ascending order' : 'Descending order';
+    }
+    populateDwellersList();
+}
+
 // Populate Dwellers List
 function populateDwellersList() {
     const dwellersList = document.getElementById('dwellersList');
@@ -559,6 +575,10 @@ function populateDwellersList() {
         dwellersList.innerHTML = '<div class="empty-state"><i class="fas fa-frown"></i> No dwellers found in this vault</div>';
         return;
     }
+    
+    // Get sort option
+    const sortElem = document.getElementById('dwellerSort');
+    const sortBy = sortElem ? sortElem.value : 'name';
     
     // Get dweller IDs that are exploring in wasteland teams
     const exploringDwellerIds = new Set();
@@ -584,6 +604,36 @@ function populateDwellersList() {
             inVaultDwellers.push({ dweller, index });
         }
     });
+    
+    // Sort function
+    const sortDwellers = (a, b) => {
+        let result = 0;
+        switch(sortBy) {
+            case 'level':
+                result = (b.dweller.experience?.currentLevel || 1) - (a.dweller.experience?.currentLevel || 1);
+                break;
+            case 'health':
+                result = (b.dweller.health?.healthValue || 0) - (a.dweller.health?.healthValue || 0);
+                break;
+            case 'gender':
+                result = (a.dweller.gender || 1) - (b.dweller.gender || 1);
+                break;
+            case 'happiness':
+                result = (b.dweller.happiness?.happinessValue || 0) - (a.dweller.happiness?.happinessValue || 0);
+                break;
+            case 'name':
+            default:
+                const nameA = `${a.dweller.name || ''} ${a.dweller.lastName || ''}`.trim().toLowerCase();
+                const nameB = `${b.dweller.name || ''} ${b.dweller.lastName || ''}`.trim().toLowerCase();
+                result = nameA.localeCompare(nameB);
+                break;
+        }
+        return dwellerSortAscending ? result : -result;
+    };
+    
+    // Sort both lists
+    inVaultDwellers.sort(sortDwellers);
+    exploringDwellers.sort(sortDwellers);
     
     // Add in-vault dwellers section
     if (inVaultDwellers.length > 0) {
