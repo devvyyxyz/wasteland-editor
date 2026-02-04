@@ -206,6 +206,7 @@ function handleFileUpload(e) {
                 updateFileSize();
                 enableEditorUI();
                 populateVaultData();
+                populateItemData();
                 populateDwellersList();
                 populateRoomsList();
                 populateWastelandTeams();
@@ -1204,9 +1205,62 @@ function populateItemData() {
 
 // Update Item Counts
 function updateItemCounts() {
-    if (!currentData || !currentData.items) return;
+    if (!currentData) return;
+    
+    // Ensure items array exists
+    if (!currentData.items) currentData.items = [];
+    
+    // Get new values from inputs
+    const lunchboxCount = parseInt(document.getElementById('lunchboxCount')?.value) || 0;
+    const handyCount = parseInt(document.getElementById('handyCount')?.value) || 0;
+    const petCarrierCount = parseInt(document.getElementById('petCarrierCount')?.value) || 0;
+    const starterPackCount = parseInt(document.getElementById('starterPackCount')?.value) || 0;
+    
+    // Remove existing special items
+    currentData.items = currentData.items.filter(item => {
+        const id = item.id || '';
+        return !id.includes('Lunchbox') && !id.includes('Handy') && !id.includes('Pet') && !id.includes('Starter');
+    });
+    
+    // Add lunchboxes
+    if (lunchboxCount > 0) {
+        currentData.items.push({
+            id: 'Lunchbox',
+            type: 'Lunchbox',
+            quantity: lunchboxCount
+        });
+    }
+    
+    // Add Mr. Handies
+    if (handyCount > 0) {
+        currentData.items.push({
+            id: 'HandyMan',
+            type: 'HandyMan',
+            quantity: handyCount
+        });
+    }
+    
+    // Add Pet Carriers
+    if (petCarrierCount > 0) {
+        currentData.items.push({
+            id: 'PetCarrier',
+            type: 'PetCarrier',
+            quantity: petCarrierCount
+        });
+    }
+    
+    // Add Starter Packs
+    if (starterPackCount > 0) {
+        currentData.items.push({
+            id: 'StarterPack',
+            type: 'StarterPack',
+            quantity: starterPackCount
+        });
+    }
+    
     jsonEditor.value = JSON.stringify(currentData, null, 2);
     updateFileSize();
+    addToHistory('Items Updated', 'Modified special item counts');
 }
 
 // Batch Operations - Max All Dweller Stats
