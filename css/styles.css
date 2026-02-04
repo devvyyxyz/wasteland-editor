@@ -1342,10 +1342,10 @@ footer p {
 }
 
 .season-rewards-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 15px;
-    max-height: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-height: 500px;
     overflow-y: auto;
     padding: 15px;
     background: rgba(255, 255, 255, 0.5);
@@ -1353,13 +1353,22 @@ footer p {
     border-radius: 4px;
 }
 
+.season-rewards-list h4 {
+    margin: 0;
+    padding: 10px 0;
+    border-bottom: 2px solid var(--border-color);
+    font-size: 1.1rem;
+}
+
 .season-reward-item {
-    padding: 15px;
+    padding: 12px;
     background: rgba(255, 255, 255, 0.9);
-    border: 2px solid var(--border-color);
+    border: 1px solid var(--border-color);
     border-left: 4px solid var(--accent-color);
     border-radius: 4px;
     transition: all 0.2s ease;
+    display: flex;
+    gap: 10px;
 }
 
 .season-reward-item:hover {
@@ -1367,14 +1376,34 @@ footer p {
     border-color: var(--primary-color);
 }
 
-.season-reward-item.unlocked {
-    border-left-color: #4CAF50;
-    background: rgba(76, 175, 80, 0.05);
+.season-reward-item.premium {
+    border-left-color: #D4AF37;
+    background: rgba(212, 175, 55, 0.05);
 }
 
-.season-reward-item.locked {
-    opacity: 0.6;
-    border-left-color: #999;
+.reward-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
+.reward-level {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 0.9rem;
+}
+
+.reward-type {
+    font-size: 0.85rem;
+    color: #555;
+    text-transform: capitalize;
+}
+
+.reward-value {
+    font-size: 0.8rem;
+    color: #888;
+    font-style: italic;
 }
 
 .reward-title {

@@ -725,36 +725,73 @@
                             <div class="form-row">
                                 <div class="form-group">
                                     <label>
-                                        Season ID:
-                                        <span class="info-icon" title="Current season identifier"><i class="fas fa-circle-info"></i></span>
+                                        Current Season:
+                                        <span class="info-icon" title="Select which season to edit"><i class="fas fa-circle-info"></i></span>
                                     </label>
-                                    <input type="text" id="seasonId" placeholder="Season ID">
+                                    <select id="currentSeason">
+                                        <option value="">-- Select Season --</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label>
                                         Season Level:
                                         <span class="info-icon" title="Current level/tier in the season pass"><i class="fas fa-circle-info"></i></span>
                                     </label>
-                                    <input type="number" id="seasonLevel" min="0" placeholder="0">
+                                    <input type="number" id="currentLevel" min="0" placeholder="0">
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group">
                                     <label>
-                                        Season XP:
-                                        <span class="info-icon" title="Experience points in current season"><i class="fas fa-circle-info"></i></span>
+                                        Season Tokens/XP:
+                                        <span class="info-icon" title="Experience/tokens in current season"><i class="fas fa-circle-info"></i></span>
                                     </label>
-                                    <input type="number" id="seasonXP" min="0" placeholder="0">
+                                    <input type="number" id="currentTokens" min="0" placeholder="0">
                                 </div>
                                 <div class="form-group">
                                     <label>
-                                        Premium Pass:
-                                        <span class="info-icon" title="Whether premium season pass is unlocked"><i class="fas fa-circle-info"></i></span>
+                                        Schema Version:
+                                        <span class="info-icon" title="Season pass data schema version"><i class="fas fa-circle-info"></i></span>
                                     </label>
-                                    <select id="seasonPremium">
+                                    <input type="number" id="schemaVersion" min="0" placeholder="0">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>
+                                        Premium Pass:
+                                        <span class="info-icon" title="Whether premium season pass is unlocked for current season"><i class="fas fa-circle-info"></i></span>
+                                    </label>
+                                    <select id="isPremium">
                                         <option value="false">No</option>
                                         <option value="true">Yes</option>
                                     </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        Premium Plus:
+                                        <span class="info-icon" title="Whether premium plus tier is unlocked"><i class="fas fa-circle-info"></i></span>
+                                    </label>
+                                    <select id="isPremiumPlus">
+                                        <option value="false">No</option>
+                                        <option value="true">Yes</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>
+                                        Max Rank Achieved:
+                                        <span class="info-icon" title="Highest rank achieved in current season"><i class="fas fa-circle-info"></i></span>
+                                    </label>
+                                    <input type="number" id="maxRankAchieved" min="0" placeholder="0">
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        Battle Pass Level:
+                                        <span class="info-icon" title="Last observed battle pass window level"><i class="fas fa-circle-info"></i></span>
+                                    </label>
+                                    <input type="number" id="battlepassWindowLevel" min="0" placeholder="0">
                                 </div>
                             </div>
                         </div>
