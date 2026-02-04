@@ -445,7 +445,11 @@ function selectDweller(dweller, index) {
     
     // Health (stored in health object)
     const healthElem = document.getElementById('dwellerHealth');
+    const maxHealthElem = document.getElementById('dwellerMaxHealth');
+    const radiationElem = document.getElementById('dwellerRadiation');
     if (healthElem) healthElem.value = dweller.health?.healthValue || dweller.health?.maxHealth || 100;
+    if (maxHealthElem) maxHealthElem.value = dweller.health?.maxHealth || 100;
+    if (radiationElem) radiationElem.value = dweller.health?.radiationLevel || 0;
     
     // Happiness (stored in happiness object)
     const happinessElem = document.getElementById('dwellerHappiness');
@@ -465,6 +469,12 @@ function selectDweller(dweller, index) {
         const elem = document.getElementById(id);
         if (elem) elem.value = statsArray[i]?.value || 1;
     });
+    
+    // Equipment
+    const weaponElem = document.getElementById('dwellerWeapon');
+    const outfitElem = document.getElementById('dwellerOutfit');
+    if (weaponElem) weaponElem.value = dweller.equipedWeapon?.id || dweller.equippedWeapon?.id || '';
+    if (outfitElem) outfitElem.value = dweller.equipedOutfit?.id || dweller.equippedOutfit?.id || '';
 }
 
 // Update Dweller Data
@@ -491,10 +501,11 @@ function updateDwellerData() {
     // Health
     if (!dweller.health) dweller.health = {};
     const healthElem = document.getElementById('dwellerHealth');
-    if (healthElem) {
-        dweller.health.healthValue = parseInt(healthElem.value) || 100;
-        if (!dweller.health.maxHealth) dweller.health.maxHealth = dweller.health.healthValue;
-    }
+    const maxHealthElem = document.getElementById('dwellerMaxHealth');
+    const radiationElem = document.getElementById('dwellerRadiation');
+    if (healthElem) dweller.health.healthValue = parseInt(healthElem.value) || 100;
+    if (maxHealthElem) dweller.health.maxHealth = parseInt(maxHealthElem.value) || 100;
+    if (radiationElem) dweller.health.radiationLevel = parseInt(radiationElem.value) || 0;
     
     // Happiness
     if (!dweller.happiness) dweller.happiness = {};
@@ -524,6 +535,26 @@ function updateDwellerData() {
             dweller.stats.stats[i].value = parseInt(elem.value) || 1;
         }
     });
+    
+    // Equipment (check both spellings: equiped and equipped)
+    const weaponElem = document.getElementById('dwellerWeapon');
+    const outfitElem = document.getElementById('dwellerOutfit');
+    
+    if (weaponElem && weaponElem.value) {
+        if (!dweller.equipedWeapon) dweller.equipedWeapon = {};
+        dweller.equipedWeapon.id = weaponElem.value;
+        dweller.equipedWeapon.type = 'Weapon';
+        // Also update if spelled correctly
+        if (dweller.equippedWeapon) dweller.equippedWeapon.id = weaponElem.value;
+    }
+    
+    if (outfitElem && outfitElem.value) {
+        if (!dweller.equipedOutfit) dweller.equipedOutfit = {};
+        dweller.equipedOutfit.id = outfitElem.value;
+        dweller.equipedOutfit.type = 'Outfit';
+        // Also update if spelled correctly
+        if (dweller.equippedOutfit) dweller.equippedOutfit.id = outfitElem.value;
+    }
     
     jsonEditor.value = JSON.stringify(currentData, null, 2);
     updateFileSize();
@@ -1787,7 +1818,9 @@ function saveRoom() {
         power: parseInt(document.getElementById('roomPower').value) || 0,
         food: parseInt(document.getElementById('roomFood').value) || 0,
         water: parseInt(document.getElementById('roomWater').value) || 0,
-        radiation: parseInt(document.getElementById('roomRadiation').value) || 0
+        radiation: parseInt(document.getElementById('roomRadiation').value) || 0,
+        rushTimer: parseInt(document.getElementById('roomRushTimer').value) || 0,
+        mergeSize: parseInt(document.getElementById('roomMergeSize').value) || 1
     };
     
     // Apply updates, preserving existing property names
@@ -1801,7 +1834,9 @@ function saveRoom() {
                 'power': ['powerGeneration', 'power_generation'],
                 'food': ['foodProduction', 'food_production'],
                 'water': ['waterProduction', 'water_production'],
-                'radiation': ['radiationLevel']
+                'radiation': ['radiationLevel'],
+                'rushTimer': ['rushCooldown', 'rush_timer'],
+                'mergeSize': ['merge', 'mergedRooms']
             };
             
             let updated = false;

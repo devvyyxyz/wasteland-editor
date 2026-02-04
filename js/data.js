@@ -281,3 +281,81 @@ const SPECIAL_STATS = [
     { key: 'a', name: 'Agility', short: 'A.' },
     { key: 'l', name: 'Luck', short: 'L.' },
 ];
+
+const PETS = {
+    // Dogs
+    "Boxer": "Boxer",
+    "Bulldog": "Bulldog",
+    "Dalmatian": "Dalmatian",
+    "Doberman": "Doberman",
+    "GermanShepherd": "German Shepherd",
+    "GoldenRetriever": "Golden Retriever",
+    "Husky": "Husky",
+    "LabradorRetriever": "Labrador Retriever",
+    "Pitbull": "Pitbull",
+    "Pug": "Pug",
+    "Rottweiler": "Rottweiler",
+    "Terrier": "Terrier",
+    // Cats
+    "AmericanShorthair": "American Shorthair",
+    "Birman": "Birman",
+    "MaineCoon": "Maine Coon",
+    "Persian": "Persian",
+    "RagdollCat": "Ragdoll Cat",
+    "RussianBlue": "Russian Blue",
+    "Siamese": "Siamese",
+    "Sphynx": "Sphynx",
+    // Parrots
+    "Macaw": "Macaw",
+    "AfricanGrey": "African Grey",
+    "Cockatiel": "Cockatiel",
+    "Cockatoo": "Cockatoo",
+    "Parakeet": "Parakeet",
+    // Special
+    "Deathclaw": "Deathclaw",
+    "MoleMiner": "Mole Miner",
+    "MoleRat": "Mole Rat"
+};
+
+const RECIPES = {
+    // Weapons
+    "Recipe_RustyLaserPistol": "Rusty Laser Pistol",
+    "Recipe_LaserPistol": "Laser Pistol",
+    "Recipe_EnhancedLaserPistol": "Enhanced Laser Pistol",
+    "Recipe_RustyPlasmaPistol": "Rusty Plasma Pistol",
+    "Recipe_PlasmaPistol": "Plasma Pistol",
+    "Recipe_RustyLaserRifle": "Rusty Laser Rifle",
+    "Recipe_LaserRifle": "Laser Rifle",
+    "Recipe_PlasmaRifle": "Plasma Rifle",
+    "Recipe_RustyRailwayRifle": "Rusty Railway Rifle",
+    "Recipe_RailwayRifle": "Railway Rifle",
+    "Recipe_GatlingLaser": "Gatling Laser",
+    "Recipe_FocusedGatlingLaser": "Focused Gatling Laser",
+    "Recipe_Vengeance": "Vengeance",
+    "Recipe_Flamer": "Flamer",
+    "Recipe_PlasmaThrower": "Plasma Thrower",
+    "Recipe_FatMan": "Fat Man",
+    "Recipe_MIRV": "MIRV",
+    // Outfits
+    "Recipe_VaultSuit": "Vault Suit",
+    "Recipe_NightwearOutfit": "Nightwear",
+    "Recipe_Jumpsuit": "Jumpsuit",
+    "Recipe_LabCoat": "Lab Coat",
+    "Recipe_MilitaryFatigues": "Military Fatigues",
+    "Recipe_PowerArmor_T45": "T-45 Power Armor",
+    "Recipe_PowerArmor_T51": "T-51 Power Armor",
+    "Recipe_PowerArmor_T60": "T-60 Power Armor",
+    "Recipe_PowerArmor_X01": "X-01 Power Armor"
+};
+
+const THEMES = {
+    "VaultTecClassic": "Vault-Tec Classic",
+    "FalloutClassic": "Fallout Classic",
+    "Nuka-Cola": "Nuka-Cola",
+    "Halloween": "Halloween",
+    "Christmas": "Christmas",
+    "Thanksgiving": "Thanksgiving",
+    "Wasteland": "Wasteland",
+    "Military": "Military",
+    "Raider": "Raider"
+};
