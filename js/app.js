@@ -4,6 +4,7 @@ let originalData = null;
 let currentDweller = null;
 let backups = [];
 let changeHistory = [];
+let originalFileName = null;
 
 // DOM Elements
 const fileInput = document.getElementById('fileInput');
@@ -163,6 +164,8 @@ function handleFileUpload(e) {
     const reader = new FileReader();
     reader.onload = (event) => {
         try {
+            // Store original filename
+            originalFileName = file.name;
             const text = event.target.result;
             let result;
             
@@ -1711,7 +1714,9 @@ function downloadSave() {
             const url = URL.createObjectURL(dataBlob);
             const link = document.createElement('a');
             link.href = url;
-            link.download = `Vault${Math.floor(Math.random() * 1000)}.sav`;
+            // Use original filename with .sav extension
+            const baseName = originalFileName?.replace(/\.[^/.]+$/, '') || `Vault${Math.floor(Math.random() * 1000)}`;
+            link.download = `${baseName}.sav`;
             link.click();
             URL.revokeObjectURL(url);
             addToHistory('Download', 'Downloaded encrypted .sav file');
@@ -1726,7 +1731,9 @@ function downloadSave() {
         const url = URL.createObjectURL(dataBlob);
         const link = document.createElement('a');
         link.href = url;
-        link.download = `fallout-shelter-save-${Date.now()}.json`;
+        // Use original filename with .json extension
+        const baseName = originalFileName?.replace(/\.[^/.]+$/, '') || `fallout-shelter-save-${Date.now()}`;
+        link.download = `${baseName}.json`;
         link.click();
         URL.revokeObjectURL(url);
         addToHistory('Download', 'Downloaded plain .json file');
@@ -1752,8 +1759,10 @@ function clearEditor() {
     if (confirm('Are you sure you want to clear the editor?')) {
         currentData = null;
         originalData = null;
+        originalFileName = null;
         currentDweller = null;
         backups = [];
+        changeHistory = [];
         jsonEditor.value = '';
         fileInfo.textContent = '';
         errorMessage.textContent = '';
