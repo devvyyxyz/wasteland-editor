@@ -791,13 +791,45 @@ tr:hover {
 /* Footer */
 footer {
     background: var(--paper-dark);
-    padding: 20px 40px;
+    padding: 25px 40px;
     text-align: center;
     color: var(--text-color);
     font-size: 0.9em;
-    border-top: 2px solid var(--border-color);
+    border-top: 3px solid var(--primary-color);
     position: relative;
     z-index: 1;
+}
+
+footer p {
+    margin-bottom: 12px;
+    font-weight: 600;
+    font-size: 1.1em;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.footer-links a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    padding: 5px 10px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.footer-links a:hover {
+    color: var(--secondary-color);
+    background: rgba(139, 69, 19, 0.1);
+    transform: translateY(-2px);
 }
 
 /* Scrollbar Styling */
@@ -1281,6 +1313,95 @@ footer {
 .wasteland-details {
     flex: 1;
 }
+/* Vault Statistics Section */
+.vault-stats-section {
+    background: var(--paper-color);
+    border-top: 3px solid var(--primary-color);
+    padding: 30px;
+    margin-top: 20px;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.vault-stats-section h2 {
+    color: var(--primary-color);
+    font-size: 28px;
+    margin-bottom: 25px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+}
+
+.stats-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, #F5EFDE 0%, #EDE4D3 100%);
+    border: 3px solid var(--primary-color);
+    border-radius: 10px;
+    padding: 25px;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 4px 10px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.stat-card:hover {
+    border-color: var(--secondary-color);
+    box-shadow: 
+        0 6px 20px rgba(139, 69, 19, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    transform: translateY(-3px);
+}
+
+.stat-card h3 {
+    color: var(--primary-color);
+    font-size: 20px;
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 5px;
+    border-bottom: 1px solid var(--border-color);
+    transition: background 0.2s ease;
+}
+
+.stat-row:hover {
+    background: rgba(139, 69, 19, 0.08);
+}
+
+.stat-row:last-child {
+    border-bottom: none;
+}
+
+.stat-row span {
+    color: var(--text-color);
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.stat-row strong {
+    color: var(--primary-color);
+    font-size: 18px;
+    font-weight: 700;
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
+}
+
 /* Inventory Styles */
 .inventory-panel {
     padding: 20px;

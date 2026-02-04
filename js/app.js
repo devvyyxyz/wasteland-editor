@@ -201,6 +201,7 @@ function handleFileUpload(e) {
                 populateWastelandTeams();
                 populateInventory();
                 populateSeasonPassData();
+                populateVaultStats();
                 
                 // Create initial backup
                 createBackup('Initial Load');
@@ -1941,6 +1942,99 @@ function closeRoomEditor() {
     document.querySelectorAll('.room-item').forEach(item => {
         item.classList.remove('active');
     });
+}
+
+// Populate Vault Statistics
+function populateVaultStats() {
+    const statsSection = document.getElementById('vaultStatsSection');
+    if (!currentData || !statsSection) return;
+
+    // Show the stats section
+    statsSection.style.display = 'block';
+
+    const vault = currentData.vault || {};
+    const dwellers = currentData.dwellers?.dwellers || [];
+    const rooms = vault.rooms || [];
+    const inventory = vault.inventory || {};
+
+    // Population Stats
+    const totalDwellers = dwellers.length;
+    const avgLevel = totalDwellers > 0 ? (dwellers.reduce((sum, d) => sum + (d.experience?.currentLevel || 1), 0) / totalDwellers).toFixed(1) : 0;
+    const maxLevelDwellers = dwellers.filter(d => (d.experience?.currentLevel || 1) >= 50).length;
+    const avgHappiness = totalDwellers > 0 ? (dwellers.reduce((sum, d) => sum + (d.happiness?.happinessValue || 100), 0) / totalDwellers).toFixed(1) : 0;
+
+    document.getElementById('statTotalDwellers').textContent = totalDwellers;
+    document.getElementById('statAvgLevel').textContent = avgLevel;
+    document.getElementById('statMaxLevelDwellers').textContent = maxLevelDwellers;
+    document.getElementById('statAvgHappiness').textContent = avgHappiness + '%';
+
+    // Resource Stats
+    const resources = vault.storage?.resources || {};
+    document.getElementById('statTotalCaps').textContent = (resources.Nuka || 0).toLocaleString();
+    document.getElementById('statFood').textContent = (resources.Food || 0).toLocaleString();
+    document.getElementById('statWater').textContent = (resources.Water || 0).toLocaleString();
+    document.getElementById('statPower').textContent = (resources.Energy || 0).toLocaleString();
+    document.getElementById('statTotalRooms').textContent = rooms.length;
+
+    // Equipment Stats
+    const weapons = inventory.items?.filter(i => i.type === 'Weapon') || [];
+    const outfits = inventory.items?.filter(i => i.type === 'Outfit') || [];
+    const junk = inventory.items?.filter(i => i.type === 'Junk') || [];
+    const equippedDwellers = dwellers.filter(d => d.equipedWeapon?.id || d.equipedOutfit?.id).length;
+
+    document.getElementById('statTotalWeapons').textContent = weapons.reduce((sum, w) => sum + (w.quantity || 1), 0);
+    document.getElementById('statTotalOutfits').textContent = outfits.reduce((sum, o) => sum + (o.quantity || 1), 0);
+    document.getElementById('statTotalJunk').textContent = junk.reduce((sum, j) => sum + (j.quantity || 1), 0);
+    document.getElementById('statEquippedDwellers').textContent = equippedDwellers;
+
+    // SPECIAL Stats
+    const specialStats = { S: 0, P: 0, E: 0, C: 0, I: 0, A: 0, L: 0 };
+    if (totalDwellers > 0) {
+        dwellers.forEach(dweller => {
+            const stats = dweller.stats?.stats || [];
+            if (stats.length >= 7) {
+                specialStats.S += stats[0]?.value || 1;
+                specialStats.P += stats[1]?.value || 1;
+                specialStats.E += stats[2]?.value || 1;
+                specialStats.C += stats[3]?.value || 1;
+                specialStats.I += stats[4]?.value || 1;
+                specialStats.A += stats[5]?.value || 1;
+                specialStats.L += stats[6]?.value || 1;
+            }
+        });
+        Object.keys(specialStats).forEach(key => {
+            specialStats[key] = (specialStats[key] / totalDwellers).toFixed(1);
+        });
+    }
+
+    document.getElementById('statAvgS').textContent = specialStats.S;
+    document.getElementById('statAvgP').textContent = specialStats.P;
+    document.getElementById('statAvgE').textContent = specialStats.E;
+    document.getElementById('statAvgC').textContent = specialStats.C;
+    document.getElementById('statAvgI').textContent = specialStats.I;
+    document.getElementById('statAvgA').textContent = specialStats.A;
+    document.getElementById('statAvgL').textContent = specialStats.L;
+
+    // Health Stats
+    const avgHealth = totalDwellers > 0 ? (dwellers.reduce((sum, d) => sum + (d.health?.healthValue || 0), 0) / totalDwellers).toFixed(1) : 0;
+    const totalRadiation = dwellers.reduce((sum, d) => sum + (d.health?.radiationValue || 0), 0);
+    const irradiatedDwellers = dwellers.filter(d => (d.health?.radiationValue || 0) > 0).length;
+    const injuredDwellers = dwellers.filter(d => (d.health?.healthValue || 0) < (d.health?.maxHealth || 100)).length;
+
+    document.getElementById('statAvgHealth').textContent = avgHealth;
+    document.getElementById('statTotalRadiation').textContent = totalRadiation.toFixed(1);
+    document.getElementById('statIrradiatedDwellers').textContent = irradiatedDwellers;
+    document.getElementById('statInjuredDwellers').textContent = injuredDwellers;
+
+    // Vault Info
+    document.getElementById('statVaultName').textContent = vault.VaultName || '-';
+    document.getElementById('statVaultNumber').textContent = vault.VaultMode || '-';
+    
+    const unlockedThemes = vault.LunchBoxesByType?.filter(t => t.IsPurchased)?.length || 0;
+    const unlockedRecipes = vault.UnlockedRecipes?.length || 0;
+    
+    document.getElementById('statUnlockedThemes').textContent = unlockedThemes;
+    document.getElementById('statUnlockedRecipes').textContent = unlockedRecipes;
 }
 
 // Initialize
