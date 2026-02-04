@@ -4,6 +4,16 @@
     box-sizing: border-box;
 }
 
+/* Hide scrollbars while keeping scroll functionality */
+* {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+*::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
 :root {
     --primary-color: #8B4513;
     --secondary-color: #A0522D;

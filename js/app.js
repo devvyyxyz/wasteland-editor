@@ -387,8 +387,8 @@ function populateDwellersList() {
     dwellers.forEach((dweller, index) => {
         const item = document.createElement('div');
         item.className = 'dweller-item';
-        const level = dweller.level || 1;
-        const health = dweller.health?.current || 0;
+        const level = dweller.experience?.currentLevel || 1;
+        const health = dweller.health?.healthValue || dweller.health?.maxHealth || 100;
         item.textContent = `${dweller.name} (Lvl ${level} • HP: ${health})`;
         item.addEventListener('click', () => selectDweller(dweller, index));
         dwellersList.appendChild(item);
@@ -431,7 +431,7 @@ function selectDweller(dweller, index) {
     const lastElem = document.getElementById('dwellerLastName');
     
     if (firstElem) firstElem.value = nameparts[0] || '';
-    if (lastElem) lastElem.value = nameparts[1] || '';
+    if (lastElem) lastElem.value = nameparts.slice(1).join(' ') || '';
     
     // Gender
     const genderElem = document.getElementById('dwellerGender');
@@ -457,8 +457,12 @@ function selectDweller(dweller, index) {
     if (skinColorElem && dweller.skinColor) skinColorElem.value = dweller.skinColor;
     if (hairColorElem && dweller.hairColor) hairColorElem.value = dweller.hairColor;
     
-    // Update SPECIAL stats (stored as array in stats.stats.SPECIAL)
-    const specialArray = dweller.stats?.stats?.SPECIAL || [];
+    // Update SPECIAL stats (check multiple possible locations)
+    // Try stats.stats.SPECIAL first, then fallback to other possible structures
+    let specialArray = dweller.stats?.stats?.SPECIAL || 
+                       dweller.stats?.SPECIAL || 
+                       dweller.SPECIAL || [];
+    
     const statIds = ['stat-s', 'stat-p', 'stat-e', 'stat-c', 'stat-i', 'stat-a', 'stat-l'];
     
     statIds.forEach((id, i) => {
