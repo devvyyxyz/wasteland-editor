@@ -402,15 +402,66 @@ function populateDwellersList() {
         return;
     }
     
-    dwellers.forEach((dweller, index) => {
-        const item = document.createElement('div');
-        item.className = 'dweller-item';
-        const level = dweller.experience?.currentLevel || 1;
-        const health = dweller.health?.healthValue || dweller.health?.maxHealth || 100;
-        item.textContent = `${dweller.name} (Lvl ${level} • HP: ${health})`;
-        item.addEventListener('click', () => selectDweller(dweller, index));
-        dwellersList.appendChild(item);
+    // Get dweller IDs that are exploring in wasteland teams
+    const exploringDwellerIds = new Set();
+    const wastelandTeams = currentData.wasteland?.teams || currentData.wasteland || [];
+    wastelandTeams.forEach(team => {
+        if (team.members && Array.isArray(team.members)) {
+            team.members.forEach(member => {
+                if (member && (member.id || member.dwellerId)) {
+                    exploringDwellerIds.add(member.id || member.dwellerId);
+                }
+            });
+        }
     });
+    
+    // Separate dwellers into in-vault and exploring
+    const inVaultDwellers = [];
+    const exploringDwellers = [];
+    
+    dwellers.forEach((dweller, index) => {
+        if (exploringDwellerIds.has(dweller.id)) {
+            exploringDwellers.push({ dweller, index });
+        } else {
+            inVaultDwellers.push({ dweller, index });
+        }
+    });
+    
+    // Add in-vault dwellers section
+    if (inVaultDwellers.length > 0) {
+        const inVaultHeader = document.createElement('div');
+        inVaultHeader.className = 'dweller-section-header';
+        inVaultHeader.textContent = `🏛️ IN VAULT (${inVaultDwellers.length})`;
+        dwellersList.appendChild(inVaultHeader);
+        
+        inVaultDwellers.forEach(({ dweller, index }) => {
+            const item = document.createElement('div');
+            item.className = 'dweller-item in-vault';
+            const level = dweller.experience?.currentLevel || 1;
+            const health = dweller.health?.healthValue || dweller.health?.maxHealth || 100;
+            item.textContent = `${dweller.name} (Lvl ${level} • HP: ${health})`;
+            item.addEventListener('click', () => selectDweller(dweller, index));
+            dwellersList.appendChild(item);
+        });
+    }
+    
+    // Add exploring dwellers section
+    if (exploringDwellers.length > 0) {
+        const exploringHeader = document.createElement('div');
+        exploringHeader.className = 'dweller-section-header exploring';
+        exploringHeader.textContent = `🌍 EXPLORING (${exploringDwellers.length})`;
+        dwellersList.appendChild(exploringHeader);
+        
+        exploringDwellers.forEach(({ dweller, index }) => {
+            const item = document.createElement('div');
+            item.className = 'dweller-item exploring';
+            const level = dweller.experience?.currentLevel || 1;
+            const health = dweller.health?.healthValue || dweller.health?.maxHealth || 100;
+            item.textContent = `${dweller.name} (Lvl ${level} • HP: ${health})`;
+            item.addEventListener('click', () => selectDweller(dweller, index));
+            dwellersList.appendChild(item);
+        });
+    }
 }
 
 // Filter Dwellers
