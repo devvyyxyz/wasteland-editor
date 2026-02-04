@@ -199,9 +199,6 @@ function handleFileUpload(e) {
                 // Track file load in history
                 addToHistory('File Loaded', `Loaded ${file.name} (${formatFileSize(file.size)})`);
                 
-                // Fix any invalid dweller stats
-                fixInvalidDwellerStats();
-                
                 // Populate selects with weapons and outfits
                 populateSelects();
                 
@@ -2074,54 +2071,6 @@ function fixInvalidDwellerStats() {
     }
 }
 
-// Fix Invalid Dweller Stats
-function fixInvalidDwellerStats() {
-    if (!currentData || !currentData.dwellers?.dwellers) return;
-    
-    let fixed = 0;
-    currentData.dwellers.dwellers.forEach(dweller => {
-        // Ensure stats object exists
-        if (!dweller.stats) dweller.stats = {};
-        
-        // Ensure stats.stats array exists and has 7 elements
-        if (!dweller.stats.stats || !Array.isArray(dweller.stats.stats)) {
-            dweller.stats.stats = [];
-        }
-        
-        // Ensure we have exactly 7 stats
-        while (dweller.stats.stats.length < 7) {
-            dweller.stats.stats.push({ value: 1, mod: 0, exp: 0 });
-            fixed++;
-        }
-        
-        // Trim if somehow we have more than 7
-        if (dweller.stats.stats.length > 7) {
-            dweller.stats.stats = dweller.stats.stats.slice(0, 7);
-            fixed++;
-        }
-        
-        // Ensure each stat has proper structure
-        dweller.stats.stats.forEach((stat, idx) => {
-            if (!stat || typeof stat !== 'object') {
-                dweller.stats.stats[idx] = { value: 1, mod: 0, exp: 0 };
-                fixed++;
-            } else {
-                if (typeof stat.value !== 'number' || stat.value < 1 || stat.value > 10) {
-                    stat.value = Math.max(1, Math.min(10, stat.value || 1));
-                    fixed++;
-                }
-                if (typeof stat.mod !== 'number') stat.mod = 0;
-                if (typeof stat.exp !== 'number') stat.exp = 0;
-            }
-        });
-    });
-    
-    if (fixed > 0) {
-        addToHistory('Auto-Fix', `Fixed ${fixed} invalid SPECIAL stats`);
-        showToast(`⚙️ Fixed ${fixed} invalid SPECIAL stats`);
-    }
-}
-
 // Populate Vault Statistics
 function populateVaultStats() {
     const statsNoData = document.getElementById('statsNoData');
@@ -2222,7 +2171,7 @@ function populateVaultStats() {
     document.getElementById('statUnlockedRecipes').textContent = unlockedRecipes;
 }
 
-// Validate & Fix Save File
+// Validate Save File
 function validateSaveFile(data) {
     const warnings = [];
     let valid = true;
@@ -2247,30 +2196,13 @@ function validateSaveFile(data) {
         }
     }
     
-    // Check and fix dwellers structure
+    // Check dwellers structure (without auto-fixing)
     if (data.dwellers?.dwellers) {
         const dwellers = data.dwellers.dwellers;
-        
-        // Auto-fix invalid dwellers
-        dwellers.forEach(d => {
-            if (!d.stats) d.stats = {};
-            if (!d.stats.stats || !Array.isArray(d.stats.stats)) {
-                d.stats.stats = [];
-            }
-            while (d.stats.stats.length < 7) {
-                d.stats.stats.push({ value: 1, mod: 0, exp: 0 });
-            }
-            if (d.stats.stats.length > 7) {
-                d.stats.stats = d.stats.stats.slice(0, 7);
-            }
-            d.stats.stats.forEach(stat => {
-                if (!stat || typeof stat !== 'object') return;
-                if (typeof stat.value !== 'number') stat.value = 1;
-                if (stat.value < 1 || stat.value > 10) stat.value = Math.max(1, Math.min(10, stat.value));
-                if (typeof stat.mod !== 'number') stat.mod = 0;
-                if (typeof stat.exp !== 'number') stat.exp = 0;
-            });
-        });
+        const invalidDwellers = dwellers.filter(d => !d.stats?.stats || d.stats.stats.length !== 7);
+        if (invalidDwellers.length > 0) {
+            warnings.push(`${invalidDwellers.length} dwellers have invalid SPECIAL stats`);
+        }
     }
     
     return { valid: warnings.length === 0, warnings };
