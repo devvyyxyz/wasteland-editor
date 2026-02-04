@@ -1,278 +1,316 @@
-# Wasteland Editor 🎮
+# 🏜️ Wasteland Editor
 
-A comprehensive Fallout Shelter save file editor with built-in save file analysis tools.
+**The ultimate save file editor for Fallout Shelter**
 
-## Features
+A user-friendly, browser-based tool to edit and enhance your Fallout Shelter experience. No installation required – just open in your browser and start editing!
 
-### 📝 Save Editor
-- **Vault Management**: Edit vault name, number, and resources (Caps, Food, Water, Power, etc.)
-- **Dweller Management**: Manage dweller stats, equipment, appearance, and skills
-- **Room Editor**: Manage vault rooms and configurations
-- **Wasteland Teams**: Edit quests and exploration teams
-- **Bulk Actions**: Quick commands to unlock rooms, max stats, heal dwellers, and more
-- **Raw JSON Editor**: Direct JSON editing for advanced users
-- **File Management**: Upload, download, and format save files
+---
 
-### 🔍 Save File Inspector
-- **Read-Only Analysis**: Inspect save file structure without modifications
-- **Format Detection**: Automatically detect file encoding and format
-- **Entropy Analysis**: Measure data compression and encryption
-- **String Extraction**: Extract readable ASCII strings from binary files
-- **Export Reports**: Generate JSON or HTML analysis reports
-- **Educational**: Learn about file structures responsibly
+## 🎯 What Can You Do?
 
-## Project Structure
+- **Boost Resources**: Get unlimited Caps, Food, Water, and Power
+- **Max Out Dwellers**: Instantly level up and max all SPECIAL stats
+- **Unlock Everything**: Access all weapons, outfits, recipes, and themes
+- **Heal Your Vault**: Remove radiation and restore health to all dwellers
+- **Track Progress**: View detailed statistics about your vault
+- **Manage Inventory**: Add, remove, or edit weapons, outfits, and junk items
+- **Save Safely**: Built-in validation and change history tracking
 
-```
-wasteland-editor/
-├── index.html              # Main editor page
-├── pages/
-│   └── inspector.html      # File analysis tool
-├── css/
-│   ├── main.css           # Editor styling
-│   └── inspector.css      # Inspector styling
-├── js/
-│   ├── app.js             # Editor functionality
-│   ├── data.js            # Game data constants
-│   └── save-inspector.js  # File analysis engine
-├── example-sav-files/     # Sample save files for testing
-└── README.md              # This file
-```
+---
 
-## Getting Started
+## 🚀 Getting Started
 
-### Running Locally
+### Quick Start (3 Easy Steps)
 
-1. **Simple Method**: Open `index.html` in your web browser
-   - Double-click `index.html`
-   - Or drag it onto your browser window
+1. **Open the Editor**
+   - Download this project or visit the hosted version
+   - Open `index.html` in any modern browser (Chrome, Firefox, Safari, Edge)
 
-2. **With Local Server** (Recommended):
-   ```bash
-   # Using Python 3
-   python -m http.server 8000
-   
-   # Using Node.js http-server
-   npx http-server
-   
-   # Using PHP
-   php -S localhost:8000
-   ```
-   Then open: `http://localhost:8000`
+2. **Load Your Save File**
+   - Click "📁 Upload Save File"
+   - Find your Fallout Shelter save file:
+     - **Windows**: `C:\Users\YourName\AppData\Local\FalloutShelter\`
+     - **Mac**: `~/Library/Application Support/FalloutShelter/`
+     - **Mobile**: Use a file manager app to locate saves
+   - Supports `.sav`, `.dat`, and `.json` files
 
-### Using the Editor
+3. **Edit & Download**
+   - Click through the tabs to edit different parts of your vault
+   - Make your changes
+   - Click "💾 Download Save" when done
+   - Replace your original save file (backup first!)
 
-1. **Load a Save File**
-   - Click "Upload Save File"
-   - Select your Fallout Shelter save file (.json, .sav, or .dat)
+---
 
-2. **Edit Your Save**
-   - Click tabs to switch between different editors
-   - Make your changes in each section
-   - Click "Download Save" to save your modifications
+## 📊 Current Features
 
-3. **Analyze a Save File**
-   - Click "File Inspector" in the navigation
-   - Upload your save file
-   - View detailed analysis and export reports
+| Feature | Status | Description |
+|---------|--------|-------------|
+| **Vault Settings** | ✅ Complete | Edit vault name, number, and basic settings |
+| **Resources Manager** | ✅ Complete | Modify Caps, Food, Water, Power, Stimpacks, RadAway, Nuka Cola |
+| **Dweller Editor** | ✅ Complete | Edit names, gender, appearance, SPECIAL stats, health, happiness |
+| **Equipment System** | ✅ Complete | Assign weapons and outfits from 400+ items |
+| **Room Manager** | ✅ Complete | View and edit room types, levels, and production |
+| **Wasteland Teams** | ✅ Complete | Manage exploration teams and quests |
+| **Inventory System** | ✅ Complete | Add/remove weapons, outfits, and junk items |
+| **Season Pass Editor** | ✅ Complete | Modify season pass level, XP, and rewards |
+| **Recipes Manager** | ✅ Complete | Unlock all craftable weapons and outfits |
+| **Themes Unlocker** | ✅ Complete | Unlock all 9 vault themes |
+| **Vault Statistics** | ✅ Complete | View 40+ statistics about your vault |
+| **Bulk Actions** | ✅ Complete | Max stats, heal all, unlock everything with one click |
+| **Change History** | ✅ Complete | Track all modifications with timestamps |
+| **Save Validation** | ✅ Complete | Verify save file integrity before downloading |
+| **Search Function** | ✅ Complete | Search through JSON data quickly |
+| **Backup System** | ✅ Complete | Auto-backup on load with recovery options |
 
-## Tabs Overview
+---
 
-### Vault Tab
-- Vault settings (name, number)
-- Resources (Caps, Food, Water, Power, etc.)
-- Inventory items (Lunchboxes, Handy Frames, etc.)
-- Bulk actions (Unlock Rooms, Max Stats, etc.)
+## 🔮 Planned Features
 
-### Dwellers Tab
-- List of all dwellers in your vault
-- Edit individual dweller details:
-  - Name, gender, appearance
-  - SPECIAL stats (S.P.E.C.I.A.L.)
-  - Level, experience, health, happiness
-  - Equipment and weapons
+| Feature | Priority | Description |
+|---------|----------|-------------|
+| **Objectives Editor** | 🔥 High | Complete or edit daily/weekly objectives |
+| **Dweller Assignment** | 🔥 High | See which room each dweller is working in |
+| **Pet Assignment** | 🔥 High | Assign pets to specific dwellers |
+| **Advanced Backup** | 🔥 High | Multiple save slots with comparison tools |
+| **Pregnancy Manager** | 🔶 Medium | Track pregnant dwellers and birth timers |
+| **Children System** | 🔶 Medium | Manage children and maturation progress |
+| **Construction Queue** | 🔶 Medium | View/speed up rooms being built or upgraded |
+| **Incident Manager** | 🔶 Medium | View/clear active incidents (fires, raiders, etc.) |
+| **Advanced Filters** | 🔶 Medium | Filter dwellers by level, stats, gender, status |
+| **Auto-Equip Best Gear** | 🔶 Medium | Automatically equip highest damage weapons |
+| **Dweller Templates** | 🔵 Low | Save and import dweller configurations |
+| **Vault Layout Map** | 🔵 Low | Visual representation of room placement |
+| **SPECIAL Radar Charts** | 🔵 Low | Visual stat comparison graphs |
+| **Undo/Redo System** | 🔵 Low | Step backward through changes |
 
-### Rooms Tab
-- View and manage vault rooms
-- Room assignments and configurations
+---
 
-### Wasteland Tab
-- Manage exploration teams
-- Quest and mission settings
+## 🎮 How to Use Each Tab
 
-### Others Tab
-- Additional vault data
-- Secondary characters and NPCs
+### 🏛️ Vault Tab
+Edit your vault's basic information and resources.
 
-### Raw JSON Tab
-- Direct JSON editing
-- For advanced users and debugging
+**What You Can Do:**
+- Change vault name and number
+- Add unlimited Caps (currency)
+- Set Food, Water, and Power to any amount
+- Modify medical supplies (Stimpacks, RadAway)
+- Add Lunchboxes, Mr. Handies, and Pet Carriers
+- View total room count and resource storage
 
-## File Inspector Features
+**Quick Actions:**
+- **Unlock All Rooms**: Instantly unlock all room types
+- **Unlock All Themes**: Get all 9 vault decorative themes
+- **Clear All Emergencies**: Stop all fires, radroach attacks, etc.
 
-### Analysis Capabilities
-- ✅ File encoding detection (Base64, binary, text)
-- ✅ Magic byte identification
-- ✅ Encryption detection (via entropy analysis)
-- ✅ Compression detection (gzip, zlib, etc.)
-- ✅ ASCII string extraction
-- ✅ Shannon entropy calculation
+---
 
-### Reports
-- Export analysis as JSON
-- Export analysis as HTML
-- View statistics and data metrics
+### 👥 Dwellers Tab
+Manage every dweller in your vault.
 
-### Educational Purpose
-- Understand save file structures
-- Learn about binary formats
-- Research game data organization
-- **Does NOT modify files** (read-only)
+**What You Can Do:**
+- Edit names (first and last)
+- Change gender and appearance (skin color, hair color)
+- Set all 7 SPECIAL stats (Strength, Perception, Endurance, Charisma, Intelligence, Agility, Luck)
+- Modify level (1-50) and experience points
+- Adjust health, max health, and radiation
+- Set happiness (0-100%)
+- Equip weapons and outfits from 400+ items
 
-## Important Notes
+**Quick Actions:**
+- **Max All Stats**: Set all dwellers to 10 in every SPECIAL stat
+- **Max Happiness**: Set all dwellers to 100% happiness
+- **Heal All**: Remove all radiation and restore full health
 
-### ⚠️ Disclaimer
-- **Legal**: This tool respects game licenses and intellectual property rights
-- **Read-Only Inspector**: The file inspector performs read-only analysis only
-- **Ethical Use**: Use for your own saves and for educational purposes
-- **Terms of Service**: Always respect Bethesda's Terms of Service
+---
 
-### ✅ What You CAN Do
-- Edit your own save files
-- Analyze file structures
-- Create backups
-- Learn about game data formats
-- Share analysis reports (not modified saves)
+### 🏗️ Rooms Tab
+View and modify your vault's rooms.
 
-### ❌ What You CANNOT Do
-- Bypass paid/premium content restrictions
-- Modify entitlement or monetization flags
-- Distribute modified saves with locked content
-- Violate game licensing or EULA
-- Circumvent anti-cheat systems
+**What You Can Do:**
+- See all rooms in your vault
+- Edit room type and level
+- Modify merge level (room size)
+- Reset production timers
+- Clear rush cooldowns
 
-## Browser Compatibility
+---
 
-- ✅ Chrome/Edge (Latest)
-- ✅ Firefox (Latest)
-- ✅ Safari (Latest)
-- ✅ Mobile browsers (Responsive design)
+### 🌍 Wasteland Tab
+Manage dwellers exploring the wasteland.
 
-## Data Constants
+**What You Can Do:**
+- View exploration teams
+- Edit quest status
+- Track exploration resources
 
-The editor includes comprehensive data constants:
-- **150+ Weapons** with stats and descriptions
-- **180+ Outfits** with SPECIAL bonuses
-- **40+ Pets** with abilities
-- **All Room Types** with production values
-- **Quest Data** for wasteland exploration
+---
 
-## Features in Detail
+### 🎒 Inventory Tab
+Manage your vault's storage.
 
-### Backup System
-- Automatic backups on file load
-- Recovery system for mistakes
-- Multiple backup slots
+**What You Can Do:**
+- View all weapons, outfits, and junk items
+- Add new items with custom quantities
+- Remove unwanted items
+- Search through 400+ available items
+- Edit item damage values
 
-### Search Functionality
-- Search through JSON data
-- Find specific values or items
-- Quick navigation
+**Database Includes:**
+- 238 weapons (from Rusty .32 Pistol to Dragon's Maw)
+- 147 outfits (from Vault Suit to X-01 Mk VI Power Armor)
+- 21 junk/collectible items
 
-### Bulk Operations
-- Max all dweller stats
-- Heal all dwellers
-- Max happiness
-- Unlock all recipes
-- Unlock all themes
-- Clear emergencies
+---
 
-## Troubleshooting
+### 🎁 Season Pass Tab
+Edit your season pass progress.
 
-### File Won't Load
-- Ensure file is valid JSON or Fallout Shelter format
-- Try a different file format (.sav, .dat, .json)
-- Check browser console for errors
+**What You Can Do:**
+- Set season pass level
+- Modify experience points
+- Enable premium pass
+- Unlock all rewards
 
-### Changes Not Saving
-- Click "Download Save" to save changes
-- Browser won't modify files directly
-- Use the download button to get your modified file
+---
 
-### Inspector Shows Encrypted Data
-- Some save formats are encrypted or compressed
-- The inspector will show entropy levels
-- Read-only analysis is still available
+### 🔧 Others Tab
+Additional vault features.
 
-## Support & Contribution
+**What You Can Do:**
+- Unlock all recipes (25+ craftable items)
+- Choose from 30+ pet types
+- Unlock vault themes
 
-### Community Resources
-- [Fallout Wiki](https://fallout.fandom.com/) - Game mechanics
-- r/falloutshelter - Player community
-- shelter-editor - Community research
+---
 
-### Development
-This project uses:
-- Vanilla JavaScript (no frameworks)
-- HTML5 & CSS3
-- No external dependencies
+### 📝 Raw JSON Tab
+For advanced users who want direct access to the save file data.
 
-## License & Attribution
+---
 
-Fallout and Fallout Shelter are trademarks of Bethesda Softworks.
-This tool is provided as-is for educational purposes.
+## 📈 Vault Statistics Dashboard
+
+View 40+ real-time statistics about your vault:
+
+**Population Stats:**
+- Total dwellers
+- Average level
+- Max level dwellers (level 50)
+- Average happiness
+
+**Resources:**
+- Total Caps
+- Food, Water, Power storage
+- Total rooms
+
+**Equipment:**
+- Total weapons, outfits, junk
+- Equipped dwellers count
+
+**SPECIAL Averages:**
+- Average stats for all 7 attributes
+
+**Health & Combat:**
+- Average health
+- Irradiated dwellers
+- Injured dwellers
+
+**Vault Info:**
+- Unlocked themes and recipes
+
+---
+
+## ⚠️ Important Information
+
+### Safety First
+- **Always backup your original save file** before making changes
+- Use the built-in validation to check for errors before downloading
+- Review the change history to track what was modified
+
+### Legal & Ethical Use
+- ✅ Edit your own personal save files
+- ✅ Use for single-player enjoyment
+- ✅ Create backups and experiments
+- ❌ Don't distribute modified saves with premium content
+- ❌ Respect Bethesda's Terms of Service
+- ❌ Don't use for competitive advantages in online features
+
+### File Compatibility
+- Supports `.sav` (encrypted game files)
+- Supports `.dat` (encrypted game files)
+- Supports `.json` (plain text for editing)
+- Downloads in both encrypted (.sav) and plain (.json) formats
+
+---
+
+## 🛠️ Troubleshooting
+
+### My file won't load
+- **Check the file format**: Make sure it's a Fallout Shelter save file
+- **Try both formats**: If `.sav` doesn't work, try exporting as `.json` first
+- **Check file size**: Corrupted saves may be 0 bytes or unusually small
+
+### Changes aren't saving
+- Click the **"💾 Download Save"** button (browser can't modify files directly)
+- Choose format: `.sav` for in-game use, `.json` for further editing
+- Replace your original save file with the downloaded one
+
+### Game doesn't recognize my edited save
+- Make sure you saved as `.sav` format (encrypted)
+- Keep the original filename
+- Place it in the correct save folder
+- Restart the game completely
+
+### Validation warnings appear
+- Read the warnings carefully
+- Minor warnings are usually safe to ignore
+- Critical errors may corrupt your save – fix before downloading
+
+---
+
+## 💡 Tips & Tricks
+
+1. **Start Small**: Make one or two changes first to ensure everything works
+2. **Use Statistics**: Check vault stats before and after changes to verify updates
+3. **Track Changes**: Use the Change History button to see what you modified
+4. **Test Downloads**: Download as `.json` first to review changes, then as `.sav` for the game
+5. **Keep Backups**: The editor auto-creates one backup, but keep your own copies too
+6. **Search Feature**: Use the search box (🔍) to find specific data quickly
+
+---
+
+## 🌐 Browser Compatibility
+
+- ✅ Chrome / Edge (Recommended)
+- ✅ Firefox
+- ✅ Safari
+- ✅ Opera
+- ✅ Mobile browsers (responsive design)
+
+**Requires**: Modern browser with JavaScript enabled (2020+)
+
+---
+
+## 📞 Support & Community
+
+- **Issues**: [Report bugs on GitHub](https://github.com/devvyyxyz/wasteland-editor/issues)
+- **Documentation**: [Read the full guide](https://github.com/devvyyxyz/wasteland-editor/blob/main/README.md)
+- **Releases**: [Download latest version](https://github.com/devvyyxyz/wasteland-editor/releases)
+- **Source Code**: [View on GitHub](https://github.com/devvyyxyz/wasteland-editor)
+
+---
+
+## 📜 License
+
+This project is open source and available for personal use.
+
+**Fallout** and **Fallout Shelter** are trademarks of Bethesda Softworks LLC.  
+This tool is not affiliated with, endorsed by, or connected to Bethesda.
 
 ---
 
 **Version**: 1.0  
 **Last Updated**: February 2026  
-**Status**: Full Featured & Tested
-
-Made with ⚡ for Vault-Tec Fans# 🎮 Wasteland Editor - Enhanced Edition
-
-**A comprehensive web-based editor for Fallout Shelter save files**
-
-Built with pure HTML,re
-**A comprehensive web-based editor for Fver
-Built with pure HTML, CSS, and JavaScript featuring a rustic pape Re
----
-
-## ✨ Key Features
-
-### 🏠 Vault Management
-- Edit vault name and customization
-- Manage all resources: Caps, Food, Watetic
-#ape
-### 🏠 Vault Maged- Edit vault name and cuza- Manage all resources: Caps, Foodel- Track special items: Lunchboxes, Mr. Handies, Pet Carriers, Starter Packs
-
-#ns
-### 👥 Advanced Dweller Editing
-- Search & Filter dwellers quickly
-- Edoad- Search & Filter dwellers quickou- Edit all 7 SPECIAL stats (0-10 at- Customize appearance (gender, skin cSy- Choose from 150+ weapons and 180+ outfits
-- Track he**- Track health, happiness, level, and expe-
-
-### ⚡ Batch Operations
-- Manage vault settings,- Max All Stats (Level er- Max Happiness (100 for all dwellers)
-- Heat individual dwellers
-- **Rooms**: View v
-**A comprehensive web-based editor for Fallout Shelter save files**
-
-s**
-Built with pure HTML,re
-**A comprehensive web-based editor for Fvng
-**A comprehensive web-olBuilt with pure HTML, CSS, and JavaScranilla---
-
-## ✨ Key Features
-
-### 🏠 Vault Management
-- Edit vault na80+ out
-its database
-
----
-
-#- Edit vault name and cu? Manage all resources: CapEdge (all#ape
-### 🏠 Vault Maged- Edit vault name Based 
-#ns
-### 👥 Advanced Dweller Editing
-- Search & Filter dwellers quickly
-- Edoad- Search & Filter dwellers quickou- Edit all 7 SPECIAL stats (0-10 at- Cust---##**- Search & Filter dwellers quick| - Edoad- S*: MIT
+**Made with ⚡ for Vault-Tec Overseers**
