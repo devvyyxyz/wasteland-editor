@@ -48,6 +48,7 @@
                     <button class="tab-btn" data-tab="dwellers">Dwellers</button>
                     <button class="tab-btn" data-tab="rooms">Rooms</button>
                     <button class="tab-btn" data-tab="wasteland">Wasteland</button>
+                    <button class="tab-btn" data-tab="seasonpass">Season Pass</button>
                     <button class="tab-btn" data-tab="others">Others</button>
                     <button class="tab-btn" data-tab="raw">Raw JSON</button>
                 </div>
@@ -349,6 +350,66 @@
                         <div id="wasteland-others" class="subtab-content">
                             <h3>Wasteland Actor Teams</h3>
                             <div id="wastelandActorsList" class="wasteland-list"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SEASON PASS TAB -->
+                <div id="seasonpass" class="tab-content">
+                    <div class="seasonpass-panel">
+                        <div class="panel-section">
+                            <h3>Season Pass Information</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>
+                                        Season ID:
+                                        <span class="info-icon" title="Current season identifier">ⓘ</span>
+                                    </label>
+                                    <input type="text" id="seasonId" placeholder="Season ID">
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        Season Level:
+                                        <span class="info-icon" title="Current level/tier in the season pass">ⓘ</span>
+                                    </label>
+                                    <input type="number" id="seasonLevel" min="0" placeholder="0">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>
+                                        Season XP:
+                                        <span class="info-icon" title="Experience points in current season">ⓘ</span>
+                                    </label>
+                                    <input type="number" id="seasonXP" min="0" placeholder="0">
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        Premium Pass:
+                                        <span class="info-icon" title="Whether premium season pass is unlocked">ⓘ</span>
+                                    </label>
+                                    <select id="seasonPremium">
+                                        <option value="false">No</option>
+                                        <option value="true">Yes</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel-section">
+                            <h3>Season Pass Rewards</h3>
+                            <div id="seasonRewardsList" class="season-rewards-list">
+                                <p style="text-align: center; color: #999; padding: 20px;">Load a season pass file (.dat) to view rewards</p>
+                            </div>
+                        </div>
+
+                        <div class="panel-section">
+                            <h3>Quick Actions</h3>
+                            <div class="button-grid">
+                                <button class="btn btn-secondary" id="maxSeasonLevelBtn">Max Season Level</button>
+                                <button class="btn btn-secondary" id="unlockAllRewardsBtn">Unlock All Rewards</button>
+                                <button class="btn btn-secondary" id="enablePremiumBtn">Enable Premium Pass</button>
+                            </div>
                         </div>
                     </div>
                 </div>

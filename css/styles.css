@@ -1090,3 +1090,72 @@ footer {
     padding: 6px 12px;
     font-size: 0.85rem;
 }
+
+/* Season Pass Styles */
+.seasonpass-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.season-rewards-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.season-reward-item {
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid var(--border-color);
+    border-left: 4px solid var(--accent-color);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.season-reward-item:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary-color);
+}
+
+.season-reward-item.unlocked {
+    border-left-color: #4CAF50;
+    background: rgba(76, 175, 80, 0.05);
+}
+
+.season-reward-item.locked {
+    opacity: 0.6;
+    border-left-color: #999;
+}
+
+.reward-title {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--primary-color);
+}
+
+.reward-description {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.reward-status {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.reward-status.unlocked {
+    color: #4CAF50;
+}
+
+.reward-status.locked {
+    color: #999;
+}

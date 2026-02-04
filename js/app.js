@@ -68,6 +68,20 @@ function initializeEventListeners() {
     if (recipeDeselectAllBtn) recipeDeselectAllBtn.addEventListener('click', recipeDeselectAll);
     if (recipeSearchInput) recipeSearchInput.addEventListener('input', (e) => filterRecipes(e.target.value));
 
+    // Season pass listeners
+    ['seasonId', 'seasonLevel', 'seasonXP', 'seasonPremium'].forEach(id => {
+        const elem = document.getElementById(id);
+        if (elem) elem.addEventListener('change', updateSeasonPassData);
+    });
+    
+    const maxSeasonLevelBtn = document.getElementById('maxSeasonLevelBtn');
+    const unlockAllRewardsBtn = document.getElementById('unlockAllRewardsBtn');
+    const enablePremiumBtn = document.getElementById('enablePremiumBtn');
+    
+    if (maxSeasonLevelBtn) maxSeasonLevelBtn.addEventListener('click', maxSeasonLevel);
+    if (unlockAllRewardsBtn) unlockAllRewardsBtn.addEventListener('click', unlockAllSeasonRewards);
+    if (enablePremiumBtn) enablePremiumBtn.addEventListener('click', enablePremiumPass);
+
     // Dweller panel listeners
     ['dwellerFirstName', 'dwellerLastName', 'dwellerGender', 'dwellerLevel', 'dwellerExp',
      'dwellerHealth', 'dwellerHappiness', 'dwellerSkinColor', 'dwellerHairColor',
@@ -144,6 +158,7 @@ function handleFileUpload(e) {
                 populateVaultData();
                 populateDwellersList();
                 populateRoomsList();
+                populateSeasonPassData();
                 
                 // Create initial backup
                 createBackup('Initial Load');
@@ -702,6 +717,157 @@ function filterRecipes(searchTerm) {
         const label = item.querySelector('label').textContent.toLowerCase();
         item.style.display = label.includes(term) ? 'flex' : 'none';
     });
+}
+
+// Season Pass Functions
+function populateSeasonPassData() {
+    if (!currentData) return;
+    
+    // Season pass data might be at root level or in a nested object
+    const seasonData = currentData.seasonPass || currentData.season || currentData;
+    
+    // Populate form fields
+    const seasonId = document.getElementById('seasonId');
+    const seasonLevel = document.getElementById('seasonLevel');
+    const seasonXP = document.getElementById('seasonXP');
+    const seasonPremium = document.getElementById('seasonPremium');
+    
+    if (seasonId) seasonId.value = seasonData.seasonId || seasonData.id || '';
+    if (seasonLevel) seasonLevel.value = seasonData.level || seasonData.seasonLevel || 0;
+    if (seasonXP) seasonXP.value = seasonData.xp || seasonData.experience || seasonData.seasonXP || 0;
+    if (seasonPremium) seasonPremium.value = (seasonData.premium || seasonData.isPremium || false).toString();
+    
+    // Populate rewards list
+    populateSeasonRewards();
+}
+
+function populateSeasonRewards() {
+    const rewardsList = document.getElementById('seasonRewardsList');
+    if (!rewardsList || !currentData) return;
+    
+    const seasonData = currentData.seasonPass || currentData.season || currentData;
+    const rewards = seasonData.rewards || seasonData.tiers || [];
+    
+    if (rewards.length === 0) {
+        rewardsList.innerHTML = '<p style="text-align: center; color: #999; padding: 20px;">No rewards found in this file</p>';
+        return;
+    }
+    
+    rewardsList.innerHTML = '';
+    
+    rewards.forEach((reward, index) => {
+        const isUnlocked = reward.unlocked !== false;
+        const rewardDiv = document.createElement('div');
+        rewardDiv.className = `season-reward-item ${isUnlocked ? 'unlocked' : 'locked'}`;
+        
+        const title = reward.name || reward.title || `Reward ${index + 1}`;
+        const description = reward.description || reward.desc || '';
+        const tier = reward.tier || reward.level || index + 1;
+        
+        rewardDiv.innerHTML = `
+            <div class="reward-title">Tier ${tier}: ${title}</div>
+            ${description ? `<div class="reward-description">${description}</div>` : ''}
+            <div class="reward-status ${isUnlocked ? 'unlocked' : 'locked'}">
+                ${isUnlocked ? '✓ Unlocked' : '🔒 Locked'}
+            </div>
+        `;
+        
+        rewardsList.appendChild(rewardDiv);
+    });
+}
+
+function updateSeasonPassData() {
+    if (!currentData) return;
+    
+    const seasonData = currentData.seasonPass || currentData.season || currentData;
+    
+    const seasonId = document.getElementById('seasonId')?.value;
+    const seasonLevel = parseInt(document.getElementById('seasonLevel')?.value) || 0;
+    const seasonXP = parseInt(document.getElementById('seasonXP')?.value) || 0;
+    const seasonPremium = document.getElementById('seasonPremium')?.value === 'true';
+    
+    if (seasonId !== undefined) {
+        if (seasonData.seasonId !== undefined) seasonData.seasonId = seasonId;
+        else if (seasonData.id !== undefined) seasonData.id = seasonId;
+    }
+    
+    if (seasonData.level !== undefined) seasonData.level = seasonLevel;
+    else if (seasonData.seasonLevel !== undefined) seasonData.seasonLevel = seasonLevel;
+    
+    if (seasonData.xp !== undefined) seasonData.xp = seasonXP;
+    else if (seasonData.experience !== undefined) seasonData.experience = seasonXP;
+    else if (seasonData.seasonXP !== undefined) seasonData.seasonXP = seasonXP;
+    
+    if (seasonData.premium !== undefined) seasonData.premium = seasonPremium;
+    else if (seasonData.isPremium !== undefined) seasonData.isPremium = seasonPremium;
+    
+    jsonEditor.value = JSON.stringify(currentData, null, 2);
+    updateFileSize();
+}
+
+function maxSeasonLevel() {
+    if (!currentData) {
+        showToast('No season pass data found');
+        return;
+    }
+    
+    const seasonData = currentData.seasonPass || currentData.season || currentData;
+    
+    // Set to max level (usually 100)
+    if (seasonData.level !== undefined) seasonData.level = 100;
+    else if (seasonData.seasonLevel !== undefined) seasonData.seasonLevel = 100;
+    else seasonData.level = 100;
+    
+    // Max out XP
+    if (seasonData.xp !== undefined) seasonData.xp = 999999;
+    else if (seasonData.experience !== undefined) seasonData.experience = 999999;
+    else if (seasonData.seasonXP !== undefined) seasonData.seasonXP = 999999;
+    
+    createBackup('Max Season Level');
+    jsonEditor.value = JSON.stringify(currentData, null, 2);
+    updateFileSize();
+    populateSeasonPassData();
+    showToast('Season level maximized!');
+}
+
+function unlockAllSeasonRewards() {
+    if (!currentData) {
+        showToast('No season pass data found');
+        return;
+    }
+    
+    const seasonData = currentData.seasonPass || currentData.season || currentData;
+    const rewards = seasonData.rewards || seasonData.tiers || [];
+    
+    rewards.forEach(reward => {
+        reward.unlocked = true;
+        if (reward.claimed !== undefined) reward.claimed = true;
+    });
+    
+    createBackup('Unlock All Season Rewards');
+    jsonEditor.value = JSON.stringify(currentData, null, 2);
+    updateFileSize();
+    populateSeasonRewards();
+    showToast('All season rewards unlocked!');
+}
+
+function enablePremiumPass() {
+    if (!currentData) {
+        showToast('No season pass data found');
+        return;
+    }
+    
+    const seasonData = currentData.seasonPass || currentData.season || currentData;
+    
+    if (seasonData.premium !== undefined) seasonData.premium = true;
+    else if (seasonData.isPremium !== undefined) seasonData.isPremium = true;
+    else seasonData.premium = true;
+    
+    createBackup('Enable Premium Pass');
+    jsonEditor.value = JSON.stringify(currentData, null, 2);
+    updateFileSize();
+    populateSeasonPassData();
+    showToast('Premium pass enabled!');
 }
 
 // Clear All Emergencies
