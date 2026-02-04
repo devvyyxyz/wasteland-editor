@@ -827,6 +827,9 @@ function editRoom(index, room) {
     currentRoomIndex = index;
     
     // Populate form fields
+    const roomTitle = document.getElementById('roomTitle');
+    if (roomTitle) roomTitle.textContent = room.name || 'Room';
+    
     document.getElementById('roomName').value = room.name || '';
     document.getElementById('roomType').value = room.type || '';
     document.getElementById('roomLevel').value = room.level || 1;
@@ -842,7 +845,6 @@ function editRoom(index, room) {
     const roomDetails = document.getElementById('roomDetails');
     if (roomDetails) {
         roomDetails.style.display = 'block';
-        roomDetails.scrollIntoView({ behavior: 'smooth' });
     }
     
     // Highlight selected room
@@ -892,9 +894,15 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Add room editor listeners
     const saveRoomBtn = document.getElementById('saveRoomBtn');
-    const closeRoomBtn = document.getElementById('closeRoomBtn');
     if (saveRoomBtn) saveRoomBtn.addEventListener('click', saveRoom);
-    if (closeRoomBtn) closeRoomBtn.addEventListener('click', closeRoomEditor);
+    
+    // Add back link listener for rooms
+    document.addEventListener('click', (e) => {
+        if (e.target.closest('#roomDetails .back-link')) {
+            e.preventDefault();
+            closeRoomEditor();
+        }
+    });
     
     console.log('Wasteland Editor Enhanced - Rustic Paper Edition loaded successfully');
     showToast('Wasteland Editor Ready');

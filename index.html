@@ -247,46 +247,66 @@
                 <!-- ROOMS TAB -->
                 <div id="rooms" class="tab-content">
                     <div class="rooms-panel">
-                        <h3>Vault Rooms</h3>
-                        <div id="roomsList" class="rooms-list"></div>
-                    </div>
-                    
-                    <div id="roomDetails" class="room-details" style="display:none;">
-                        <h3>Edit Room</h3>
-                        <div class="form-group">
-                            <label>Room Name</label>
-                            <input type="text" id="roomName" class="form-control">
+                        <div class="rooms-list-container">
+                            <h3>Vault Rooms</h3>
+                            <input type="text" id="roomSearch" class="search-input" placeholder="Search rooms...">
+                            <div id="roomsList" class="rooms-list"></div>
                         </div>
-                        <div class="form-group">
-                            <label>Room Type</label>
-                            <input type="text" id="roomType" class="form-control">
+                        
+                        <div id="roomDetails" class="room-details" style="display:none;">
+                            <a href="#" class="back-link">← Back</a>
+                            <div class="panel-section">
+                                <h3 id="roomTitle">Room</h3>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Room Name:</label>
+                                        <input type="text" id="roomName" placeholder="Room name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Type:</label>
+                                        <input type="text" id="roomType" placeholder="Room type">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Level:</label>
+                                        <input type="number" id="roomLevel" min="1" max="3">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>State:</label>
+                                        <input type="text" id="roomState" placeholder="e.g., Idle">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel-section">
+                                <h3>Production</h3>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Power Generation:</label>
+                                        <input type="number" id="roomPower" min="0">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Food Production:</label>
+                                        <input type="number" id="roomFood" min="0">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Water Production:</label>
+                                        <input type="number" id="roomWater" min="0">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Radiation:</label>
+                                        <input type="number" id="roomRadiation" min="0" max="100">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row" style="gap: 10px; padding-top: 15px; border-top: 1px solid var(--border-color); margin-top: 15px;">
+                                <button id="saveRoomBtn" class="btn btn-primary">Save Room</button>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>Level</label>
-                            <input type="number" id="roomLevel" class="form-control" min="1" max="3">
-                        </div>
-                        <div class="form-group">
-                            <label>State</label>
-                            <input type="text" id="roomState" class="form-control" placeholder="e.g., Idle">
-                        </div>
-                        <div class="form-group">
-                            <label>Power Generation</label>
-                            <input type="number" id="roomPower" class="form-control" min="0">
-                        </div>
-                        <div class="form-group">
-                            <label>Food Production</label>
-                            <input type="number" id="roomFood" class="form-control" min="0">
-                        </div>
-                        <div class="form-group">
-                            <label>Water Production</label>
-                            <input type="number" id="roomWater" class="form-control" min="0">
-                        </div>
-                        <div class="form-group">
-                            <label>Radiation</label>
-                            <input type="number" id="roomRadiation" class="form-control" min="0" max="100">
-                        </div>
-                        <button id="saveRoomBtn" class="btn btn-primary">Save Room</button>
-                        <button id="closeRoomBtn" class="btn btn-secondary">Close</button>
                     </div>
                 </div>
 
