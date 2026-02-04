@@ -768,8 +768,20 @@ function selectDweller(dweller, index) {
     // Equipment
     const weaponElem = document.getElementById('dwellerWeapon');
     const outfitElem = document.getElementById('dwellerOutfit');
-    if (weaponElem) weaponElem.value = dweller.equipedWeapon?.id || dweller.equippedWeapon?.id || '';
-    if (outfitElem) outfitElem.value = dweller.equipedOutfit?.id || dweller.equippedOutfit?.id || '';
+    
+    if (weaponElem) {
+        const weaponId = dweller.equipedWeapon?.id || dweller.equippedWeapon?.id || '';
+        weaponElem.value = weaponId;
+        storeOriginalValue('dwellerWeapon', weaponId);
+        trackFieldChange('dwellerWeapon');
+    }
+    
+    if (outfitElem) {
+        const outfitId = dweller.equipedOutfit?.id || dweller.equippedOutfit?.id || '';
+        outfitElem.value = outfitId;
+        storeOriginalValue('dwellerOutfit', outfitId);
+        trackFieldChange('dwellerOutfit');
+    }
 }
 
 // Update Dweller Data
@@ -849,20 +861,38 @@ function updateDwellerData() {
     const weaponElem = document.getElementById('dwellerWeapon');
     const outfitElem = document.getElementById('dwellerOutfit');
     
-    if (weaponElem && weaponElem.value) {
-        if (!dweller.equipedWeapon) dweller.equipedWeapon = {};
-        dweller.equipedWeapon.id = weaponElem.value;
-        dweller.equipedWeapon.type = 'Weapon';
-        dweller.equipedWeapon.hasBeenAssigned = false;
-        dweller.equipedWeapon.hasRandonWeaponBeenAssigned = false;
+    if (weaponElem) {
+        if (weaponElem.value) {
+            if (!dweller.equipedWeapon) dweller.equipedWeapon = {};
+            dweller.equipedWeapon.id = weaponElem.value;
+            dweller.equipedWeapon.type = 'Weapon';
+            dweller.equipedWeapon.hasBeenAssigned = false;
+            dweller.equipedWeapon.hasRandonWeaponBeenAssigned = false;
+        } else {
+            // If no weapon selected, set to default fist/none
+            if (!dweller.equipedWeapon) dweller.equipedWeapon = {};
+            dweller.equipedWeapon.id = 'Fist';
+            dweller.equipedWeapon.type = 'Weapon';
+            dweller.equipedWeapon.hasBeenAssigned = false;
+            dweller.equipedWeapon.hasRandonWeaponBeenAssigned = false;
+        }
     }
     
-    if (outfitElem && outfitElem.value) {
-        if (!dweller.equipedOutfit) dweller.equipedOutfit = {};
-        dweller.equipedOutfit.id = outfitElem.value;
-        dweller.equipedOutfit.type = 'Outfit';
-        dweller.equipedOutfit.hasBeenAssigned = false;
-        dweller.equipedOutfit.hasRandonWeaponBeenAssigned = false;
+    if (outfitElem) {
+        if (outfitElem.value) {
+            if (!dweller.equipedOutfit) dweller.equipedOutfit = {};
+            dweller.equipedOutfit.id = outfitElem.value;
+            dweller.equipedOutfit.type = 'Outfit';
+            dweller.equipedOutfit.hasBeenAssigned = false;
+            dweller.equipedOutfit.hasRandonWeaponBeenAssigned = false;
+        } else {
+            // If no outfit selected, set to default jumpsuit
+            if (!dweller.equipedOutfit) dweller.equipedOutfit = {};
+            dweller.equipedOutfit.id = 'jumpsuit';
+            dweller.equipedOutfit.type = 'Outfit';
+            dweller.equipedOutfit.hasBeenAssigned = false;
+            dweller.equipedOutfit.hasRandonWeaponBeenAssigned = false;
+        }
     }
     
     jsonEditor.value = JSON.stringify(currentData, null, 2);
