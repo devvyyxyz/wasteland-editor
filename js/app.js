@@ -3,12 +3,14 @@ let currentData = null;
 let originalData = null;
 let currentDweller = null;
 let backups = [];
+let changeHistory = [];
 
 // DOM Elements
 const fileInput = document.getElementById('fileInput');
 const fileInfo = document.getElementById('fileInfo');
 const downloadBtn = document.getElementById('downloadBtn');
 const formatBtn = document.getElementById('formatBtn');
+const historyBtn = document.getElementById('historyBtn');
 const clearBtn = document.getElementById('clearBtn');
 const jsonEditor = document.getElementById('jsonEditor');
 const fileSizeSpan = document.getElementById('fileSize');
@@ -24,6 +26,7 @@ function initializeEventListeners() {
     fileInput.addEventListener('change', handleFileUpload);
     downloadBtn.addEventListener('click', downloadSave);
     formatBtn.addEventListener('click', formatJSON);
+    historyBtn.addEventListener('click', showHistoryModal);
     clearBtn.addEventListener('click', clearEditor);
     jsonEditor.addEventListener('input', debounce(handleEditorChange, 500));
     searchInput.addEventListener('input', debounce(handleSearch, 300));
@@ -187,7 +190,13 @@ function handleFileUpload(e) {
                 errorMessage.textContent = '';
                 downloadBtn.disabled = false;
                 formatBtn.disabled = false;
+                historyBtn.disabled = false;
                 clearBtn.disabled = false;
+                
+                // Track file load in history
+                addToHistory('File Loaded', `Loaded ${file.name} (${formatFileSize(file.size)})`);
+                // Track file load in history
+                addToHistory('File Loaded', `Loaded ${file.name} (${formatFileSize(file.size)})`);
                 
                 // Populate selects with weapons and outfits
                 populateSelects();
@@ -563,6 +572,8 @@ function updateDwellerData() {
     
     jsonEditor.value = JSON.stringify(currentData, null, 2);
     updateFileSize();
+    const dwellerName = `${currentDweller.name || 'Unknown'}`;
+    addToHistory('Dweller Updated', `Modified ${dwellerName}`);
 }
 
 // Max Dweller Stats
@@ -1108,6 +1119,7 @@ function updateVaultData() {
     
     jsonEditor.value = JSON.stringify(currentData, null, 2);
     updateFileSize();
+    addToHistory('Vault Updated', 'Modified vault settings and resources');
 }
 
 // Populate Item Data
@@ -1680,6 +1692,13 @@ function handleEditorChange() {
 function downloadSave() {
     if (!currentData) return;
     
+    // Validate save file integrity
+    const validation = validateSaveFile(currentData);
+    if (!validation.valid) {
+        const proceed = confirm(`⚠️ Save file validation warnings:\n\n${validation.warnings.join('\n')}\n\nDo you want to download anyway?`);
+        if (!proceed) return;
+    }
+    
     // Ask user format preference
     const format = prompt('Download as:\n1. .sav (encrypted - use in game)\n2. .json (plain text - editable)\n\nEnter 1 or 2:', '1');
     
@@ -1694,6 +1713,7 @@ function downloadSave() {
             link.download = `Vault${Math.floor(Math.random() * 1000)}.sav`;
             link.click();
             URL.revokeObjectURL(url);
+            addToHistory('Download', 'Downloaded encrypted .sav file');
             showToast('Save file downloaded as .sav!');
         } else {
             errorMessage.textContent = `Encryption error: ${result.error}`;
@@ -1708,6 +1728,7 @@ function downloadSave() {
         link.download = `fallout-shelter-save-${Date.now()}.json`;
         link.click();
         URL.revokeObjectURL(url);
+        addToHistory('Download', 'Downloaded plain .json file');
         showToast('Save file downloaded as .json!');
     }
 }
@@ -1946,11 +1967,18 @@ function closeRoomEditor() {
 
 // Populate Vault Statistics
 function populateVaultStats() {
-    const statsSection = document.getElementById('vaultStatsSection');
-    if (!currentData || !statsSection) return;
-
-    // Show the stats section
-    statsSection.style.display = 'block';
+    const statsNoData = document.getElementById('statsNoData');
+    const statsGrid = document.getElementById('statsGridContainer');
+    
+    if (!currentData) {
+        if (statsNoData) statsNoData.style.display = 'flex';
+        if (statsGrid) statsGrid.style.display = 'none';
+        return;
+    }
+    
+    // Hide no-data message and show stats
+    if (statsNoData) statsNoData.style.display = 'none';
+    if (statsGrid) statsGrid.style.display = 'grid';
 
     const vault = currentData.vault || {};
     const dwellers = currentData.dwellers?.dwellers || [];
@@ -2035,6 +2063,84 @@ function populateVaultStats() {
     
     document.getElementById('statUnlockedThemes').textContent = unlockedThemes;
     document.getElementById('statUnlockedRecipes').textContent = unlockedRecipes;
+}
+
+// Validate Save File
+function validateSaveFile(data) {
+    const warnings = [];
+    let valid = true;
+    
+    // Check basic structure
+    if (!data.vault) {
+        warnings.push('Missing vault object');
+        valid = false;
+    }
+    if (!data.dwellers) {
+        warnings.push('Missing dwellers object');
+        valid = false;
+    }
+    
+    // Check vault structure
+    if (data.vault) {
+        if (!data.vault.storage?.resources) {
+            warnings.push('Missing vault.storage.resources');
+        }
+        if (!data.vault.rooms) {
+            warnings.push('Missing vault.rooms array');
+        }
+    }
+    
+    // Check dwellers structure
+    if (data.dwellers?.dwellers) {
+        const dwellers = data.dwellers.dwellers;
+        const invalidDwellers = dwellers.filter(d => !d.stats?.stats || d.stats.stats.length !== 7);
+        if (invalidDwellers.length > 0) {
+            warnings.push(`${invalidDwellers.length} dwellers have invalid SPECIAL stats`);
+        }
+    }
+    
+    return { valid: warnings.length === 0, warnings };
+}
+
+// Add to Change History
+function addToHistory(action, details) {
+    const entry = {
+        action,
+        details,
+        timestamp: new Date().toLocaleString()
+    };
+    changeHistory.unshift(entry); // Add to beginning
+    if (changeHistory.length > 100) changeHistory.pop(); // Keep last 100
+}
+
+// Show History Modal
+function showHistoryModal() {
+    const modal = document.getElementById('historyModal');
+    const historyList = document.getElementById('historyList');
+    
+    if (!modal || !historyList) return;
+    
+    if (changeHistory.length === 0) {
+        historyList.innerHTML = '<div class="no-data-message"><p>No changes recorded yet</p></div>';
+    } else {
+        historyList.innerHTML = changeHistory.map(entry => `
+            <div class="history-item">
+                <div class="history-item-header">
+                    <span class="history-item-action">${entry.action}</span>
+                    <span class="history-item-time">${entry.timestamp}</span>
+                </div>
+                <div class="history-item-details">${entry.details}</div>
+            </div>
+        `).join('');
+    }
+    
+    modal.style.display = 'flex';
+}
+
+// Close History Modal
+function closeHistoryModal() {
+    const modal = document.getElementById('historyModal');
+    if (modal) modal.style.display = 'none';
 }
 
 // Initialize

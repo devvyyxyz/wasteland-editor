@@ -36,6 +36,9 @@
                     <button id="formatBtn" class="btn btn-secondary" disabled>
                         ✨ Format JSON
                     </button>
+                    <button id="historyBtn" class="btn btn-secondary" disabled>
+                        📜 Change History
+                    </button>
                     <button id="clearBtn" class="btn btn-secondary" disabled>
                         🗑️ Clear
                     </button>
@@ -655,9 +658,16 @@
         </main>
 
         <!-- Vault Statistics Section -->
-        <section class="vault-stats-section" id="vaultStatsSection" style="display:none;">
+        <section class="vault-stats-section" id="vaultStatsSection">
             <h2>📊 Vault Statistics</h2>
-            <div class="stats-grid-container">
+            <div class="stats-no-data" id="statsNoData">
+                <div class="no-data-message">
+                    <span class="no-data-icon">📊</span>
+                    <p>No vault data loaded</p>
+                    <small>Upload a save file to view statistics</small>
+                </div>
+            </div>
+            <div class="stats-grid-container" id="statsGridContainer" style="display:none;">
                 <div class="stat-card">
                     <h3>Population</h3>
                     <div class="stat-row"><span>Total Dwellers:</span> <strong id="statTotalDwellers">0</strong></div>
@@ -733,6 +743,22 @@
                 <div class="button-grid" style="margin-top: 20px;">
                     <button class="btn btn-primary" onclick="confirmAddInventoryItem()">Add Item</button>
                     <button class="btn btn-secondary" onclick="closeInventoryModal()">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Change History Modal -->
+        <div id="historyModal" class="inventory-modal">
+            <div class="inventory-modal-content" style="max-width: 800px;">
+                <div class="inventory-modal-header">
+                    <h3>📜 Change History</h3>
+                    <button class="inventory-modal-close" onclick="closeHistoryModal()">×</button>
+                </div>
+                <div class="panel-section">
+                    <div id="historyList" class="history-list" style="max-height: 500px; overflow-y: auto;"></div>
+                </div>
+                <div class="button-grid" style="margin-top: 20px;">
+                    <button class="btn btn-secondary" onclick="closeHistoryModal()">Close</button>
                 </div>
             </div>
         </div>
