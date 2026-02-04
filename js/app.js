@@ -299,6 +299,40 @@ function disableEditorUI() {
     const inputs = document.querySelectorAll('.tab-content input, .tab-content select, .tab-content button');
     inputs.forEach(input => input.disabled = true);
     document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('editor-disabled'));
+    
+    // Reset all fields to defaults
+    resetEditorFields();
+}
+
+function resetEditorFields() {
+    // Reset vault fields
+    const vaultFields = ['vaultName', 'caps', 'food', 'water', 'power', 'radaway', 'stimpacks', 'nukacola', 'nukaquantum',
+                         'lunchboxCount', 'handyCount', 'petCarrierCount', 'starterPackCount'];
+    vaultFields.forEach(id => {
+        const elem = document.getElementById(id);
+        if (elem) elem.value = id === 'vaultName' ? '' : '0';
+    });
+    
+    // Reset dweller fields
+    const dwellerFields = ['dwellerFirstName', 'dwellerLastName', 'dwellerLevel', 'dwellerExp',
+                          'dwellerHealth', 'dwellerMaxHealth', 'dwellerHappiness', 'dwellerRadiation'];
+    dwellerFields.forEach(id => {
+        const elem = document.getElementById(id);
+        if (elem) elem.value = '';
+    });
+    
+    // Reset SPECIAL stats
+    ['S', 'P', 'E', 'C', 'I', 'A', 'L'].forEach(stat => {
+        const elem = document.getElementById(`stat-${stat.toLowerCase()}`);
+        if (elem) elem.value = '1';
+    });
+    
+    // Clear lists
+    const dwellersList = document.getElementById('dwellersList');
+    if (dwellersList) dwellersList.innerHTML = '';
+    
+    const roomsList = document.getElementById('roomsList');
+    if (roomsList) roomsList.innerHTML = '';
 }
 
 function showToast(message) {
@@ -1177,9 +1211,16 @@ function updateVaultData() {
 
 // Populate Item Data
 function populateItemData() {
-    if (!currentData) return;
+    if (!currentData || !currentData.vault) {
+        // Reset to zero if no data
+        ['lunchboxCount', 'handyCount', 'petCarrierCount', 'starterPackCount'].forEach(id => {
+            const elem = document.getElementById(id);
+            if (elem) elem.value = '0';
+        });
+        return;
+    }
     
-    const items = currentData.items || [];
+    const items = currentData.vault.inventory?.items || [];
     let lunchboxes = 0, handies = 0, pets = 0, starter = 0;
     
     items.forEach(item => {
@@ -1205,10 +1246,11 @@ function populateItemData() {
 
 // Update Item Counts
 function updateItemCounts() {
-    if (!currentData) return;
+    if (!currentData || !currentData.vault) return;
     
-    // Ensure items array exists
-    if (!currentData.items) currentData.items = [];
+    // Ensure vault.inventory.items array exists
+    if (!currentData.vault.inventory) currentData.vault.inventory = {};
+    if (!currentData.vault.inventory.items) currentData.vault.inventory.items = [];
     
     // Get new values from inputs
     const lunchboxCount = parseInt(document.getElementById('lunchboxCount')?.value) || 0;
@@ -1217,14 +1259,14 @@ function updateItemCounts() {
     const starterPackCount = parseInt(document.getElementById('starterPackCount')?.value) || 0;
     
     // Remove existing special items
-    currentData.items = currentData.items.filter(item => {
+    currentData.vault.inventory.items = currentData.vault.inventory.items.filter(item => {
         const id = item.id || '';
         return !id.includes('Lunchbox') && !id.includes('Handy') && !id.includes('Pet') && !id.includes('Starter');
     });
     
     // Add lunchboxes
     if (lunchboxCount > 0) {
-        currentData.items.push({
+        currentData.vault.inventory.items.push({
             id: 'Lunchbox',
             type: 'Lunchbox',
             quantity: lunchboxCount
@@ -1233,7 +1275,7 @@ function updateItemCounts() {
     
     // Add Mr. Handies
     if (handyCount > 0) {
-        currentData.items.push({
+        currentData.vault.inventory.items.push({
             id: 'HandyMan',
             type: 'HandyMan',
             quantity: handyCount
@@ -1242,7 +1284,7 @@ function updateItemCounts() {
     
     // Add Pet Carriers
     if (petCarrierCount > 0) {
-        currentData.items.push({
+        currentData.vault.inventory.items.push({
             id: 'PetCarrier',
             type: 'PetCarrier',
             quantity: petCarrierCount
@@ -1251,7 +1293,7 @@ function updateItemCounts() {
     
     // Add Starter Packs
     if (starterPackCount > 0) {
-        currentData.items.push({
+        currentData.vault.inventory.items.push({
             id: 'StarterPack',
             type: 'StarterPack',
             quantity: starterPackCount
