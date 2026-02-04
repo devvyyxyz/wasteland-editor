@@ -2412,6 +2412,125 @@ function populateVaultStats() {
     
     document.getElementById('statUnlockedThemes').textContent = unlockedThemes;
     document.getElementById('statUnlockedRecipes').textContent = unlockedRecipes;
+    
+    // Populate vault layout
+    populateVaultLayout();
+}
+
+// Vault Layout Visualizer
+function populateVaultLayout() {
+    const layoutNoData = document.getElementById('layoutNoData');
+    const gridContainer = document.getElementById('vaultGridContainer');
+    const vaultGrid = document.getElementById('vaultGrid');
+    
+    if (!currentData || !currentData.vault) {
+        if (layoutNoData) layoutNoData.style.display = 'flex';
+        if (gridContainer) gridContainer.style.display = 'none';
+        return;
+    }
+    
+    // Hide no-data message and show grid
+    if (layoutNoData) layoutNoData.style.display = 'none';
+    if (gridContainer) gridContainer.style.display = 'block';
+    
+    const rooms = currentData.vault.rooms || [];
+    const dwellers = currentData.dwellers?.dwellers || [];
+    
+    vaultGrid.innerHTML = '';
+    
+    // Create 3-column grid of rooms (typical Fallout Shelter layout)
+    const maxRooms = Math.max(9, rooms.length); // Show at least 3x3 grid
+    
+    // Room type to icon mapping
+    const roomIcons = {
+        'Vault Door': '🚪',
+        'Vault': '🏠',
+        'Entrance': '🚪',
+        'Residential': '🏠',
+        'Diner': '🍽️',
+        'Water': '💧',
+        'Power': '⚡',
+        'Food': '🌾',
+        'Garden': '🌱',
+        'Barracks': '🪖',
+        'Training': '💪',
+        'Laboratory': '🔬',
+        'Infirmary': '⚕️',
+        'Game': '🎮',
+        'Recreational': '🎉',
+        'Armor': '🛡️',
+        'Weapon': '🔫',
+        'Vault Suit': '👔',
+        'Overseer': '👨‍💼',
+        'Storage': '📦',
+        'Athletics': '🏃',
+        'Strength': '💪',
+        'Perception': '👁️',
+        'Endurance': '❤️',
+        'Charisma': '💬',
+        'Intelligence': '🧠',
+        'Agility': '⚡',
+        'Luck': '🍀',
+        'Nuka': '🥤',
+        'Radio': '📻',
+        'Medbay': '⚕️',
+        'Classroom': '📚'
+    };
+    
+    rooms.forEach((room, index) => {
+        const tile = document.createElement('div');
+        tile.className = `room-tile tier-${Math.max(0, (room.level || 1) - 1)}`;
+        
+        // Find icon for this room type
+        let icon = '🏗️'; // Default icon
+        for (const [key, value] of Object.entries(roomIcons)) {
+            if ((room.type || '').includes(key) || (room.template || '').includes(key)) {
+                icon = value;
+                break;
+            }
+        }
+        
+        // Get dwellers assigned to this room
+        const assignedDwellers = dwellers.filter(d => d.assignment?.roomId === room.id).length;
+        const roomName = (room.type || 'Room').replace(/room/i, '').trim() || 'Room';
+        
+        tile.innerHTML = `
+            <div class="room-tile-icon">${icon}</div>
+            <div class="room-tile-name">${roomName}</div>
+            <div class="room-tile-level">Lvl ${room.level || 1}</div>
+        `;
+        
+        // Add hover tooltip
+        tile.title = `${roomName}\nLevel: ${room.level || 1}\nDwellers: ${assignedDwellers}`;
+        
+        // Click to edit room
+        tile.addEventListener('click', () => {
+            const roomsList = document.getElementById('roomsList');
+            if (roomsList) {
+                // Scroll to rooms tab and find the room in the list
+                document.getElementById('roomsBtn')?.click();
+                setTimeout(() => {
+                    const roomItems = document.querySelectorAll('.room-item');
+                    if (roomItems[index]) {
+                        roomItems[index].click();
+                        roomItems[index].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }, 100);
+            }
+        });
+        
+        vaultGrid.appendChild(tile);
+    });
+    
+    // Add empty slots if needed (up to 12 rooms max display)
+    const displayLimit = 12;
+    for (let i = rooms.length; i < displayLimit; i++) {
+        const emptyTile = document.createElement('div');
+        emptyTile.className = 'room-tile empty';
+        emptyTile.innerHTML = '<div class="room-tile-icon">+</div>';
+        emptyTile.title = 'Empty slot';
+        vaultGrid.appendChild(emptyTile);
+    }
 }
 
 // Validate Save File
