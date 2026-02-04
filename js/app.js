@@ -596,7 +596,8 @@ function populateDwellersList() {
             item.className = 'dweller-item in-vault';
             const level = dweller.experience?.currentLevel || 1;
             const health = dweller.health?.healthValue || dweller.health?.maxHealth || 100;
-            item.textContent = `${dweller.name} (Lvl ${level} • HP: ${health})`;
+            const fullName = `${dweller.name || ''} ${dweller.lastName || ''}`.trim() || 'Unknown';
+            item.textContent = `${fullName} (Lvl ${level} • HP: ${health})`;
             item.addEventListener('click', () => selectDweller(dweller, index));
             dwellersList.appendChild(item);
         });
@@ -614,7 +615,8 @@ function populateDwellersList() {
             item.className = 'dweller-item exploring';
             const level = dweller.experience?.currentLevel || 1;
             const health = dweller.health?.healthValue || dweller.health?.maxHealth || 100;
-            item.textContent = `${dweller.name} (Lvl ${level} • HP: ${health})`;
+            const fullName = `${dweller.name || ''} ${dweller.lastName || ''}`.trim() || 'Unknown';
+            item.textContent = `${fullName} (Lvl ${level} • HP: ${health})`;
             item.addEventListener('click', () => selectDweller(dweller, index));
             dwellersList.appendChild(item);
         });
@@ -650,20 +652,21 @@ function selectDweller(dweller, index) {
     if (dwellerDetails) dwellerDetails.style.display = 'block';
     
     const nameElem = document.getElementById('dwellerName');
-    if (nameElem) nameElem.textContent = dweller.name || 'Unknown';
+    const fullName = `${dweller.name || ''} ${dweller.lastName || ''}`.trim() || 'Unknown';
+    if (nameElem) nameElem.textContent = fullName;
     
-    const nameparts = (dweller.name || '').split(' ');
+    // Load first and last name from separate fields
     const firstElem = document.getElementById('dwellerFirstName');
     const lastElem = document.getElementById('dwellerLastName');
     
     if (firstElem) {
-        const firstName = nameparts[0] || '';
+        const firstName = dweller.name || '';
         firstElem.value = firstName;
         storeOriginalValue('dwellerFirstName', firstName);
         trackFieldChange('dwellerFirstName');
     }
     if (lastElem) {
-        const lastName = nameparts.slice(1).join(' ') || '';
+        const lastName = dweller.lastName || '';
         lastElem.value = lastName;
         storeOriginalValue('dwellerLastName', lastName);
         trackFieldChange('dwellerLastName');
@@ -777,7 +780,9 @@ function updateDwellerData() {
     const firstName = document.getElementById('dwellerFirstName')?.value || '';
     const lastName = document.getElementById('dwellerLastName')?.value || '';
     
-    dweller.name = `${firstName} ${lastName}`.trim();
+    // Update both name (first name) and lastName fields separately
+    dweller.name = firstName;
+    dweller.lastName = lastName;
     
     // Gender
     const genderElem = document.getElementById('dwellerGender');
