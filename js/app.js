@@ -826,20 +826,61 @@ let currentRoomIndex = null;
 function editRoom(index, room) {
     currentRoomIndex = index;
     
-    // Populate form fields
+    // Map field IDs to actual room property names (handle variations)
+    const fieldMappings = {
+        'roomName': ['name', 'Name'],
+        'roomType': ['type', 'Type', 'roomType'],
+        'roomLevel': ['level', 'Level', 'roomLevel'],
+        'roomState': ['state', 'State', 'roomState'],
+        'roomPower': ['power', 'Power', 'powerGeneration', 'power_generation'],
+        'roomFood': ['food', 'Food', 'foodProduction', 'food_production'],
+        'roomWater': ['water', 'Water', 'waterProduction', 'water_production'],
+        'roomRadiation': ['radiation', 'Radiation', 'radiationLevel']
+    };
+    
+    // Update title
     const roomTitle = document.getElementById('roomTitle');
     if (roomTitle) roomTitle.textContent = room.name || 'Room';
     
-    document.getElementById('roomName').value = room.name || '';
-    document.getElementById('roomType').value = room.type || '';
-    document.getElementById('roomLevel').value = room.level || 1;
-    document.getElementById('roomState').value = room.state || 'built';
-    
-    // Numeric fields with defaults
-    document.getElementById('roomPower').value = room.power || 0;
-    document.getElementById('roomFood').value = room.food || 0;
-    document.getElementById('roomWater').value = room.water || 0;
-    document.getElementById('roomRadiation').value = room.radiation || 0;
+    // Populate form fields and enable/disable based on availability
+    Object.entries(fieldMappings).forEach(([fieldId, propertyNames]) => {
+        const input = document.getElementById(fieldId);
+        if (!input) return;
+        
+        // Find which property name exists in the room object
+        let foundValue = null;
+        let hasProperty = false;
+        
+        for (const propName of propertyNames) {
+            if (propName in room) {
+                foundValue = room[propName];
+                hasProperty = true;
+                break;
+            }
+        }
+        
+        // Set value
+        if (hasProperty && foundValue !== null && foundValue !== undefined) {
+            input.value = foundValue;
+        } else if (fieldId === 'roomLevel') {
+            input.value = 1;
+        } else if (fieldId === 'roomState') {
+            input.value = 'built';
+        } else {
+            input.value = 0;
+        }
+        
+        // Enable/disable based on field existence
+        if (hasProperty) {
+            input.disabled = false;
+            input.classList.remove('field-unavailable');
+            input.title = '';
+        } else {
+            input.disabled = true;
+            input.classList.add('field-unavailable');
+            input.title = 'This room does not have this property';
+        }
+    });
     
     // Show the form
     const roomDetails = document.getElementById('roomDetails');
@@ -858,15 +899,47 @@ function saveRoom() {
     
     const room = currentData.vault.rooms[currentRoomIndex];
     
-    // Update room properties
-    room.name = document.getElementById('roomName').value;
-    room.type = document.getElementById('roomType').value;
-    room.level = parseInt(document.getElementById('roomLevel').value) || 1;
-    room.state = document.getElementById('roomState').value;
-    room.power = parseInt(document.getElementById('roomPower').value) || 0;
-    room.food = parseInt(document.getElementById('roomFood').value) || 0;
-    room.water = parseInt(document.getElementById('roomWater').value) || 0;
-    room.radiation = parseInt(document.getElementById('roomRadiation').value) || 0;
+    // Update room properties - use the property names that exist in the room
+    const updates = {
+        name: document.getElementById('roomName').value,
+        type: document.getElementById('roomType').value,
+        level: parseInt(document.getElementById('roomLevel').value) || 1,
+        state: document.getElementById('roomState').value,
+        power: parseInt(document.getElementById('roomPower').value) || 0,
+        food: parseInt(document.getElementById('roomFood').value) || 0,
+        water: parseInt(document.getElementById('roomWater').value) || 0,
+        radiation: parseInt(document.getElementById('roomRadiation').value) || 0
+    };
+    
+    // Apply updates, preserving existing property names
+    Object.entries(updates).forEach(([key, value]) => {
+        // Update the property if it already exists, or add it
+        if (key in room || key === 'name' || key === 'type' || key === 'level' || key === 'state') {
+            room[key] = value;
+        } else {
+            // For production values, check if alternate property names exist
+            const altNames = {
+                'power': ['powerGeneration', 'power_generation'],
+                'food': ['foodProduction', 'food_production'],
+                'water': ['waterProduction', 'water_production'],
+                'radiation': ['radiationLevel']
+            };
+            
+            let updated = false;
+            if (altNames[key]) {
+                for (const altName of altNames[key]) {
+                    if (altName in room) {
+                        room[altName] = value;
+                        updated = true;
+                        break;
+                    }
+                }
+            }
+            if (!updated) {
+                room[key] = value;
+            }
+        }
+    });
     
     // Refresh list to show updates
     populateRoomsList();
