@@ -433,26 +433,37 @@ function selectDweller(dweller, index) {
     if (firstElem) firstElem.value = nameparts[0] || '';
     if (lastElem) lastElem.value = nameparts[1] || '';
     
-    const fields = {
-        'dwellerGender': dweller.gender || 1,
-        'dwellerLevel': dweller.level || 1,
-        'dwellerExp': dweller.experience || 0,
-        'dwellerHealth': dweller.health?.current || 0,
-        'dwellerHappiness': dweller.happiness || 50,
-    };
+    // Gender
+    const genderElem = document.getElementById('dwellerGender');
+    if (genderElem) genderElem.value = dweller.gender || 1;
     
-    Object.entries(fields).forEach(([elemId, value]) => {
-        const elem = document.getElementById(elemId);
-        if (elem) elem.value = value;
-    });
+    // Level and Experience (stored in experience object)
+    const levelElem = document.getElementById('dwellerLevel');
+    const expElem = document.getElementById('dwellerExp');
+    if (levelElem) levelElem.value = dweller.experience?.currentLevel || 1;
+    if (expElem) expElem.value = dweller.experience?.experienceValue || 0;
     
-    // Update SPECIAL stats
-    const stats = dweller.stats || {};
-    const statMap = { s: 'strength', p: 'perception', e: 'endurance', c: 'charisma', i: 'intelligence', a: 'agility', l: 'luck' };
+    // Health (stored in health object)
+    const healthElem = document.getElementById('dwellerHealth');
+    if (healthElem) healthElem.value = dweller.health?.healthValue || dweller.health?.maxHealth || 100;
     
-    Object.entries(statMap).forEach(([abbr, full]) => {
-        const elem = document.getElementById(`stat-${abbr}`);
-        if (elem) elem.value = stats[full] || 1;
+    // Happiness (stored in happiness object)
+    const happinessElem = document.getElementById('dwellerHappiness');
+    if (happinessElem) happinessElem.value = Math.round((dweller.happiness?.happinessValue || 50));
+    
+    // Appearance
+    const skinColorElem = document.getElementById('dwellerSkinColor');
+    const hairColorElem = document.getElementById('dwellerHairColor');
+    if (skinColorElem && dweller.skinColor) skinColorElem.value = dweller.skinColor;
+    if (hairColorElem && dweller.hairColor) hairColorElem.value = dweller.hairColor;
+    
+    // Update SPECIAL stats (stored as array in stats.stats.SPECIAL)
+    const specialArray = dweller.stats?.stats?.SPECIAL || [];
+    const statIds = ['stat-s', 'stat-p', 'stat-e', 'stat-c', 'stat-i', 'stat-a', 'stat-l'];
+    
+    statIds.forEach((id, i) => {
+        const elem = document.getElementById(id);
+        if (elem) elem.value = specialArray[i] || 1;
     });
 }
 
@@ -466,36 +477,45 @@ function updateDwellerData() {
     
     dweller.name = `${firstName} ${lastName}`.trim();
     
-    const fields = {
-        'dwellerGender': 'gender',
-        'dwellerLevel': 'level',
-        'dwellerExp': 'experience',
-        'dwellerHealth': (elem) => {
-            if (!dweller.health) dweller.health = {};
-            dweller.health.current = parseInt(elem.value) || 0;
-        },
-        'dwellerHappiness': 'happiness',
-        'dwellerOutfit': 'equipped_outfit',
-        'dwellerWeapon': 'equipped_weapon'
-    };
+    // Gender
+    const genderElem = document.getElementById('dwellerGender');
+    if (genderElem) dweller.gender = parseInt(genderElem.value) || 1;
     
-    Object.entries(fields).forEach(([elemId, prop]) => {
-        const elem = document.getElementById(elemId);
-        if (!elem) return;
-        
-        if (typeof prop === 'function') {
-            prop(elem);
-        } else {
-            dweller[prop] = parseInt(elem.value) || elem.value;
-        }
-    });
+    // Level and Experience
+    if (!dweller.experience) dweller.experience = {};
+    const levelElem = document.getElementById('dwellerLevel');
+    const expElem = document.getElementById('dwellerExp');
+    if (levelElem) dweller.experience.currentLevel = parseInt(levelElem.value) || 1;
+    if (expElem) dweller.experience.experienceValue = parseInt(expElem.value) || 0;
     
+    // Health
+    if (!dweller.health) dweller.health = {};
+    const healthElem = document.getElementById('dwellerHealth');
+    if (healthElem) {
+        dweller.health.healthValue = parseInt(healthElem.value) || 100;
+        if (!dweller.health.maxHealth) dweller.health.maxHealth = dweller.health.healthValue;
+    }
+    
+    // Happiness
+    if (!dweller.happiness) dweller.happiness = {};
+    const happinessElem = document.getElementById('dwellerHappiness');
+    if (happinessElem) dweller.happiness.happinessValue = parseInt(happinessElem.value) || 50;
+    
+    // Appearance
+    const skinColorElem = document.getElementById('dwellerSkinColor');
+    const hairColorElem = document.getElementById('dwellerHairColor');
+    if (skinColorElem) dweller.skinColor = skinColorElem.value;
+    if (hairColorElem) dweller.hairColor = hairColorElem.value;
+    
+    // SPECIAL stats (stored as array in stats.stats.SPECIAL)
     if (!dweller.stats) dweller.stats = {};
-    const statMap = { s: 'strength', p: 'perception', e: 'endurance', c: 'charisma', i: 'intelligence', a: 'agility', l: 'luck' };
+    if (!dweller.stats.stats) dweller.stats.stats = {};
+    if (!dweller.stats.stats.SPECIAL) dweller.stats.stats.SPECIAL = [1, 1, 1, 1, 1, 1, 1];
     
-    Object.entries(statMap).forEach(([abbr, full]) => {
-        const elem = document.getElementById(`stat-${abbr}`);
-        if (elem) dweller.stats[full] = parseInt(elem.value) || 1;
+    const statIds = ['stat-s', 'stat-p', 'stat-e', 'stat-c', 'stat-i', 'stat-a', 'stat-l'];
+    statIds.forEach((id, i) => {
+        const elem = document.getElementById(id);
+        if (elem) dweller.stats.stats.SPECIAL[i] = parseInt(elem.value) || 1;
     });
     
     jsonEditor.value = JSON.stringify(currentData, null, 2);
