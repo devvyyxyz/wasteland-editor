@@ -1077,59 +1077,33 @@ function createInventoryItem(item, index, type) {
     const div = document.createElement('div');
     div.className = 'inventory-item';
     
-    const itemName = item.name || item.id || `${type} ${index + 1}`;
+    const itemName = item.id || `${type} ${index + 1}`;
     const itemType = item.type || type;
-    const quantity = item.quantity || item.count || 1;
     
     let detailsHTML = '';
     
     if (type === 'weapon') {
         const damage = item.damage || item.damageValue || 0;
-        const damageType = item.damageType || 'Normal';
-        detailsHTML = `
-            <div class="inventory-item-stat">
-                <span>Damage:</span>
-                <strong>${damage}</strong>
-            </div>
-            <div class="inventory-item-stat">
-                <span>Type:</span>
-                <strong>${damageType}</strong>
-            </div>
-        `;
+        detailsHTML = `<span class="inventory-item-stat"><strong>DMG ${damage}</strong></span>`;
     } else if (type === 'outfit') {
         const stats = item.stats || {};
-        const bonusText = Object.entries(stats).map(([key, val]) => `${key}: +${val}`).join(', ') || 'No bonuses';
-        detailsHTML = `
-            <div class="inventory-item-stat">
-                <span>Bonuses:</span>
-                <strong>${bonusText}</strong>
-            </div>
-        `;
+        const bonus = Object.keys(stats).length > 0 ? '✓' : '—';
+        detailsHTML = `<span class="inventory-item-stat"><strong>${bonus}</strong></span>`;
     } else if (type === 'junk') {
-        const rarity = item.rarity || 'Common';
-        detailsHTML = `
-            <div class="inventory-item-stat">
-                <span>Rarity:</span>
-                <strong>${rarity}</strong>
-            </div>
-        `;
+        detailsHTML = `<span class="inventory-item-stat"><strong>Item</strong></span>`;
     }
     
     div.innerHTML = `
         <div class="inventory-item-header">
-            <div class="inventory-item-name">${itemName}</div>
+            <div class="inventory-item-name" title="${itemName}">${itemName}</div>
             <div class="inventory-item-type">${itemType}</div>
         </div>
         <div class="inventory-item-details">
-            <div class="inventory-item-stat">
-                <span>Quantity:</span>
-                <strong>${quantity}</strong>
-            </div>
             ${detailsHTML}
         </div>
         <div class="inventory-item-actions">
-            <button class="btn btn-secondary" onclick="editInventoryItem(${index}, '${type}')">✏️ Edit</button>
-            <button class="btn btn-secondary" onclick="deleteInventoryItem(${index}, '${type}')">🗑️ Delete</button>
+            <button class="btn btn-secondary" onclick="editInventoryItem(${index}, '${type}')" title="View">ℹ️</button>
+            <button class="btn btn-secondary" onclick="deleteInventoryItem(${index}, '${type}')" title="Delete">🗑️</button>
         </div>
     `;
     
@@ -1137,77 +1111,34 @@ function createInventoryItem(item, index, type) {
 }
 
 function editInventoryItem(index, type) {
-    let item;
+    // Get the actual item from the vault.inventory.items array
+    if (!currentData.vault?.inventory?.items) return;
     
-    if (type === 'weapon') {
-        const weapons = currentData.vault?.inventory?.items?.filter(i => i.type === 'Weapon') || currentData.inventory?.weapons || currentData.weapons || [];
-        item = weapons[index];
-    } else if (type === 'outfit') {
-        const outfits = currentData.vault?.inventory?.items?.filter(i => i.type === 'Outfit') || currentData.inventory?.outfits || currentData.outfits || [];
-        item = outfits[index];
-    } else if (type === 'junk') {
-        const junk = currentData.vault?.inventory?.items?.filter(i => i.type === 'Junk') || currentData.inventory?.junk || currentData.junk || [];
-        item = junk[index];
-    }
+    let itemTypeFilter = type === 'weapon' ? 'Weapon' : type === 'outfit' ? 'Outfit' : 'Junk';
+    const filteredItems = currentData.vault.inventory.items.filter(i => i.type === itemTypeFilter);
     
-    if (!item) return;
+    if (index >= filteredItems.length) return;
+    const item = filteredItems[index];
     
-    const newQuantity = prompt(`Enter new quantity for ${item.name || item.id || 'this item'}:`, item.quantity || item.count || 1);
-    if (newQuantity === null) return;
-    
-    const qty = parseInt(newQuantity);
-    if (isNaN(qty) || qty < 0) {
-        showToast('Invalid quantity!');
-        return;
-    }
-    
-    if (item.quantity !== undefined) item.quantity = qty;
-    else if (item.count !== undefined) item.count = qty;
-    else item.quantity = qty;
-    
-    jsonEditor.value = JSON.stringify(currentData, null, 2);
-    updateFileSize();
-    populateInventory();
-    showToast('Item updated!');
+    // Game doesn't use quantity field - items are stored individually
+    // Show only read-only info about the item
+    const itemInfo = `Item: ${item.id}\nType: ${item.type}\nAssigned: ${item.hasBeenAssigned ? 'Yes' : 'No'}`;
+    alert(itemInfo + '\n\nNote: To add more of this item, use the Add button. To remove, use Delete.');
 }
 
 function deleteInventoryItem(index, type) {
     if (!confirm('Are you sure you want to delete this item?')) return;
     
-    if (type === 'weapon') {
-        if (currentData.vault?.inventory?.items) {
-            const weapons = currentData.vault.inventory.items.filter(i => i.type === 'Weapon');
-            const item = weapons[index];
-            const itemIndex = currentData.vault.inventory.items.indexOf(item);
-            currentData.vault.inventory.items.splice(itemIndex, 1);
-        } else if (currentData.inventory?.weapons) {
-            currentData.inventory.weapons.splice(index, 1);
-        } else if (currentData.weapons) {
-            currentData.weapons.splice(index, 1);
-        }
-    } else if (type === 'outfit') {
-        if (currentData.vault?.inventory?.items) {
-            const outfits = currentData.vault.inventory.items.filter(i => i.type === 'Outfit');
-            const item = outfits[index];
-            const itemIndex = currentData.vault.inventory.items.indexOf(item);
-            currentData.vault.inventory.items.splice(itemIndex, 1);
-        } else if (currentData.inventory?.outfits) {
-            currentData.inventory.outfits.splice(index, 1);
-        } else if (currentData.outfits) {
-            currentData.outfits.splice(index, 1);
-        }
-    } else if (type === 'junk') {
-        if (currentData.vault?.inventory?.items) {
-            const junk = currentData.vault.inventory.items.filter(i => i.type === 'Junk');
-            const item = junk[index];
-            const itemIndex = currentData.vault.inventory.items.indexOf(item);
-            currentData.vault.inventory.items.splice(itemIndex, 1);
-        } else if (currentData.inventory?.junk) {
-            currentData.inventory.junk.splice(index, 1);
-        } else if (currentData.junk) {
-            currentData.junk.splice(index, 1);
-        }
-    }
+    if (!currentData.vault?.inventory?.items) return;
+    
+    let itemTypeFilter = type === 'weapon' ? 'Weapon' : type === 'outfit' ? 'Outfit' : 'Junk';
+    const filteredItems = currentData.vault.inventory.items.filter(i => i.type === itemTypeFilter);
+    
+    if (index >= filteredItems.length) return;
+    
+    const item = filteredItems[index];
+    const actualItemIndex = currentData.vault.inventory.items.indexOf(item);
+    currentData.vault.inventory.items.splice(actualItemIndex, 1);
     
     jsonEditor.value = JSON.stringify(currentData, null, 2);
     updateFileSize();
@@ -1282,32 +1213,28 @@ function confirmAddInventoryItem() {
     const itemId = modalSelect.value;
     const itemName = modalSelect.options[modalSelect.selectedIndex].text;
     
-    const newItem = {
-        id: itemId,
-        name: itemName,
-        type: currentModalType === 'weapon' ? 'Weapon' : currentModalType === 'outfit' ? 'Outfit' : 'Junk',
-        quantity: quantity
-    };
-    
-    if (currentModalType === 'weapon') {
-        // Set default damage based on weapon type
-        newItem.damage = 10;
-        newItem.damageType = 'Normal';
-    } else if (currentModalType === 'outfit') {
-        newItem.stats = {};
-    }
-    
-    // Add to appropriate array
+    // Ensure vault structure exists
     if (!currentData.vault) currentData.vault = {};
     if (!currentData.vault.inventory) currentData.vault.inventory = {};
     if (!currentData.vault.inventory.items) currentData.vault.inventory.items = [];
     
-    currentData.vault.inventory.items.push(newItem);
+    // Game stores individual items, NOT quantity field
+    // Add 'quantity' number of items to the array
+    for (let i = 0; i < quantity; i++) {
+        const newItem = {
+            id: itemId,
+            type: currentModalType === 'weapon' ? 'Weapon' : currentModalType === 'outfit' ? 'Outfit' : 'Junk',
+            hasBeenAssigned: false,
+            hasRandonWeaponBeenAssigned: false
+        };
+        
+        currentData.vault.inventory.items.push(newItem);
+    }
     
     jsonEditor.value = JSON.stringify(currentData, null, 2);
     updateFileSize();
     populateInventory();
-    showToast(`${itemName} added!`);
+    showToast(`${quantity}x ${itemName} added!`);
     
     closeInventoryModal();
 }

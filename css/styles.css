@@ -1582,21 +1582,27 @@ footer p {
 
 /* Inventory Styles */
 .inventory-panel {
-    padding: 20px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    height: 100%;
+    width: 100%;
+    flex: 1;
 }
 
 .inventory-subtabs {
     display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
+    gap: 5px;
     border-bottom: 2px solid var(--border-color);
+    flex-wrap: wrap;
 }
 
 .inventory-subtab-btn {
     background: transparent;
     border: none;
-    padding: 12px 24px;
-    font-size: 14px;
+    padding: 10px 16px;
+    font-size: 13px;
     color: var(--text-color);
     cursor: pointer;
     border-bottom: 3px solid transparent;
@@ -1606,7 +1612,7 @@ footer p {
 
 .inventory-subtab-btn:hover {
     color: var(--primary-color);
-    background: rgba(255, 138, 76, 0.1);
+    background: rgba(255, 138, 76, 0.05);
 }
 
 .inventory-subtab-btn.active {
@@ -1616,100 +1622,143 @@ footer p {
 
 .inventory-subtab-content {
     display: none;
+    flex: 1;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    min-height: 0;
 }
 
 .inventory-subtab-content.active {
-    display: block;
+    display: flex;
 }
 
 .inventory-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    gap: 10px;
+    flex-wrap: wrap;
+    flex-shrink: 0;
 }
 
 .inventory-header h3 {
     margin: 0;
     color: var(--primary-color);
+    font-size: 14px;
+    flex-shrink: 0;
 }
 
 .inventory-actions {
     display: flex;
-    gap: 10px;
+    gap: 8px;
     align-items: center;
+    flex: 1;
+    min-width: 200px;
+}
+
+.inventory-actions input {
+    flex: 1;
+    min-width: 150px;
+    padding: 6px 10px;
+    font-size: 12px;
+}
+
+.inventory-actions button {
+    padding: 6px 12px;
+    font-size: 12px;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .inventory-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    overflow-y: auto;
+    width: 100%;
+    min-height: 0;
 }
 
 .inventory-item {
     background: var(--secondary-bg);
-    padding: 15px;
-    border-radius: 8px;
+    padding: 8px 10px;
+    border-radius: 6px;
     border: 1px solid var(--border-color);
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    transition: all 0.2s ease;
+    display: grid;
+    grid-template-columns: 1fr 80px 80px;
+    gap: 8px;
+    align-items: center;
+    font-size: 12px;
+    width: 100%;
 }
 
 .inventory-item:hover {
     border-color: var(--primary-color);
-    box-shadow: 0 4px 12px rgba(255, 138, 76, 0.2);
-    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(255, 138, 76, 0.15);
+    background: rgba(255, 138, 76, 0.05);
 }
 
 .inventory-item-header {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    gap: 8px;
+    align-items: center;
+    min-width: 0;
 }
 
 .inventory-item-name {
     font-weight: 600;
     color: var(--primary-color);
-    font-size: 14px;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
 }
 
 .inventory-item-type {
-    font-size: 12px;
+    font-size: 10px;
     color: #999;
     background: rgba(255, 138, 76, 0.1);
-    padding: 2px 8px;
-    border-radius: 4px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .inventory-item-details {
     display: flex;
-    flex-direction: column;
-    gap: 5px;
-    font-size: 13px;
+    gap: 8px;
+    align-items: center;
+    font-size: 11px;
+    color: var(--text-muted);
+    white-space: nowrap;
 }
 
 .inventory-item-stat {
     display: flex;
-    justify-content: space-between;
-    color: var(--text-muted);
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
 }
 
 .inventory-item-stat strong {
     color: var(--text-color);
+    font-weight: 600;
 }
 
 .inventory-item-actions {
     display: flex;
-    gap: 8px;
-    margin-top: 5px;
+    gap: 4px;
+    justify-self: end;
 }
 
 .inventory-item-actions button {
-    flex: 1;
-    padding: 6px 12px;
-    font-size: 12px;
+    padding: 4px 8px;
+    font-size: 11px;
+    flex-shrink: 0;
 }
 
 .inventory-modal {
