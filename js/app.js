@@ -98,6 +98,29 @@ function initializeEventListeners() {
         document.querySelectorAll('.wasteland-team-item').forEach(item => item.classList.remove('active'));
     });
 
+    // Inventory subtab listeners
+    document.querySelectorAll('.inventory-subtab-btn').forEach(btn => {
+        btn.addEventListener('click', () => switchInventorySubtab(btn.dataset.subtab));
+    });
+
+    // Inventory search listeners
+    const weaponSearch = document.getElementById('weaponSearch');
+    const outfitSearch = document.getElementById('outfitSearch');
+    const junkSearch = document.getElementById('junkSearch');
+    
+    if (weaponSearch) weaponSearch.addEventListener('input', (e) => filterInventory('weapons', e.target.value));
+    if (outfitSearch) outfitSearch.addEventListener('input', (e) => filterInventory('outfits', e.target.value));
+    if (junkSearch) junkSearch.addEventListener('input', (e) => filterInventory('junk', e.target.value));
+
+    // Inventory add buttons
+    const addWeaponBtn = document.getElementById('addWeaponBtn');
+    const addOutfitBtn = document.getElementById('addOutfitBtn');
+    const addJunkBtn = document.getElementById('addJunkBtn');
+    
+    if (addWeaponBtn) addWeaponBtn.addEventListener('click', () => addInventoryItem('weapon'));
+    if (addOutfitBtn) addOutfitBtn.addEventListener('click', () => addInventoryItem('outfit'));
+    if (addJunkBtn) addJunkBtn.addEventListener('click', () => addInventoryItem('junk'));
+
     // Dweller panel listeners
     ['dwellerFirstName', 'dwellerLastName', 'dwellerGender', 'dwellerLevel', 'dwellerExp',
      'dwellerHealth', 'dwellerHappiness', 'dwellerSkinColor', 'dwellerHairColor',
@@ -176,6 +199,7 @@ function handleFileUpload(e) {
                 populateDwellersList();
                 populateRoomsList();
                 populateWastelandTeams();
+                populateInventory();
                 populateSeasonPassData();
                 
                 // Create initial backup
@@ -647,6 +671,290 @@ function maxTeamResources() {
     selectWastelandTeam(team, currentWastelandTeam.index);
     updateWastelandTeam();
     showToast('Team resources maximized!');
+}
+
+// Inventory Functions
+function switchInventorySubtab(subtab) {
+    // Update subtab buttons
+    document.querySelectorAll('.inventory-subtab-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.subtab === subtab) btn.classList.add('active');
+    });
+    
+    // Update subtab content
+    document.querySelectorAll('.inventory-subtab-content').forEach(content => {
+        content.classList.remove('active');
+    });
+    document.getElementById(`${subtab}-inventory`)?.classList.add('active');
+}
+
+function populateInventory() {
+    if (!currentData) return;
+    
+    // Populate weapons
+    populateWeapons();
+    // Populate outfits
+    populateOutfits();
+    // Populate junk
+    populateJunk();
+}
+
+function populateWeapons() {
+    const weaponsList = document.getElementById('weaponsList');
+    if (!weaponsList) return;
+    
+    weaponsList.innerHTML = '';
+    
+    const weapons = currentData.vault?.inventory?.items?.filter(item => item.type === 'Weapon') 
+                    || currentData.inventory?.weapons 
+                    || currentData.weapons 
+                    || [];
+    
+    if (weapons.length === 0) {
+        weaponsList.innerHTML = '<div class="empty-state">🔫 No weapons in storage<br><small>Add weapons to see them here</small></div>';
+        return;
+    }
+    
+    weapons.forEach((weapon, index) => {
+        const item = createInventoryItem(weapon, index, 'weapon');
+        weaponsList.appendChild(item);
+    });
+}
+
+function populateOutfits() {
+    const outfitsList = document.getElementById('outfitsList');
+    if (!outfitsList) return;
+    
+    outfitsList.innerHTML = '';
+    
+    const outfits = currentData.vault?.inventory?.items?.filter(item => item.type === 'Outfit') 
+                    || currentData.inventory?.outfits 
+                    || currentData.outfits 
+                    || [];
+    
+    if (outfits.length === 0) {
+        outfitsList.innerHTML = '<div class="empty-state">👔 No outfits in storage<br><small>Add outfits to see them here</small></div>';
+        return;
+    }
+    
+    outfits.forEach((outfit, index) => {
+        const item = createInventoryItem(outfit, index, 'outfit');
+        outfitsList.appendChild(item);
+    });
+}
+
+function populateJunk() {
+    const junkList = document.getElementById('junkList');
+    if (!junkList) return;
+    
+    junkList.innerHTML = '';
+    
+    const junk = currentData.vault?.inventory?.items?.filter(item => item.type === 'Junk') 
+                || currentData.inventory?.junk 
+                || currentData.junk 
+                || [];
+    
+    if (junk.length === 0) {
+        junkList.innerHTML = '<div class="empty-state">🔧 No junk in storage<br><small>Add junk items to see them here</small></div>';
+        return;
+    }
+    
+    junk.forEach((junkItem, index) => {
+        const item = createInventoryItem(junkItem, index, 'junk');
+        junkList.appendChild(item);
+    });
+}
+
+function createInventoryItem(item, index, type) {
+    const div = document.createElement('div');
+    div.className = 'inventory-item';
+    
+    const itemName = item.name || item.id || `${type} ${index + 1}`;
+    const itemType = item.type || type;
+    const quantity = item.quantity || item.count || 1;
+    
+    let detailsHTML = '';
+    
+    if (type === 'weapon') {
+        const damage = item.damage || item.damageValue || 0;
+        const damageType = item.damageType || 'Normal';
+        detailsHTML = `
+            <div class="inventory-item-stat">
+                <span>Damage:</span>
+                <strong>${damage}</strong>
+            </div>
+            <div class="inventory-item-stat">
+                <span>Type:</span>
+                <strong>${damageType}</strong>
+            </div>
+        `;
+    } else if (type === 'outfit') {
+        const stats = item.stats || {};
+        const bonusText = Object.entries(stats).map(([key, val]) => `${key}: +${val}`).join(', ') || 'No bonuses';
+        detailsHTML = `
+            <div class="inventory-item-stat">
+                <span>Bonuses:</span>
+                <strong>${bonusText}</strong>
+            </div>
+        `;
+    } else if (type === 'junk') {
+        const rarity = item.rarity || 'Common';
+        detailsHTML = `
+            <div class="inventory-item-stat">
+                <span>Rarity:</span>
+                <strong>${rarity}</strong>
+            </div>
+        `;
+    }
+    
+    div.innerHTML = `
+        <div class="inventory-item-header">
+            <div class="inventory-item-name">${itemName}</div>
+            <div class="inventory-item-type">${itemType}</div>
+        </div>
+        <div class="inventory-item-details">
+            <div class="inventory-item-stat">
+                <span>Quantity:</span>
+                <strong>${quantity}</strong>
+            </div>
+            ${detailsHTML}
+        </div>
+        <div class="inventory-item-actions">
+            <button class="btn btn-secondary" onclick="editInventoryItem(${index}, '${type}')">✏️ Edit</button>
+            <button class="btn btn-secondary" onclick="deleteInventoryItem(${index}, '${type}')">🗑️ Delete</button>
+        </div>
+    `;
+    
+    return div;
+}
+
+function editInventoryItem(index, type) {
+    let item;
+    
+    if (type === 'weapon') {
+        const weapons = currentData.vault?.inventory?.items?.filter(i => i.type === 'Weapon') || currentData.inventory?.weapons || currentData.weapons || [];
+        item = weapons[index];
+    } else if (type === 'outfit') {
+        const outfits = currentData.vault?.inventory?.items?.filter(i => i.type === 'Outfit') || currentData.inventory?.outfits || currentData.outfits || [];
+        item = outfits[index];
+    } else if (type === 'junk') {
+        const junk = currentData.vault?.inventory?.items?.filter(i => i.type === 'Junk') || currentData.inventory?.junk || currentData.junk || [];
+        item = junk[index];
+    }
+    
+    if (!item) return;
+    
+    const newQuantity = prompt(`Enter new quantity for ${item.name || item.id || 'this item'}:`, item.quantity || item.count || 1);
+    if (newQuantity === null) return;
+    
+    const qty = parseInt(newQuantity);
+    if (isNaN(qty) || qty < 0) {
+        showToast('Invalid quantity!');
+        return;
+    }
+    
+    if (item.quantity !== undefined) item.quantity = qty;
+    else if (item.count !== undefined) item.count = qty;
+    else item.quantity = qty;
+    
+    jsonEditor.value = JSON.stringify(currentData, null, 2);
+    updateFileSize();
+    populateInventory();
+    showToast('Item updated!');
+}
+
+function deleteInventoryItem(index, type) {
+    if (!confirm('Are you sure you want to delete this item?')) return;
+    
+    if (type === 'weapon') {
+        if (currentData.vault?.inventory?.items) {
+            const weapons = currentData.vault.inventory.items.filter(i => i.type === 'Weapon');
+            const item = weapons[index];
+            const itemIndex = currentData.vault.inventory.items.indexOf(item);
+            currentData.vault.inventory.items.splice(itemIndex, 1);
+        } else if (currentData.inventory?.weapons) {
+            currentData.inventory.weapons.splice(index, 1);
+        } else if (currentData.weapons) {
+            currentData.weapons.splice(index, 1);
+        }
+    } else if (type === 'outfit') {
+        if (currentData.vault?.inventory?.items) {
+            const outfits = currentData.vault.inventory.items.filter(i => i.type === 'Outfit');
+            const item = outfits[index];
+            const itemIndex = currentData.vault.inventory.items.indexOf(item);
+            currentData.vault.inventory.items.splice(itemIndex, 1);
+        } else if (currentData.inventory?.outfits) {
+            currentData.inventory.outfits.splice(index, 1);
+        } else if (currentData.outfits) {
+            currentData.outfits.splice(index, 1);
+        }
+    } else if (type === 'junk') {
+        if (currentData.vault?.inventory?.items) {
+            const junk = currentData.vault.inventory.items.filter(i => i.type === 'Junk');
+            const item = junk[index];
+            const itemIndex = currentData.vault.inventory.items.indexOf(item);
+            currentData.vault.inventory.items.splice(itemIndex, 1);
+        } else if (currentData.inventory?.junk) {
+            currentData.inventory.junk.splice(index, 1);
+        } else if (currentData.junk) {
+            currentData.junk.splice(index, 1);
+        }
+    }
+    
+    jsonEditor.value = JSON.stringify(currentData, null, 2);
+    updateFileSize();
+    populateInventory();
+    showToast('Item deleted!');
+}
+
+function addInventoryItem(type) {
+    const itemName = prompt(`Enter ${type} name:`);
+    if (!itemName) return;
+    
+    const quantity = prompt('Enter quantity:', '1');
+    if (quantity === null) return;
+    
+    const qty = parseInt(quantity);
+    if (isNaN(qty) || qty < 1) {
+        showToast('Invalid quantity!');
+        return;
+    }
+    
+    const newItem = {
+        id: itemName.toLowerCase().replace(/\s+/g, '_'),
+        name: itemName,
+        type: type === 'weapon' ? 'Weapon' : type === 'outfit' ? 'Outfit' : 'Junk',
+        quantity: qty
+    };
+    
+    if (type === 'weapon') {
+        newItem.damage = parseInt(prompt('Enter damage value:', '10')) || 10;
+        newItem.damageType = 'Normal';
+    } else if (type === 'outfit') {
+        newItem.stats = {};
+    }
+    
+    // Add to appropriate array
+    if (!currentData.vault) currentData.vault = {};
+    if (!currentData.vault.inventory) currentData.vault.inventory = {};
+    if (!currentData.vault.inventory.items) currentData.vault.inventory.items = [];
+    
+    currentData.vault.inventory.items.push(newItem);
+    
+    jsonEditor.value = JSON.stringify(currentData, null, 2);
+    updateFileSize();
+    populateInventory();
+    showToast(`${type} added!`);
+}
+
+function filterInventory(type, searchTerm) {
+    const items = document.querySelectorAll(`#${type}-inventory .inventory-item`);
+    const term = searchTerm.toLowerCase();
+    
+    items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        item.style.display = text.includes(term) ? 'flex' : 'none';
+    });
 }
 
 // Update Vault Data

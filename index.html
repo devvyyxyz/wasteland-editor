@@ -48,6 +48,7 @@
                     <button class="tab-btn" data-tab="dwellers">Dwellers</button>
                     <button class="tab-btn" data-tab="rooms">Rooms</button>
                     <button class="tab-btn" data-tab="wasteland">Wasteland</button>
+                    <button class="tab-btn" data-tab="inventory">Inventory</button>
                     <button class="tab-btn" data-tab="seasonpass">Season Pass</button>
                     <button class="tab-btn" data-tab="others">Others</button>
                     <button class="tab-btn" data-tab="raw">Raw JSON</button>
@@ -414,6 +415,54 @@
                                 <button class="btn btn-secondary" id="maxTeamResourcesBtn">Max Resources</button>
                                 <button class="btn btn-primary" id="saveTeamBtn">Save Changes</button>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- INVENTORY TAB -->
+                <div id="inventory" class="tab-content">
+                    <div class="inventory-panel">
+                        <!-- Inventory Subtabs -->
+                        <div class="inventory-subtabs">
+                            <button class="inventory-subtab-btn active" data-subtab="weapons">🔫 Weapons</button>
+                            <button class="inventory-subtab-btn" data-subtab="outfits">👔 Outfits</button>
+                            <button class="inventory-subtab-btn" data-subtab="junk">🔧 Junk</button>
+                        </div>
+
+                        <!-- Weapons Inventory -->
+                        <div id="weapons-inventory" class="inventory-subtab-content active">
+                            <div class="inventory-header">
+                                <h3>Weapon Storage</h3>
+                                <div class="inventory-actions">
+                                    <input type="text" id="weaponSearch" class="search-input" placeholder="Search weapons...">
+                                    <button class="btn btn-secondary" id="addWeaponBtn">➕ Add Weapon</button>
+                                </div>
+                            </div>
+                            <div id="weaponsList" class="inventory-list"></div>
+                        </div>
+
+                        <!-- Outfits Inventory -->
+                        <div id="outfits-inventory" class="inventory-subtab-content">
+                            <div class="inventory-header">
+                                <h3>Outfit Storage</h3>
+                                <div class="inventory-actions">
+                                    <input type="text" id="outfitSearch" class="search-input" placeholder="Search outfits...">
+                                    <button class="btn btn-secondary" id="addOutfitBtn">➕ Add Outfit</button>
+                                </div>
+                            </div>
+                            <div id="outfitsList" class="inventory-list"></div>
+                        </div>
+
+                        <!-- Junk Inventory -->
+                        <div id="junk-inventory" class="inventory-subtab-content">
+                            <div class="inventory-header">
+                                <h3>Junk Storage</h3>
+                                <div class="inventory-actions">
+                                    <input type="text" id="junkSearch" class="search-input" placeholder="Search junk...">
+                                    <button class="btn btn-secondary" id="addJunkBtn">➕ Add Junk</button>
+                                </div>
+                            </div>
+                            <div id="junkList" class="inventory-list"></div>
                         </div>
                     </div>
                 </div>
