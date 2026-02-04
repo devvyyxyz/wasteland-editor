@@ -1,0 +1,4546 @@
+{
+  "timeMgr": {
+    "gameTime": 847.07,
+    "questTime": 0,
+    "time": 1062.8,
+    "timeSaveDate": 639057781439198300,
+    "timeGameBegin": 639057770810259200
+  },
+  "localNotificationMgr": {
+    "UniqueIDS": []
+  },
+  "taskMgr": {
+    "id": 70,
+    "time": 1062.77,
+    "tasks": [
+      {
+        "startTime": 79.28,
+        "endTime": 86479.28,
+        "id": 14,
+        "paused": false,
+        "rescheduleToOldest": true
+      },
+      {
+        "startTime": 0,
+        "endTime": 86400,
+        "id": 8,
+        "paused": false,
+        "rescheduleToOldest": true
+      },
+      {
+        "startTime": 0,
+        "endTime": 86400,
+        "id": 7,
+        "paused": false,
+        "rescheduleToOldest": true
+      },
+      {
+        "startTime": 959.21,
+        "endTime": 4559.21,
+        "id": 67,
+        "paused": false,
+        "rescheduleToOldest": true
+      },
+      {
+        "startTime": 0,
+        "endTime": 3600,
+        "id": 6,
+        "paused": false,
+        "rescheduleToOldest": true
+      },
+      {
+        "startTime": 169.33,
+        "endTime": 1369.33,
+        "id": 30,
+        "paused": false,
+        "rescheduleToOldest": true
+      },
+      {
+        "startTime": 1060.9,
+        "endTime": 1075.9,
+        "id": 63,
+        "paused": false,
+        "rescheduleToOldest": true
+      },
+      {
+        "startTime": 1061.42,
+        "endTime": 1071.42,
+        "id": 18,
+        "paused": false,
+        "rescheduleToOldest": true
+      },
+      {
+        "startTime": 1061.42,
+        "endTime": 1071.42,
+        "id": 19,
+        "paused": false,
+        "rescheduleToOldest": true
+      },
+      {
+        "startTime": 1061.42,
+        "endTime": 1071.42,
+        "id": 20,
+        "paused": false,
+        "rescheduleToOldest": true
+      },
+      {
+        "startTime": 1061.69,
+        "endTime": 1066.69,
+        "id": 60,
+        "paused": false,
+        "rescheduleToOldest": true
+      },
+      {
+        "startTime": 1057.42,
+        "endTime": 1065.42,
+        "id": 17,
+        "paused": false,
+        "rescheduleToOldest": true
+      },
+      {
+        "startTime": 1062.69,
+        "endTime": 1063.69,
+        "id": 56,
+        "paused": false,
+        "rescheduleToOldest": true
+      },
+      {
+        "startTime": 1007.86,
+        "endTime": 1063.48,
+        "id": 15,
+        "paused": false,
+        "rescheduleToOldest": true
+      },
+      {
+        "startTime": 1062.77,
+        "endTime": 1062.87,
+        "id": 69,
+        "paused": false,
+        "rescheduleToOldest": true
+      },
+      {
+        "startTime": 1062.77,
+        "endTime": 1062.87,
+        "id": 68,
+        "paused": false,
+        "rescheduleToOldest": true
+      },
+      {
+        "startTime": 1062.77,
+        "endTime": 1062.87,
+        "id": 70,
+        "paused": false,
+        "rescheduleToOldest": true
+      }
+    ],
+    "pausedTasks": []
+  },
+  "ratingMgr": {
+    "sampleId": 6,
+    "dayRatingId": 7,
+    "currentSamples": [],
+    "ratings": [],
+    "ratingsLast": [],
+    "hasWeekRating": false,
+    "hasLastWeekRating": false,
+    "weekRating": 0,
+    "lastWeekRating": 0
+  },
+  "specialTheme": {
+    "themeByRoomType": {
+      "FakeWasteland": "NewVegasNight"
+    },
+    "eventsThemes": {
+      "Cafeteria_Xmas": {
+        "id": "Cafeteria_Xmas",
+        "type": "Theme",
+        "hasBeenAssigned": false,
+        "hasRandonWeaponBeenAssigned": false,
+        "extraData": {
+          "partsCollectedCount": 10,
+          "IsCraftingInProgress": false,
+          "IsCrafted": true,
+          "IsClaimed": true,
+          "IsClaimedInCraftingRoom": true,
+          "IsNew": true
+        }
+      },
+      "Cafeteria_Halloween": {
+        "id": "Cafeteria_Halloween",
+        "type": "Theme",
+        "hasBeenAssigned": false,
+        "hasRandonWeaponBeenAssigned": false,
+        "extraData": {
+          "partsCollectedCount": 10,
+          "IsCraftingInProgress": false,
+          "IsCrafted": true,
+          "IsClaimed": true,
+          "IsClaimedInCraftingRoom": true,
+          "IsNew": true
+        }
+      },
+      "Cafeteria_ThanksGiving": {
+        "id": "Cafeteria_ThanksGiving",
+        "type": "Theme",
+        "hasBeenAssigned": false,
+        "hasRandonWeaponBeenAssigned": false,
+        "extraData": {
+          "partsCollectedCount": 10,
+          "IsCraftingInProgress": false,
+          "IsCrafted": true,
+          "IsClaimed": true,
+          "IsClaimedInCraftingRoom": true,
+          "IsNew": true
+        }
+      },
+      "LivingQuarters_Xmas": {
+        "id": "LivingQuarters_Xmas",
+        "type": "Theme",
+        "hasBeenAssigned": false,
+        "hasRandonWeaponBeenAssigned": false,
+        "extraData": {
+          "partsCollectedCount": 10,
+          "IsCraftingInProgress": false,
+          "IsCrafted": true,
+          "IsClaimed": true,
+          "IsClaimedInCraftingRoom": true,
+          "IsNew": true
+        }
+      },
+      "LivingQuarters_Halloween": {
+        "id": "LivingQuarters_Halloween",
+        "type": "Theme",
+        "hasBeenAssigned": false,
+        "hasRandonWeaponBeenAssigned": false,
+        "extraData": {
+          "partsCollectedCount": 10,
+          "IsCraftingInProgress": false,
+          "IsCrafted": true,
+          "IsClaimed": true,
+          "IsClaimedInCraftingRoom": true,
+          "IsNew": true
+        }
+      },
+      "LivingQuarters_ThanksGiving": {
+        "id": "LivingQuarters_ThanksGiving",
+        "type": "Theme",
+        "hasBeenAssigned": false,
+        "hasRandonWeaponBeenAssigned": false,
+        "extraData": {
+          "partsCollectedCount": 10,
+          "IsCraftingInProgress": false,
+          "IsCrafted": true,
+          "IsClaimed": true,
+          "IsClaimedInCraftingRoom": true,
+          "IsNew": true
+        }
+      }
+    },
+    "lastOverallTheme": "None"
+  },
+  "dwellers": {
+    "dwellers": [
+      {
+        "serializeId": 1,
+        "name": "Dennis",
+        "lastName": "Frosts",
+        "happiness": {
+          "happinessValue": 100
+        },
+        "health": {
+          "healthValue": 108.21,
+          "radiationValue": 0,
+          "permaDeath": false,
+          "lastLevelUpdated": 2,
+          "maxHealth": 108.5
+        },
+        "deathSource": 0,
+        "experience": {
+          "experienceValue": 6218,
+          "currentLevel": 2,
+          "storage": 0,
+          "accum": 0,
+          "needLvUp": false,
+          "wastelandExperience": 0
+        },
+        "relations": {
+          "relations": [],
+          "partner": -1,
+          "lastPartner": -1,
+          "ascendants": [
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1
+          ]
+        },
+        "gender": 2,
+        "stats": {
+          "stats": [
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 5,
+              "mod": 0,
+              "exp": 72000
+            },
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            }
+          ]
+        },
+        "pregnant": false,
+        "babyReady": false,
+        "assigned": false,
+        "sawIncident": false,
+        "WillGoToWasteland": false,
+        "WillBeEvicted": false,
+        "IsEvictedWaitingForFollowers": false,
+        "skinColor": 4290152550,
+        "hairColor": 4285094227,
+        "outfitColor": 4294967295,
+        "pendingExperienceReward": 0,
+        "hair": "10",
+        "equipedOutfit": {
+          "id": "jumpsuit",
+          "type": "Outfit",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false
+        },
+        "equipedWeapon": {
+          "id": "Fist",
+          "type": "Weapon",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false
+        },
+        "savedRoom": 33,
+        "lastChildBorn": -1,
+        "rarity": "Common",
+        "deathTime": -1
+      },
+      {
+        "serializeId": 2,
+        "name": "Teresa",
+        "lastName": "Lord",
+        "happiness": {
+          "happinessValue": 100
+        },
+        "health": {
+          "healthValue": 104.71,
+          "radiationValue": 0,
+          "permaDeath": false,
+          "lastLevelUpdated": 1,
+          "maxHealth": 105
+        },
+        "deathSource": 0,
+        "experience": {
+          "experienceValue": 0,
+          "currentLevel": 1,
+          "storage": 0,
+          "accum": 0,
+          "needLvUp": false,
+          "wastelandExperience": 0
+        },
+        "relations": {
+          "relations": [
+            {
+              "dweller": 5,
+              "value": 1
+            },
+            {
+              "dweller": 10,
+              "value": 4
+            }
+          ],
+          "partner": -1,
+          "lastPartner": -1,
+          "ascendants": [
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1
+          ]
+        },
+        "gender": 1,
+        "stats": {
+          "stats": [
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 3,
+              "mod": 0,
+              "exp": 14400
+            },
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            }
+          ]
+        },
+        "pregnant": false,
+        "babyReady": false,
+        "assigned": false,
+        "sawIncident": false,
+        "WillGoToWasteland": false,
+        "WillBeEvicted": false,
+        "IsEvictedWaitingForFollowers": false,
+        "skinColor": 4293704350,
+        "hairColor": 4292105271,
+        "outfitColor": 4294967295,
+        "pendingExperienceReward": 0,
+        "hair": "02",
+        "equipedOutfit": {
+          "id": "jumpsuit",
+          "type": "Outfit",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false
+        },
+        "equipedWeapon": {
+          "id": "Fist",
+          "type": "Weapon",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false
+        },
+        "savedRoom": 32,
+        "lastChildBorn": -1,
+        "rarity": "Normal",
+        "deathTime": -1
+      },
+      {
+        "serializeId": 3,
+        "name": "Dylan",
+        "lastName": "Owens",
+        "happiness": {
+          "happinessValue": 100
+        },
+        "health": {
+          "healthValue": 107.71,
+          "radiationValue": 0,
+          "permaDeath": false,
+          "lastLevelUpdated": 2,
+          "maxHealth": 108
+        },
+        "deathSource": 0,
+        "experience": {
+          "experienceValue": 5806,
+          "currentLevel": 2,
+          "storage": 0,
+          "accum": 0,
+          "needLvUp": false,
+          "wastelandExperience": 0
+        },
+        "relations": {
+          "relations": [],
+          "partner": -1,
+          "lastPartner": -1,
+          "ascendants": [
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1
+          ]
+        },
+        "gender": 2,
+        "stats": {
+          "stats": [
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 5,
+              "mod": 0,
+              "exp": 72000
+            },
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            }
+          ]
+        },
+        "pregnant": false,
+        "babyReady": false,
+        "assigned": false,
+        "sawIncident": false,
+        "WillGoToWasteland": false,
+        "WillBeEvicted": false,
+        "IsEvictedWaitingForFollowers": false,
+        "skinColor": 4294956216,
+        "hairColor": 4294967295,
+        "outfitColor": 4294967295,
+        "pendingExperienceReward": 0,
+        "hair": "01",
+        "faceMask": "f_hair_11",
+        "equipedOutfit": {
+          "id": "jumpsuit",
+          "type": "Outfit",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false
+        },
+        "equipedWeapon": {
+          "id": "Fist",
+          "type": "Weapon",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false
+        },
+        "savedRoom": 36,
+        "lastChildBorn": -1,
+        "rarity": "Common",
+        "deathTime": -1
+      },
+      {
+        "serializeId": 4,
+        "name": "Todd",
+        "lastName": "West",
+        "happiness": {
+          "happinessValue": 100
+        },
+        "health": {
+          "healthValue": 108.21,
+          "radiationValue": 0,
+          "permaDeath": false,
+          "lastLevelUpdated": 2,
+          "maxHealth": 108.5
+        },
+        "deathSource": 0,
+        "experience": {
+          "experienceValue": 6095,
+          "currentLevel": 2,
+          "storage": 0,
+          "accum": 0,
+          "needLvUp": false,
+          "wastelandExperience": 0
+        },
+        "relations": {
+          "relations": [],
+          "partner": -1,
+          "lastPartner": -1,
+          "ascendants": [
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1
+          ]
+        },
+        "gender": 2,
+        "stats": {
+          "stats": [
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 5,
+              "mod": 0,
+              "exp": 72000
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            }
+          ]
+        },
+        "pregnant": false,
+        "babyReady": false,
+        "assigned": false,
+        "sawIncident": false,
+        "WillGoToWasteland": false,
+        "WillBeEvicted": false,
+        "IsEvictedWaitingForFollowers": false,
+        "skinColor": 4287524180,
+        "hairColor": 4284959268,
+        "outfitColor": 4294967295,
+        "pendingExperienceReward": 0,
+        "hair": "02",
+        "equipedOutfit": {
+          "id": "jumpsuit",
+          "type": "Outfit",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false
+        },
+        "equipedWeapon": {
+          "id": "Fist",
+          "type": "Weapon",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false
+        },
+        "savedRoom": 35,
+        "lastChildBorn": -1,
+        "rarity": "Common",
+        "deathTime": -1
+      },
+      {
+        "serializeId": 5,
+        "name": "Aaron",
+        "lastName": "Mills",
+        "happiness": {
+          "happinessValue": 100
+        },
+        "health": {
+          "healthValue": 104.71,
+          "radiationValue": 0,
+          "permaDeath": false,
+          "lastLevelUpdated": 1,
+          "maxHealth": 105
+        },
+        "deathSource": 0,
+        "experience": {
+          "experienceValue": 0,
+          "currentLevel": 1,
+          "storage": 0,
+          "accum": 0,
+          "needLvUp": false,
+          "wastelandExperience": 0
+        },
+        "relations": {
+          "relations": [
+            {
+              "dweller": 2,
+              "value": 4
+            },
+            {
+              "dweller": 11,
+              "value": 0
+            }
+          ],
+          "partner": -1,
+          "lastPartner": -1,
+          "ascendants": [
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1
+          ]
+        },
+        "gender": 2,
+        "stats": {
+          "stats": [
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 3,
+              "mod": 0,
+              "exp": 14400
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            }
+          ]
+        },
+        "pregnant": false,
+        "babyReady": false,
+        "assigned": false,
+        "sawIncident": false,
+        "WillGoToWasteland": false,
+        "WillBeEvicted": false,
+        "IsEvictedWaitingForFollowers": false,
+        "skinColor": 4294896868,
+        "hairColor": 4289023020,
+        "outfitColor": 4294967295,
+        "pendingExperienceReward": 0,
+        "hair": "18",
+        "equipedOutfit": {
+          "id": "jumpsuit",
+          "type": "Outfit",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false
+        },
+        "equipedWeapon": {
+          "id": "Fist",
+          "type": "Weapon",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false
+        },
+        "savedRoom": 32,
+        "lastChildBorn": -1,
+        "rarity": "Normal",
+        "deathTime": -1
+      },
+      {
+        "serializeId": 6,
+        "name": "Diana",
+        "lastName": "Campbell",
+        "happiness": {
+          "happinessValue": 100
+        },
+        "health": {
+          "healthValue": 104.71,
+          "radiationValue": 0,
+          "permaDeath": false,
+          "lastLevelUpdated": 1,
+          "maxHealth": 105
+        },
+        "deathSource": 0,
+        "experience": {
+          "experienceValue": 0,
+          "currentLevel": 1,
+          "storage": 0,
+          "accum": 0,
+          "needLvUp": false,
+          "wastelandExperience": 0
+        },
+        "relations": {
+          "relations": [],
+          "partner": -1,
+          "lastPartner": -1,
+          "ascendants": [
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1
+          ]
+        },
+        "gender": 1,
+        "stats": {
+          "stats": [
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 3,
+              "mod": 0,
+              "exp": 14400
+            },
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            }
+          ]
+        },
+        "pregnant": false,
+        "babyReady": false,
+        "assigned": false,
+        "sawIncident": false,
+        "WillGoToWasteland": false,
+        "WillBeEvicted": false,
+        "IsEvictedWaitingForFollowers": false,
+        "skinColor": 4293580213,
+        "hairColor": 4291535471,
+        "outfitColor": 4294967295,
+        "pendingExperienceReward": 0,
+        "hair": "06",
+        "equipedOutfit": {
+          "id": "jumpsuit",
+          "type": "Outfit",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false
+        },
+        "equipedWeapon": {
+          "id": "Fist",
+          "type": "Weapon",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false
+        },
+        "savedRoom": -1,
+        "lastChildBorn": -1,
+        "rarity": "Normal",
+        "deathTime": -1
+      },
+      {
+        "serializeId": 7,
+        "name": "Jean",
+        "lastName": "Peterson",
+        "happiness": {
+          "happinessValue": 100
+        },
+        "health": {
+          "healthValue": 108.21,
+          "radiationValue": 0,
+          "permaDeath": false,
+          "lastLevelUpdated": 2,
+          "maxHealth": 108.5
+        },
+        "deathSource": 0,
+        "experience": {
+          "experienceValue": 5813,
+          "currentLevel": 2,
+          "storage": 0,
+          "accum": 0,
+          "needLvUp": false,
+          "wastelandExperience": 0
+        },
+        "relations": {
+          "relations": [],
+          "partner": -1,
+          "lastPartner": -1,
+          "ascendants": [
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1
+          ]
+        },
+        "gender": 1,
+        "stats": {
+          "stats": [
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            }
+          ]
+        },
+        "pregnant": false,
+        "babyReady": false,
+        "assigned": false,
+        "sawIncident": false,
+        "WillGoToWasteland": false,
+        "WillBeEvicted": false,
+        "IsEvictedWaitingForFollowers": false,
+        "skinColor": 4294963175,
+        "hairColor": 4289023020,
+        "outfitColor": 4294967295,
+        "pendingExperienceReward": 0,
+        "hair": "05",
+        "equipedOutfit": {
+          "id": "jumpsuit",
+          "type": "Outfit",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false
+        },
+        "equipedWeapon": {
+          "id": "Fist",
+          "type": "Weapon",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false
+        },
+        "savedRoom": 36,
+        "lastChildBorn": -1,
+        "rarity": "Normal",
+        "deathTime": -1
+      },
+      {
+        "serializeId": 8,
+        "name": "Veronique",
+        "lastName": "Price",
+        "happiness": {
+          "happinessValue": 100
+        },
+        "health": {
+          "healthValue": 104.71,
+          "radiationValue": 0,
+          "permaDeath": false,
+          "lastLevelUpdated": 1,
+          "maxHealth": 105
+        },
+        "deathSource": 0,
+        "experience": {
+          "experienceValue": 0,
+          "currentLevel": 1,
+          "storage": 0,
+          "accum": 0,
+          "needLvUp": false,
+          "wastelandExperience": 0
+        },
+        "relations": {
+          "relations": [],
+          "partner": -1,
+          "lastPartner": -1,
+          "ascendants": [
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1
+          ]
+        },
+        "gender": 1,
+        "stats": {
+          "stats": [
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            }
+          ]
+        },
+        "pregnant": false,
+        "babyReady": false,
+        "assigned": false,
+        "sawIncident": false,
+        "WillGoToWasteland": false,
+        "WillBeEvicted": false,
+        "IsEvictedWaitingForFollowers": false,
+        "skinColor": 4294965710,
+        "hairColor": 4288567131,
+        "outfitColor": 4294967295,
+        "pendingExperienceReward": 0,
+        "hair": "21",
+        "equipedOutfit": {
+          "id": "jumpsuit",
+          "type": "Outfit",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false
+        },
+        "equipedWeapon": {
+          "id": "Fist",
+          "type": "Weapon",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false
+        },
+        "savedRoom": -1,
+        "lastChildBorn": -1,
+        "rarity": "Normal",
+        "deathTime": -1
+      },
+      {
+        "serializeId": 9,
+        "name": "Ryan",
+        "lastName": "Barton",
+        "happiness": {
+          "happinessValue": 100
+        },
+        "health": {
+          "healthValue": 149.71,
+          "radiationValue": 0,
+          "permaDeath": false,
+          "lastLevelUpdated": 10,
+          "maxHealth": 150
+        },
+        "deathSource": 0,
+        "experience": {
+          "experienceValue": 115739,
+          "currentLevel": 10,
+          "storage": 0,
+          "accum": 0,
+          "needLvUp": false,
+          "wastelandExperience": 0
+        },
+        "relations": {
+          "relations": [],
+          "partner": -1,
+          "lastPartner": -1,
+          "ascendants": [
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1
+          ]
+        },
+        "gender": 2,
+        "stats": {
+          "stats": [
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 5,
+              "mod": 0,
+              "exp": 72000
+            },
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 5,
+              "mod": 0,
+              "exp": 72000
+            },
+            {
+              "value": 3,
+              "mod": 2,
+              "exp": 14400
+            },
+            {
+              "value": 4,
+              "mod": 2,
+              "exp": 36000
+            },
+            {
+              "value": 7,
+              "mod": 0,
+              "exp": 201600
+            },
+            {
+              "value": 3,
+              "mod": 1,
+              "exp": 14400
+            }
+          ]
+        },
+        "pregnant": false,
+        "babyReady": false,
+        "assigned": false,
+        "sawIncident": false,
+        "WillGoToWasteland": false,
+        "WillBeEvicted": false,
+        "IsEvictedWaitingForFollowers": false,
+        "skinColor": 4294964980,
+        "hairColor": 4287521104,
+        "outfitColor": 4284966759,
+        "pendingExperienceReward": 0,
+        "uniqueData": "TheMayorMale",
+        "hair": "23",
+        "equipedOutfit": {
+          "id": "MayorSpecial",
+          "type": "Outfit",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false
+        },
+        "equipedWeapon": {
+          "id": "Fist",
+          "type": "Weapon",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false
+        },
+        "savedRoom": -1,
+        "lastChildBorn": -1,
+        "rarity": "Rare",
+        "deathTime": -1
+      },
+      {
+        "serializeId": 10,
+        "name": "Harry",
+        "lastName": "Henriquez",
+        "happiness": {
+          "happinessValue": 100
+        },
+        "health": {
+          "healthValue": 104.71,
+          "radiationValue": 0,
+          "permaDeath": false,
+          "lastLevelUpdated": 1,
+          "maxHealth": 105
+        },
+        "deathSource": 0,
+        "experience": {
+          "experienceValue": 0,
+          "currentLevel": 1,
+          "storage": 0,
+          "accum": 0,
+          "needLvUp": false,
+          "wastelandExperience": 0
+        },
+        "relations": {
+          "relations": [
+            {
+              "dweller": 2,
+              "value": 2
+            },
+            {
+              "dweller": 11,
+              "value": 0
+            }
+          ],
+          "partner": -1,
+          "lastPartner": -1,
+          "ascendants": [
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1
+          ]
+        },
+        "gender": 2,
+        "stats": {
+          "stats": [
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 3,
+              "mod": 0,
+              "exp": 14400
+            },
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            }
+          ]
+        },
+        "pregnant": false,
+        "babyReady": false,
+        "assigned": false,
+        "sawIncident": false,
+        "WillGoToWasteland": false,
+        "WillBeEvicted": false,
+        "IsEvictedWaitingForFollowers": false,
+        "skinColor": 4287524180,
+        "hairColor": 4285940014,
+        "outfitColor": 4294967295,
+        "pendingExperienceReward": 0,
+        "hair": "13",
+        "equipedOutfit": {
+          "id": "jumpsuit",
+          "type": "Outfit",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false
+        },
+        "equipedWeapon": {
+          "id": "Fist",
+          "type": "Weapon",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false
+        },
+        "savedRoom": -1,
+        "lastChildBorn": -1,
+        "rarity": "Normal",
+        "deathTime": -1
+      },
+      {
+        "serializeId": 11,
+        "name": "Susan",
+        "lastName": "Warner",
+        "happiness": {
+          "happinessValue": 100
+        },
+        "health": {
+          "healthValue": 104.71,
+          "radiationValue": 0,
+          "permaDeath": false,
+          "lastLevelUpdated": 1,
+          "maxHealth": 105
+        },
+        "deathSource": 0,
+        "experience": {
+          "experienceValue": 0,
+          "currentLevel": 1,
+          "storage": 0,
+          "accum": 0,
+          "needLvUp": false,
+          "wastelandExperience": 0
+        },
+        "relations": {
+          "relations": [
+            {
+              "dweller": 10,
+              "value": 3
+            },
+            {
+              "dweller": 5,
+              "value": 4
+            }
+          ],
+          "partner": -1,
+          "lastPartner": -1,
+          "ascendants": [
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1
+          ]
+        },
+        "gender": 1,
+        "stats": {
+          "stats": [
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            }
+          ]
+        },
+        "pregnant": false,
+        "babyReady": false,
+        "assigned": false,
+        "sawIncident": false,
+        "WillGoToWasteland": false,
+        "WillBeEvicted": false,
+        "IsEvictedWaitingForFollowers": false,
+        "skinColor": 4287918679,
+        "hairColor": 4288567131,
+        "outfitColor": 4294967295,
+        "pendingExperienceReward": 0,
+        "hair": "24",
+        "equipedOutfit": {
+          "id": "jumpsuit",
+          "type": "Outfit",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false
+        },
+        "equipedWeapon": {
+          "id": "Fist",
+          "type": "Weapon",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false
+        },
+        "savedRoom": -1,
+        "lastChildBorn": -1,
+        "rarity": "Normal",
+        "deathTime": -1
+      },
+      {
+        "serializeId": 12,
+        "name": "Danielle",
+        "lastName": "Sanders",
+        "happiness": {
+          "happinessValue": 100
+        },
+        "health": {
+          "healthValue": 104.71,
+          "radiationValue": 0,
+          "permaDeath": false,
+          "lastLevelUpdated": 1,
+          "maxHealth": 105
+        },
+        "deathSource": 0,
+        "experience": {
+          "experienceValue": 1582,
+          "currentLevel": 1,
+          "storage": 0,
+          "accum": 0,
+          "needLvUp": false,
+          "wastelandExperience": 0
+        },
+        "relations": {
+          "relations": [],
+          "partner": -1,
+          "lastPartner": -1,
+          "ascendants": [
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1
+          ]
+        },
+        "gender": 1,
+        "stats": {
+          "stats": [
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            }
+          ]
+        },
+        "pregnant": false,
+        "babyReady": false,
+        "assigned": false,
+        "sawIncident": false,
+        "WillGoToWasteland": false,
+        "WillBeEvicted": false,
+        "IsEvictedWaitingForFollowers": false,
+        "skinColor": 4294963175,
+        "hairColor": 4294967122,
+        "outfitColor": 4294967295,
+        "pendingExperienceReward": 0,
+        "hair": "10",
+        "equipedOutfit": {
+          "id": "jumpsuit",
+          "type": "Outfit",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false
+        },
+        "equipedWeapon": {
+          "id": "Fist",
+          "type": "Weapon",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false
+        },
+        "savedRoom": -1,
+        "lastChildBorn": -1,
+        "rarity": "Normal",
+        "deathTime": -1
+      },
+      {
+        "serializeId": 13,
+        "name": "Aaron",
+        "lastName": "Sanders",
+        "happiness": {
+          "happinessValue": 50
+        },
+        "health": {
+          "healthValue": 105,
+          "radiationValue": 0,
+          "permaDeath": false,
+          "lastLevelUpdated": 1,
+          "maxHealth": 105
+        },
+        "deathSource": 0,
+        "experience": {
+          "experienceValue": 0,
+          "currentLevel": 1,
+          "storage": 0,
+          "accum": 0,
+          "needLvUp": false,
+          "wastelandExperience": 0
+        },
+        "relations": {
+          "relations": [],
+          "partner": -1,
+          "lastPartner": -1,
+          "ascendants": [
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1
+          ]
+        },
+        "gender": 2,
+        "stats": {
+          "stats": [
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 1,
+              "mod": 0,
+              "exp": 0
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            },
+            {
+              "value": 2,
+              "mod": 0,
+              "exp": 3600
+            }
+          ]
+        },
+        "pregnant": false,
+        "babyReady": false,
+        "assigned": false,
+        "sawIncident": false,
+        "WillGoToWasteland": false,
+        "WillBeEvicted": false,
+        "IsEvictedWaitingForFollowers": false,
+        "skinColor": 4294896868,
+        "hairColor": 4284959268,
+        "outfitColor": 4282269807,
+        "pendingExperienceReward": 0,
+        "hair": "02",
+        "equipedOutfit": {
+          "id": "costume_07",
+          "type": "Outfit",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false
+        },
+        "equipedWeapon": {
+          "id": "Fist",
+          "type": "Weapon",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false
+        },
+        "savedRoom": -1,
+        "lastChildBorn": -1,
+        "rarity": "Normal",
+        "deathTime": -1
+      }
+    ],
+    "actors": [],
+    "id": 13,
+    "mrhId": 1,
+    "min_happiness": 0
+  },
+  "constructMgr": {
+    "roomDeserializeID": 46
+  },
+  "vault": {
+    "rocks": [
+      {
+        "r": 3,
+        "c": 23
+      },
+      {
+        "r": 4,
+        "c": 23
+      },
+      {
+        "r": 4,
+        "c": 19
+      },
+      {
+        "r": 4,
+        "c": 2
+      },
+      {
+        "r": 5,
+        "c": 6
+      },
+      {
+        "r": 5,
+        "c": 15
+      },
+      {
+        "r": 6,
+        "c": 21
+      },
+      {
+        "r": 6,
+        "c": 18
+      },
+      {
+        "r": 6,
+        "c": 3
+      },
+      {
+        "r": 7,
+        "c": 10
+      },
+      {
+        "r": 7,
+        "c": 4
+      },
+      {
+        "r": 8,
+        "c": 6
+      },
+      {
+        "r": 8,
+        "c": 1
+      },
+      {
+        "r": 8,
+        "c": 21
+      },
+      {
+        "r": 8,
+        "c": 14
+      },
+      {
+        "r": 9,
+        "c": 16
+      },
+      {
+        "r": 9,
+        "c": 12
+      },
+      {
+        "r": 9,
+        "c": 4
+      },
+      {
+        "r": 10,
+        "c": 0
+      },
+      {
+        "r": 10,
+        "c": 17
+      },
+      {
+        "r": 10,
+        "c": 21
+      },
+      {
+        "r": 10,
+        "c": 8
+      },
+      {
+        "r": 11,
+        "c": 18
+      },
+      {
+        "r": 11,
+        "c": 23
+      },
+      {
+        "r": 11,
+        "c": 20
+      },
+      {
+        "r": 11,
+        "c": 7
+      },
+      {
+        "r": 12,
+        "c": 11
+      },
+      {
+        "r": 12,
+        "c": 3
+      },
+      {
+        "r": 12,
+        "c": 24
+      },
+      {
+        "r": 13,
+        "c": 23
+      },
+      {
+        "r": 13,
+        "c": 8
+      },
+      {
+        "r": 13,
+        "c": 15
+      },
+      {
+        "r": 14,
+        "c": 19
+      },
+      {
+        "r": 14,
+        "c": 22
+      },
+      {
+        "r": 14,
+        "c": 2
+      },
+      {
+        "r": 14,
+        "c": 5
+      },
+      {
+        "r": 14,
+        "c": 14
+      },
+      {
+        "r": 15,
+        "c": 23
+      },
+      {
+        "r": 15,
+        "c": 12
+      },
+      {
+        "r": 15,
+        "c": 9
+      },
+      {
+        "r": 15,
+        "c": 6
+      },
+      {
+        "r": 16,
+        "c": 19
+      },
+      {
+        "r": 16,
+        "c": 1
+      },
+      {
+        "r": 16,
+        "c": 22
+      },
+      {
+        "r": 16,
+        "c": 16
+      },
+      {
+        "r": 17,
+        "c": 3
+      },
+      {
+        "r": 17,
+        "c": 22
+      },
+      {
+        "r": 17,
+        "c": 5
+      },
+      {
+        "r": 17,
+        "c": 19
+      },
+      {
+        "r": 17,
+        "c": 7
+      },
+      {
+        "r": 18,
+        "c": 13
+      },
+      {
+        "r": 18,
+        "c": 16
+      },
+      {
+        "r": 18,
+        "c": 10
+      },
+      {
+        "r": 18,
+        "c": 4
+      },
+      {
+        "r": 19,
+        "c": 10
+      },
+      {
+        "r": 19,
+        "c": 16
+      },
+      {
+        "r": 19,
+        "c": 18
+      },
+      {
+        "r": 20,
+        "c": 0
+      },
+      {
+        "r": 20,
+        "c": 24
+      },
+      {
+        "r": 20,
+        "c": 6
+      },
+      {
+        "r": 20,
+        "c": 14
+      },
+      {
+        "r": 21,
+        "c": 3
+      },
+      {
+        "r": 21,
+        "c": 19
+      },
+      {
+        "r": 21,
+        "c": 12
+      },
+      {
+        "r": 21,
+        "c": 5
+      },
+      {
+        "r": 21,
+        "c": 1
+      },
+      {
+        "r": 22,
+        "c": 7
+      },
+      {
+        "r": 22,
+        "c": 16
+      },
+      {
+        "r": 22,
+        "c": 5
+      },
+      {
+        "r": 22,
+        "c": 13
+      },
+      {
+        "r": 23,
+        "c": 24
+      },
+      {
+        "r": 23,
+        "c": 19
+      },
+      {
+        "r": 23,
+        "c": 12
+      },
+      {
+        "r": 23,
+        "c": 4
+      },
+      {
+        "r": 24,
+        "c": 18
+      },
+      {
+        "r": 24,
+        "c": 13
+      },
+      {
+        "r": 24,
+        "c": 6
+      }
+    ],
+    "ultracite": [],
+    "rooms": [
+      {
+        "emergencyDone": false,
+        "type": "Entrance",
+        "class": "Facility",
+        "mergeLevel": 2,
+        "row": 0,
+        "col": 3,
+        "power": true,
+        "roomHealth": {
+          "damageValue": 0,
+          "initialValue": 0
+        },
+        "mrHandyList": [],
+        "rushTask": -1,
+        "level": 1,
+        "dwellers": [],
+        "deadDwellers": [],
+        "currentStateName": "Idle",
+        "currentState": {},
+        "deserializeID": 25,
+        "assignedDecoration": "",
+        "roomVisibility": false,
+        "roomOutline": false,
+        "broken": false
+      },
+      {
+        "emergencyDone": false,
+        "type": "FakeWasteland",
+        "class": "Facility",
+        "mergeLevel": 1,
+        "row": 0,
+        "col": 0,
+        "power": true,
+        "roomHealth": {
+          "damageValue": 0,
+          "initialValue": 0
+        },
+        "mrHandyList": [],
+        "rushTask": -1,
+        "level": 1,
+        "dwellers": [],
+        "deadDwellers": [],
+        "currentStateName": "Idle",
+        "currentState": {},
+        "deserializeID": 26,
+        "assignedDecoration": "",
+        "roomVisibility": false,
+        "roomOutline": false
+      },
+      {
+        "emergencyDone": false,
+        "type": "Elevator",
+        "class": "Utility",
+        "mergeLevel": 1,
+        "row": 0,
+        "col": 9,
+        "power": true,
+        "roomHealth": {
+          "damageValue": 0,
+          "initialValue": 0
+        },
+        "mrHandyList": [],
+        "rushTask": -1,
+        "level": 1,
+        "dwellers": [],
+        "deadDwellers": [],
+        "currentStateName": "Idle",
+        "currentState": {},
+        "deserializeID": 27,
+        "assignedDecoration": "",
+        "roomVisibility": false,
+        "roomOutline": false,
+        "withHole": false
+      },
+      {
+        "emergencyDone": false,
+        "type": "Elevator",
+        "class": "Utility",
+        "mergeLevel": 1,
+        "row": 1,
+        "col": 9,
+        "power": true,
+        "roomHealth": {
+          "damageValue": 0,
+          "initialValue": 0
+        },
+        "mrHandyList": [],
+        "rushTask": -1,
+        "level": 1,
+        "dwellers": [],
+        "deadDwellers": [],
+        "currentStateName": "Idle",
+        "currentState": {},
+        "deserializeID": 28,
+        "assignedDecoration": "",
+        "roomVisibility": false,
+        "roomOutline": false,
+        "withHole": false
+      },
+      {
+        "emergencyDone": false,
+        "type": "Elevator",
+        "class": "Utility",
+        "mergeLevel": 1,
+        "row": 2,
+        "col": 9,
+        "power": true,
+        "roomHealth": {
+          "damageValue": 0,
+          "initialValue": 0
+        },
+        "mrHandyList": [],
+        "rushTask": -1,
+        "level": 1,
+        "dwellers": [],
+        "deadDwellers": [],
+        "currentStateName": "Idle",
+        "currentState": {},
+        "deserializeID": 29,
+        "assignedDecoration": "",
+        "roomVisibility": false,
+        "roomOutline": false,
+        "withHole": false
+      },
+      {
+        "emergencyDone": false,
+        "type": "LivingQuarters",
+        "class": "Facility",
+        "mergeLevel": 2,
+        "row": 1,
+        "col": 3,
+        "power": true,
+        "roomHealth": {
+          "damageValue": 0,
+          "initialValue": 0
+        },
+        "mrHandyList": [],
+        "rushTask": -1,
+        "level": 1,
+        "dwellers": [
+          5,
+          2,
+          10,
+          11
+        ],
+        "deadDwellers": [],
+        "currentStateName": "Working",
+        "currentState": {
+          "breedingTaskId": 63
+        },
+        "deserializeID": 32,
+        "assignedDecoration": "",
+        "roomVisibility": false,
+        "roomOutline": false,
+        "children": [],
+        "partners": []
+      },
+      {
+        "emergencyDone": true,
+        "type": "Geothermal",
+        "class": "Production",
+        "mergeLevel": 1,
+        "row": 2,
+        "col": 10,
+        "power": true,
+        "roomHealth": {
+          "damageValue": 0,
+          "initialValue": 37.61
+        },
+        "mrHandyList": [],
+        "rushTask": 30,
+        "level": 1,
+        "dwellers": [
+          1,
+          9
+        ],
+        "deadDwellers": [],
+        "currentStateName": "Working",
+        "currentState": {
+          "taskId": 69,
+          "notificationId": "-1"
+        },
+        "deserializeID": 33,
+        "assignedDecoration": "",
+        "roomVisibility": false,
+        "roomOutline": false,
+        "storage": {
+          "resources": {
+            "Nuka": 4.17,
+            "Food": 0,
+            "Energy": 0.75,
+            "Water": 0,
+            "StimPack": 0,
+            "RadAway": 0,
+            "Lunchbox": 0,
+            "MrHandy": 0,
+            "PetCarrier": 0,
+            "CraftedOutfit": 0,
+            "CraftedWeapon": 0,
+            "NukaColaQuantum": 0,
+            "CraftedTheme": 0,
+            "DummyUltracite": 0,
+            "PokerChip": 0
+          },
+          "bonus": {
+            "Nuka": 0,
+            "Food": 0,
+            "Energy": 0,
+            "Water": 0,
+            "StimPack": 0,
+            "RadAway": 0,
+            "Lunchbox": 0,
+            "MrHandy": 0,
+            "PetCarrier": 0,
+            "CraftedOutfit": 0,
+            "CraftedWeapon": 0,
+            "NukaColaQuantum": 0,
+            "CraftedTheme": 0,
+            "DummyUltracite": 0,
+            "PokerChip": 0
+          }
+        },
+        "numberOfProductionCycle": 3,
+        "ExperienceRewardIsDirty": false
+      },
+      {
+        "emergencyDone": false,
+        "type": "Elevator",
+        "class": "Utility",
+        "mergeLevel": 1,
+        "row": 3,
+        "col": 9,
+        "power": true,
+        "roomHealth": {
+          "damageValue": 0,
+          "initialValue": 0
+        },
+        "mrHandyList": [],
+        "rushTask": -1,
+        "level": 1,
+        "dwellers": [],
+        "deadDwellers": [],
+        "currentStateName": "Idle",
+        "currentState": {},
+        "deserializeID": 34,
+        "assignedDecoration": "",
+        "roomVisibility": false,
+        "roomOutline": false,
+        "withHole": false
+      },
+      {
+        "emergencyDone": false,
+        "type": "WaterPlant",
+        "class": "Production",
+        "mergeLevel": 1,
+        "row": 3,
+        "col": 10,
+        "power": true,
+        "roomHealth": {
+          "damageValue": 0,
+          "initialValue": 0
+        },
+        "mrHandyList": [],
+        "rushTask": -1,
+        "level": 1,
+        "dwellers": [
+          4,
+          12
+        ],
+        "deadDwellers": [],
+        "currentStateName": "Working",
+        "currentState": {
+          "taskId": 70,
+          "notificationId": "-1"
+        },
+        "deserializeID": 35,
+        "assignedDecoration": "",
+        "roomVisibility": false,
+        "roomOutline": false,
+        "storage": {
+          "resources": {
+            "Nuka": 2.69,
+            "Food": 0,
+            "Energy": 0,
+            "Water": 0.54,
+            "StimPack": 0,
+            "RadAway": 0,
+            "Lunchbox": 0,
+            "MrHandy": 0,
+            "PetCarrier": 0,
+            "CraftedOutfit": 0,
+            "CraftedWeapon": 0,
+            "NukaColaQuantum": 0,
+            "CraftedTheme": 0,
+            "DummyUltracite": 0,
+            "PokerChip": 0
+          },
+          "bonus": {
+            "Nuka": 0,
+            "Food": 0,
+            "Energy": 0,
+            "Water": 0,
+            "StimPack": 0,
+            "RadAway": 0,
+            "Lunchbox": 0,
+            "MrHandy": 0,
+            "PetCarrier": 0,
+            "CraftedOutfit": 0,
+            "CraftedWeapon": 0,
+            "NukaColaQuantum": 0,
+            "CraftedTheme": 0,
+            "DummyUltracite": 0,
+            "PokerChip": 0
+          }
+        },
+        "numberOfProductionCycle": 5,
+        "ExperienceRewardIsDirty": false
+      },
+      {
+        "emergencyDone": false,
+        "type": "Cafeteria",
+        "class": "Production",
+        "mergeLevel": 1,
+        "row": 0,
+        "col": 10,
+        "power": true,
+        "roomHealth": {
+          "damageValue": 0,
+          "initialValue": 0
+        },
+        "mrHandyList": [],
+        "rushTask": -1,
+        "level": 1,
+        "dwellers": [
+          3,
+          7
+        ],
+        "deadDwellers": [],
+        "currentStateName": "Working",
+        "currentState": {
+          "taskId": 68,
+          "notificationId": "-1"
+        },
+        "deserializeID": 36,
+        "assignedDecoration": "",
+        "roomVisibility": false,
+        "roomOutline": false,
+        "storage": {
+          "resources": {
+            "Nuka": 3.14,
+            "Food": 0.63,
+            "Energy": 0,
+            "Water": 0,
+            "StimPack": 0,
+            "RadAway": 0,
+            "Lunchbox": 0,
+            "MrHandy": 0,
+            "PetCarrier": 0,
+            "CraftedOutfit": 0,
+            "CraftedWeapon": 0,
+            "NukaColaQuantum": 0,
+            "CraftedTheme": 0,
+            "DummyUltracite": 0,
+            "PokerChip": 0
+          },
+          "bonus": {
+            "Nuka": 0,
+            "Food": 0,
+            "Energy": 0,
+            "Water": 0,
+            "StimPack": 0,
+            "RadAway": 0,
+            "Lunchbox": 0,
+            "MrHandy": 0,
+            "PetCarrier": 0,
+            "CraftedOutfit": 0,
+            "CraftedWeapon": 0,
+            "NukaColaQuantum": 0,
+            "CraftedTheme": 0,
+            "DummyUltracite": 0,
+            "PokerChip": 0
+          }
+        },
+        "numberOfProductionCycle": 6,
+        "ExperienceRewardIsDirty": false
+      }
+    ],
+    "storage": {
+      "resources": {
+        "Nuka": 421700,
+        "Food": 32.37,
+        "Energy": 40.45,
+        "Water": 24.37,
+        "StimPack": 0,
+        "RadAway": 3,
+        "Lunchbox": 0,
+        "MrHandy": 0,
+        "PetCarrier": 0,
+        "CraftedOutfit": 0,
+        "CraftedWeapon": 0,
+        "NukaColaQuantum": 99788,
+        "CraftedTheme": 0,
+        "DummyUltracite": 0,
+        "PokerChip": 0
+      },
+      "bonus": {
+        "Nuka": 0,
+        "Food": 0,
+        "Energy": 0,
+        "Water": 0,
+        "StimPack": 0,
+        "RadAway": 0,
+        "Lunchbox": 0,
+        "MrHandy": 0,
+        "PetCarrier": 0,
+        "CraftedOutfit": 0,
+        "CraftedWeapon": 0,
+        "NukaColaQuantum": 0,
+        "CraftedTheme": 0,
+        "DummyUltracite": 0,
+        "PokerChip": 0
+      }
+    },
+    "inventory": {
+      "items": [
+        {
+          "id": "SurvivorSpecial",
+          "type": "Outfit",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false
+        },
+        {
+          "id": "bombay_r",
+          "type": "Pet",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false,
+          "extraData": {
+            "uniqueName": "Smudge",
+            "bonus": "AddMaxHP",
+            "bonusValue": 65
+          }
+        },
+        {
+          "id": "JunkJet",
+          "type": "Weapon",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false
+        },
+        {
+          "id": "FormalWear_Fancy",
+          "type": "Outfit",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false
+        },
+        {
+          "id": "Pistol_Rusty",
+          "type": "Weapon",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false
+        },
+        {
+          "id": "ArgyleSweater",
+          "type": "Outfit",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false
+        },
+        {
+          "id": "Shovel",
+          "type": "Junk",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false
+        },
+        {
+          "id": "Melee_ButcherKnife",
+          "type": "Weapon",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false
+        },
+        {
+          "id": "AlarmClock",
+          "type": "Junk",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false
+        }
+      ]
+    },
+    "emergencyData": {
+      "active": false,
+      "lastWaveTime": 639057770734857600,
+      "failedPreviousWave": false,
+      "currentWave": 0,
+      "graceTimeLeft": -1,
+      "currentWaveRemainingMelee": 0,
+      "currentWaveRemainingGunner": 0,
+      "currentWaveRemainingHeavy": 0,
+      "randomEventTaskId": 15
+    },
+    "roomConsumption": {
+      "taskIdOnline": 17,
+      "taskIDShutDown": 18
+    },
+    "dwellerWaterConsumption": {
+      "taskIdOnline": 19
+    },
+    "dwellerFoodConsumption": {
+      "taskIdOnline": 20
+    },
+    "lunchboxRandomGenerator": "0001000000FFFFFFFF01000000000000000C0200000046417373656D626C792D4353686172702C2056657273696F6E3D302E302E302E302C2043756C747572653D6E65757472616C2C205075626C69634B6579546F6B656E3D6E756C6C05010000001253657269616C697A61626C6552616E646F6D0300000005696E65787406696E657874700953656564417272617900000708080802000000170000002C00000009030000000F0300000038000000080000000045DBF50119542C4EA1D91E6890802F434052634FF899393AB6E0753877E0BF2E6D501C63D10EB62C7D149702411540269A248C2DA214E24897BA8A488EDD472286CC0C1C1021A360331E814113F55D40709FA25047AC722502A3A64D281ED5294F7FB10BD391FB0F06B12E596659C23D95942C6A749E595B95531F7AE2ECF4183740AB25DBC094238ED202016FFDBB0F4AA5BE6316D9012FD2A19A674727C248D3A361525EBB112AC5C6FE3640167D517C9C236DC0879657E0713011CA3D464ECE8AF61FFA537F75AC2AD3254C21913A98D1853288250C51C45F7E460B",
+    "LunchBoxesByType": [
+      1,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    "LunchBoxDeckNames": [
+      "Normal",
+      "Normal",
+      "Normal",
+      "Normal",
+      "Normal",
+      "Normal",
+      "Normal",
+      "Normal",
+      "Normal",
+      "Normal"
+    ],
+    "SeasonPassLunchboxClaims": {
+      "SeasonPassLunchboxClaims": []
+    },
+    "LunchBoxesCount": 10,
+    "VaultName": "592",
+    "VaultMode": "Normal",
+    "VaultTheme": 0,
+    "Achievements": {
+      "objectivesInProgress": [
+        {
+          "objectiveID": "rush_success_01",
+          "requirements": [
+            {
+              "requirementID": "rush_success_01",
+              "satisfied": false,
+              "rushCount": 1
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "merge_power_01",
+          "requirements": [
+            {
+              "requirementID": "merge_power_01",
+              "satisfied": false,
+              "higherMergeLevelFound": 1
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "wasteland_kill_01",
+          "requirements": [
+            {
+              "requirementID": "wasteland_kill_01",
+              "satisfied": false,
+              "currentCreatures": 0
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "merge_food_01",
+          "requirements": [
+            {
+              "requirementID": "merge_food_01",
+              "satisfied": false,
+              "higherMergeLevelFound": 1
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "merge_water_01",
+          "requirements": [
+            {
+              "requirementID": "merge_water_01",
+              "satisfied": false,
+              "higherMergeLevelFound": 1
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "make_baby_01",
+          "requirements": [
+            {
+              "requirementID": "make_baby_01",
+              "satisfied": false,
+              "currentBabies": 0
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "upgrade_room_01",
+          "requirements": [
+            {
+              "requirementID": "upgrade_room_01",
+              "satisfied": false,
+              "acceptedRoom": 0
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "levelup_dweller_01",
+          "requirements": [
+            {
+              "requirementID": "levelup_dweller_01",
+              "satisfied": false,
+              "dweller": 7
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "levelup_dweller_02",
+          "requirements": [
+            {
+              "requirementID": "levelup_dweller_02",
+              "satisfied": false,
+              "dweller": 7
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "levelup_dweller_03",
+          "requirements": [
+            {
+              "requirementID": "levelup_dweller_03",
+              "satisfied": false,
+              "dweller": 7
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "build_rooms_01",
+          "requirements": [
+            {
+              "requirementID": "build_rooms_01",
+              "satisfied": false,
+              "acceptedRoom": 5
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "build_nukacola_01",
+          "requirements": [
+            {
+              "requirementID": "build_nukacola_01",
+              "satisfied": false,
+              "acceptedRoom": 0
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "build_rooms_02",
+          "requirements": [
+            {
+              "requirementID": "build_rooms_02",
+              "satisfied": false,
+              "acceptedRoom": 5
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "stop_raider_01",
+          "requirements": [
+            {
+              "requirementID": "stop_raider_01",
+              "satisfied": false,
+              "currentInvasions": 0
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "build_each_rooms_01",
+          "requirements": [
+            {
+              "requirementID": "build_each_rooms_01_casino",
+              "satisfied": false,
+              "acceptedRoom": 0
+            },
+            {
+              "requirementID": "build_each_rooms_01_storage",
+              "satisfied": false,
+              "acceptedRoom": 0
+            },
+            {
+              "requirementID": "build_each_rooms_01_nukeCola",
+              "satisfied": false,
+              "acceptedRoom": 0
+            },
+            {
+              "requirementID": "build_each_rooms_01_superRoom2",
+              "satisfied": false,
+              "acceptedRoom": 0
+            },
+            {
+              "requirementID": "build_each_rooms_01_hydroponic",
+              "satisfied": false,
+              "acceptedRoom": 0
+            },
+            {
+              "requirementID": "build_each_rooms_01_scienceLab",
+              "satisfied": false,
+              "acceptedRoom": 0
+            },
+            {
+              "requirementID": "build_each_rooms_01_medBay",
+              "satisfied": false,
+              "acceptedRoom": 0
+            },
+            {
+              "requirementID": "build_each_rooms_01_classroom",
+              "satisfied": false,
+              "acceptedRoom": 0
+            },
+            {
+              "requirementID": "build_each_rooms_01_armory",
+              "satisfied": false,
+              "acceptedRoom": 0
+            },
+            {
+              "requirementID": "build_each_rooms_01_radio",
+              "satisfied": false,
+              "acceptedRoom": 0
+            },
+            {
+              "requirementID": "build_each_rooms_01_water2",
+              "satisfied": false,
+              "acceptedRoom": 0
+            },
+            {
+              "requirementID": "build_each_rooms_01_energy2",
+              "satisfied": false,
+              "acceptedRoom": 0
+            },
+            {
+              "requirementID": "build_each_rooms_01_gym",
+              "satisfied": false,
+              "acceptedRoom": 0
+            },
+            {
+              "requirementID": "build_each_rooms_01_bar",
+              "satisfied": false,
+              "acceptedRoom": 0
+            },
+            {
+              "requirementID": "build_each_rooms_01_dojo",
+              "satisfied": false,
+              "acceptedRoom": 0
+            },
+            {
+              "requirementID": "build_each_rooms_01_livingquarters",
+              "satisfied": true,
+              "acceptedRoom": 2
+            },
+            {
+              "requirementID": "build_each_rooms_01_geothermal",
+              "satisfied": true,
+              "acceptedRoom": 1
+            },
+            {
+              "requirementID": "build_each_rooms_01_cafeteria",
+              "satisfied": true,
+              "acceptedRoom": 1
+            },
+            {
+              "requirementID": "build_each_rooms_01_waterplant",
+              "satisfied": true,
+              "acceptedRoom": 1
+            },
+            {
+              "requirementID": "build_each_rooms_01_overseer",
+              "satisfied": false,
+              "acceptedRoom": 0
+            },
+            {
+              "requirementID": "build_each_rooms_01_weaponfactory",
+              "satisfied": false,
+              "acceptedRoom": 0
+            },
+            {
+              "requirementID": "build_each_rooms_01_outfitfactory",
+              "satisfied": false,
+              "acceptedRoom": 0
+            },
+            {
+              "requirementID": "build_each_rooms_01_designfactory",
+              "satisfied": false,
+              "acceptedRoom": 0
+            },
+            {
+              "requirementID": "build_each_rooms_01_barbershop",
+              "satisfied": false,
+              "acceptedRoom": 0
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "completed_objectives_01",
+          "requirements": [
+            {
+              "requirementID": "completed_objectives_01",
+              "satisfied": false,
+              "numberOfObjectivesCompleted": 4
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "collect_legendary_dwellers_01",
+          "requirements": [
+            {
+              "requirementID": "collect_legendary_dwellers_01",
+              "satisfied": false,
+              "currentLegendaryDwellers": 0
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "collect_legendary_outfits_01",
+          "requirements": [
+            {
+              "requirementID": "collect_legendary_outfits_01",
+              "satisfied": false,
+              "currentLegendaryOutfits": 0
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "collect_legendary_weapons_01",
+          "requirements": [
+            {
+              "requirementID": "collect_legendary_weapons_01",
+              "satisfied": false,
+              "currentLegendaryWeapons": 0
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "collect_caps_01",
+          "requirements": [
+            {
+              "requirementID": "collect_caps_01",
+              "satisfied": false,
+              "nukaCount": 393,
+              "isAchievement": true
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "collect_caps_02",
+          "requirements": [
+            {
+              "requirementID": "collect_caps_02",
+              "satisfied": false,
+              "nukaCount": 393,
+              "isAchievement": true
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "complete_quests_10",
+          "requirements": [
+            {
+              "requirementID": "complete_quests_10",
+              "satisfied": false,
+              "currentNumberQuestsCompleted": 0
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "complete_quests_30",
+          "requirements": [
+            {
+              "requirementID": "complete_quests_30",
+              "satisfied": false,
+              "currentNumberQuestsCompleted": 0
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "complete_quests_60",
+          "requirements": [
+            {
+              "requirementID": "complete_quests_60",
+              "satisfied": false,
+              "currentNumberQuestsCompleted": 0
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "complete_quests_100",
+          "requirements": [
+            {
+              "requirementID": "complete_quests_100",
+              "satisfied": false,
+              "currentNumberQuestsCompleted": 0
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "barbershop_10",
+          "requirements": [
+            {
+              "requirementID": "barbershop_10",
+              "satisfied": false,
+              "acceptedRoom": 0
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "craft_10_weapons",
+          "requirements": [
+            {
+              "requirementID": "craft_10_weapons",
+              "satisfied": false,
+              "currentNumberItems": 0
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "craft_10_outfits",
+          "requirements": [
+            {
+              "requirementID": "craft_10_outfits",
+              "satisfied": false,
+              "currentNumberItems": 0
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "craft_outfit_weapon_theme",
+          "requirements": [
+            {
+              "requirementID": "craft_outfit",
+              "satisfied": false,
+              "currentNumberItems": 0
+            },
+            {
+              "requirementID": "craft_weapon",
+              "satisfied": false,
+              "currentNumberItems": 0
+            },
+            {
+              "requirementID": "craft_theme",
+              "satisfied": false,
+              "currentNumberItems": 0
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "",
+          "requirements": [
+            {
+              "requirementID": "scrap_items_500",
+              "satisfied": false,
+              "currentNumberItems": 0
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "collect_theme_all_parts_4",
+          "requirements": [
+            {
+              "requirementID": "collect_theme_all_parts_4",
+              "satisfied": false,
+              "currentAllThemeParts": 1
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "quest_dialog_choices_01",
+          "requirements": [
+            {
+              "requirementID": "quest_dialog_choices_01",
+              "satisfied": false,
+              "currentNumberQuestDialogChoicesMade": 0
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "craft_themes_8",
+          "requirements": [
+            {
+              "requirementID": "craft_themes_8",
+              "satisfied": false,
+              "currentNumberItems": 0
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "kill_on_quests_500",
+          "requirements": [
+            {
+              "requirementID": "kill_on_quests_500",
+              "satisfied": false,
+              "currentNumberQuestEnemiesToKill": 0
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "stimpacks_100_radaway_100",
+          "requirements": [
+            {
+              "requirementID": "stimpack_100",
+              "satisfied": false,
+              "currentNumberLoot": 0
+            },
+            {
+              "requirementID": "radaway_100",
+              "satisfied": false,
+              "currentNumberLoot": 0
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "boss_kill_10",
+          "requirements": [
+            {
+              "requirementID": "boss_kill_10",
+              "satisfied": false,
+              "currentNumberQuestEnemiesToKill": 0
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "build_rooms_stat",
+          "requirements": [
+            {
+              "requirementID": "build_rooms_stat",
+              "satisfied": false,
+              "acceptedRoom": 5
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        {
+          "objectiveID": "collect_caps_stat",
+          "requirements": [
+            {
+              "requirementID": "collect_caps_stat",
+              "satisfied": false,
+              "nukaCount": 393,
+              "isAchievement": true
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        }
+      ],
+      "completed": [
+        "collect_theme_all_parts_1"
+      ]
+    },
+    "wasteland": {
+      "state": {
+        "name": "Idle"
+      },
+      "teams": [],
+      "cycles": [
+        {
+          "cycleType": "Radiation"
+        },
+        {
+          "cycleType": "Experience"
+        },
+        {
+          "cycleType": "NukaCaps"
+        },
+        {
+          "cycleType": "Encounters",
+          "pendingCycles": [],
+          "teamEncounters": [],
+          "inProgress": []
+        },
+        {
+          "cycleType": "Item",
+          "pendingCycles": []
+        },
+        {
+          "cycleType": "Speech"
+        },
+        {
+          "cycleType": "Junk",
+          "pendingCycles": [],
+          "teamEncounters": [],
+          "inProgress": []
+        }
+      ],
+      "mrHandyCycles": [
+        {
+          "cycleType": "Speech"
+        },
+        {
+          "cycleType": "NukaCaps"
+        }
+      ],
+      "questCycles": [],
+      "allTimeTeamsCounter": 0,
+      "lastSurpriseQuest": "",
+      "lastSurprisePopupTime": -1
+    }
+  },
+  "dwellerSpawner": {
+    "dwellersWaiting": [
+      {
+        "newDweller": true,
+        "charType": "Dweller",
+        "dwellerId": 13
+      }
+    ]
+  },
+  "deviceName": "STEAMDECK",
+  "tutorialManager": {
+    "phase": "Phase5",
+    "taskNumber": 0,
+    "objectivesTutorialMessage": true,
+    "lunchboxTutorialMessage": true,
+    "showingObjectiveTutorialMessage": false,
+    "showingLunchboxTutorialMessage": false,
+    "showWastelandMessageTime": 300,
+    "showExploreWastelandMessageTime": 10,
+    "exploreWastelandMessageShown": false,
+    "skippedTutorial": 1,
+    "questTutorialCompleted": 0,
+    "seasonTutorialCompleted": 1,
+    "scorchedAttackWarningShown": 0,
+    "dwellerSpawnedDuringScorchedAttack": 0,
+    "scorchedTimerTutorialCompleted": 0,
+    "builtUltraciteMine": 0,
+    "spinToWinTutorialCompleted": 1,
+    "arrivalTimerTutorialCompleted": 1,
+    "arrivalTimerClaimTutorialCompleted": 0,
+    "canShowArrivalTimerClaimTutorial": 0,
+    "seasonalQuestTutorialCompleted": 0,
+    "intialTimerTasks": [],
+    "ContextualVaultTecObjectives": false,
+    "ContextualAddFriends": false,
+    "ContextualWasteland": false,
+    "ContextualRadioRoom": false,
+    "ContextualWeaponsAndOutfits": false,
+    "ContextualTrainDweller": false,
+    "ContextualBabies": false,
+    "ContextualDestroyRocks": false,
+    "ContextualStorage": false,
+    "ContextualNoRoomForDwellers": false,
+    "ContextualUnequipedDweller": false,
+    "ContextualBuildAnElevator": false,
+    "ContextualDestroyRockToBuild": false,
+    "ContextualNoBuildZonesAvailableByRock": false,
+    "ContextualDestroyRockToAccessNextFloor": false,
+    "ContextualResourcesAlert": false,
+    "ContextualIncidentOcurs": false,
+    "ContextualLowPowerAlert": false,
+    "ContextualStorageFull": false,
+    "ContextualMergeOrUpgradeRoom": false,
+    "ContextualWastelandMessage": false,
+    "ContextualObjectivesCompleted": false,
+    "ContextualBabiesTutorial": false,
+    "ContextualStimpackMessage": false,
+    "ContextualLunchboxTutorial": false,
+    "ContextualRadwayMessage": false,
+    "ContextualRoomMerge2": false,
+    "ContextualRoomMerge3": false,
+    "ContextualStorage2": false,
+    "ContextualEquippingItemsWeapon": false,
+    "ContextualLuck": false,
+    "ContextualEquppingItemsPet": false,
+    "ContextualCrafting": false,
+    "ContextualDecorations": false,
+    "ContextualRequestJunk": false,
+    "ContextualJunk": false,
+    "ContextualTriggeredBirth": false,
+    "ContextualInventoryFull": false,
+    "ContextualInventoryFullWindow": false,
+    "ContextualJunkGiveAway": false,
+    "ContextualScrapping": false,
+    "ContextualAssignWith3DTouch": false,
+    "ContextualNukaQuantum": false,
+    "ContextualSurpriseQuests": false,
+    "ContextualReturningFromQuests": false,
+    "ContextualRadioRoomToggle": false,
+    "ContextualCraftTheme": false,
+    "ContextualJoystickNavigationInVault": false,
+    "ContextualScorchedAttackWarning": false,
+    "ContextualUltraciteWeapons": false,
+    "ContextualBuildUltraciteMine": false,
+    "ContextualBuildUltraciteWeaponFactory": false,
+    "ContextualScorchedAttackFail": false,
+    "MaleTasksQuant": 0,
+    "FemaleTasksQuant": 0
+  },
+  "objectiveMgr": {
+    "taskID": 8,
+    "canDiscard": true,
+    "nukaQuantumIncrement": 0,
+    "shuffleBags": [
+      [
+        "QuestPerformPerfectCriticalHit1_Survival",
+        "KillRaiderAtVaultDoor1",
+        "Babies1",
+        "DwellerHappy1",
+        "KillCreature1",
+        "CollectCaps1",
+        "Wasteland1",
+        "QuestCollectCaps1_Survival",
+        "SurviveDeathclawNoCasualties1",
+        "SurviveGhoulNoCasualties1",
+        "MakeFriend1",
+        "EquipRandomWeapon",
+        "SurviveRadscorpionNoCasualties1_Survival",
+        "UpgradeRoom1",
+        "SurviveHoursNoCasualties1",
+        "SurviveDeathclawNoCasualtiesHardcore1",
+        "RushRoom1_Survival",
+        "Stimpack1",
+        "Water1",
+        "MergeTwoRooms1",
+        "QuestCollectContainers1",
+        "StopMoleratWithoutPropagate1",
+        "MysteriousStranger1",
+        "RaiseSpecificSpecialLevel1",
+        "BaldDwellersInVault",
+        "WastelandCollectCaps1",
+        "StimpackHardcore1",
+        "CraftOutfits1",
+        "QuestPerformCriticalHit1_Survival",
+        "StopIncidents1",
+        "CompleteQuestInWasteland1_Survival",
+        "CollectWaterWithinOneMin1",
+        "CollectWeapons1",
+        "ExploreLocation1",
+        "QuestCollectCaps1",
+        "KillCreatureHardcore1",
+        "WeaponsHardcore1",
+        "RaiseSpecialLevel1",
+        "CollectFoodWithinOneMin1",
+        "KillDeathclawAtVaultDoor1",
+        "BarberShopUse1",
+        "QuestPerformCriticalHit1",
+        "SurviveDeathclawNoCasualties1_Survival",
+        "SurviveMoleratNoCasualties1_Survival",
+        "Radaway1",
+        "StopIncidentsHardcore1",
+        "CollectPets1",
+        "CollectWeaponsHardcore1",
+        "RightRoom1",
+        "Food1_Survival",
+        "CollectOutfits1",
+        "Power1_Survival",
+        "Food1",
+        "QuestCollectContainers1_Survival",
+        "SurviveMoleratNoCasualties1",
+        "OutfitsHardcore1",
+        "ExploreWastelandHoursWithoutRadaway1",
+        "RandomEnemyKilledUnarmed",
+        "Weapons1",
+        "Couple1",
+        "SurviveRadscorpionNoCasualties1",
+        "CollectRareOutfits1",
+        "RandomEnemyKilledUnarmed1_Survival",
+        "CollectOutfitsHardcore1",
+        "RushRoomHardcore1",
+        "KillRandomEnemyUnarmedHardcore1",
+        "CollectRareWeapons1",
+        "CompleteQuestInWasteland1",
+        "CraftRareOutfits1",
+        "Pregnant1",
+        "RushRoom1",
+        "CollectPowerWithinOneMin1",
+        "CompleteQuestInOverseer1_Survival",
+        "ScrapItems1",
+        "CraftWeapons1",
+        "WastelandWithPet1",
+        "CollectJunk1",
+        "CraftRareWeapons1",
+        "ExtinguishFireHardcore1",
+        "QuestPerformPerfectCriticalHit1",
+        "StopIncidents1_Survival",
+        "ExtinguishFire1",
+        "CompleteQuestInOverseer1",
+        "StopRadroachWithoutPropagate1",
+        "Outfits1",
+        "KillCreature1_Survival",
+        "WastelandLevelUp1",
+        "SellJunk1",
+        "ExploreWastelandHours1_Survival",
+        "SellItemHarcore1",
+        "Water1_Survival",
+        "LevelUp1",
+        "DwellerHappy1_Survival",
+        "SurviveMoleratNoCasualtiesHardcore1",
+        "QuestWinBattles1_Survival",
+        "SurviveGhoulNoCasualties1_Survival",
+        "QuestWinBattles1",
+        "Power1",
+        "ExploreWastelandHours1"
+      ],
+      [
+        "RightRoom2",
+        "WastelandLevelUp2",
+        "CollectOutfits2",
+        "CollectRareOutfits2",
+        "CollectWaterWithinOneMin2",
+        "ExtinguishFireHardcore2",
+        "StopRadroachWithoutPropagate2",
+        "RaiseSpecificSpecialLevel2",
+        "KillRaiderAtVaultDoor2",
+        "Weapons2",
+        "CollectFoodWithinOneMin2",
+        "KillCreature2_Survival",
+        "Pregnant2",
+        "SurviveHoursNoCasualties2",
+        "KillCreature2",
+        "Wasteland2",
+        "Water2_Survival",
+        "CompleteQuestInOverseer2",
+        "SurviveMoleratNoCasualties2_Survival",
+        "SurviveGhoulNoCasualties2_Survival",
+        "QuestWinBattles2",
+        "SurviveRadscorpionNoCasualties2_Survival",
+        "CompleteQuestInOverseer2_Survival",
+        "QuestCollectCaps2_Survival",
+        "CollectPowerWithinOneMin2",
+        "WastelandWithPet2",
+        "SurviveRadscorpionNoCasualties2",
+        "ScrapItems2",
+        "StopIncidents2_Survival",
+        "StimpackHardcore2",
+        "WeaponsHardcore2",
+        "CollectOutfitsHardcore2",
+        "RandomEnemyKilledUnarmed2",
+        "CompleteQuestInWasteland2",
+        "StopIncidents2",
+        "QuestWinBattles2_Survival",
+        "CollectCaps2",
+        "QuestCollectContainers2_Survival",
+        "SellItemHarcore2",
+        "KillRandomEnemyUnarmedHardcore2",
+        "WastelandCollectCaps2",
+        "CollectWeapons2",
+        "Power2_Survival",
+        "Food2",
+        "QuestPerformCriticalHit2_Survival",
+        "Power2",
+        "ExploreWastelandHours2_Survival",
+        "BaldDwellersInVault2",
+        "SellJunk2",
+        "DwellerHappy2_Survival",
+        "CraftWeapons2",
+        "RushRoom2_Survival",
+        "SurviveDeathclawNoCasualties2",
+        "CompleteQuestInWasteland2_Survival",
+        "QuestPerformPerfectCriticalHit2",
+        "StopMoleratWithoutPropagate2",
+        "CollectWeaponsHardcore2",
+        "CollectJunk2",
+        "RushRoomHardcore2",
+        "Couple2",
+        "StopIncidentsHardcore2",
+        "EquipRandomWeapon2",
+        "CraftRareOutfits2",
+        "ExploreLocation2",
+        "RandomEnemyKilledUnarmed2_Survival",
+        "LevelUp2",
+        "MysteriousStranger2",
+        "Babies2",
+        "KillDeathclawAtVaultDoor2",
+        "CraftRareWeapons2",
+        "SurviveDeathclawNoCasualtiesHardcore2",
+        "SurviveDeathclawNoCasualties2_Survival",
+        "SurviveMoleratNoCasualtiesHardcore2",
+        "DwellerHappy2",
+        "QuestPerformCriticalHit2",
+        "ExtinguishFire2",
+        "ExploreWastelandHours2",
+        "QuestPerformPerfectCriticalHit2_Survival",
+        "QuestCollectCaps2",
+        "WaterTut1",
+        "OutfitsHardcore2",
+        "CollectRareWeapons2",
+        "ExploreWastelandHoursWithoutRadaway2",
+        "UpgradeRoom2",
+        "BarberShopUse2",
+        "CraftOutfits2",
+        "MakeFriend2",
+        "KillCreatureHardcore2",
+        "CollectPets2",
+        "SurviveMoleratNoCasualties2",
+        "RaiseSpecialLevel2",
+        "RushRoom2",
+        "Radaway2",
+        "Water2",
+        "MergeTwoRooms2",
+        "Food2_Survival",
+        "SurviveGhoulNoCasualties2",
+        "QuestCollectContainers2",
+        "Stimpack2",
+        "Outfits2"
+      ],
+      [
+        "SurviveDeathclawNoCasualtiesHardcore3",
+        "ExploreWastelandHoursWithoutRadaway3",
+        "SurviveGhoulNoCasualties3",
+        "QuestWinBattles3_Survival",
+        "RandomEnemyKilledUnarmed3",
+        "MakeFriend3",
+        "Weapons3",
+        "CraftRareWeapons3",
+        "SurviveRadscorpionNoCasualties3_Survival",
+        "QuestPerformCriticalHit3_Survival",
+        "Power3",
+        "RushRoom3",
+        "ExploreWastelandHours3_Survival",
+        "CollectPets3",
+        "QuestCollectContainers3_Survival",
+        "Stimpack3",
+        "WastelandWithPet3",
+        "SellItemHarcore3",
+        "WastelandLevelUp3",
+        "WastelandCollectCaps3",
+        "SurviveHoursNoCasualties3",
+        "CollectWaterWithinOneMin3",
+        "SurviveMoleratNoCasualties3_Survival",
+        "KillCreature3",
+        "SurviveMoleratNoCasualties3",
+        "Water3",
+        "QuestWinBattles3",
+        "CollectFoodWithinOneMin3",
+        "StopMoleratWithoutPropagate3",
+        "CollectWeapons3",
+        "OutfitsT1",
+        "ExploreWastelandHours3",
+        "RadawayT1",
+        "Outfits3",
+        "Food3",
+        "CraftWeapons3",
+        "StopIncidents3_Survival",
+        "CraftOutfits3",
+        "SurviveMoleratNoCasualtiesHardcore3",
+        "RushRoomHardcore3",
+        "BaldDwellersInVault3",
+        "ScrapItems3",
+        "StopIncidentsHardcore3",
+        "ExtinguishFireHardcore3",
+        "StopRadroachWithoutPropagate3",
+        "Power3_Survival",
+        "Water3_Survival",
+        "KillCreatureHardcore3",
+        "KillCreature3_Survival",
+        "UpgradeRoom3",
+        "QuestCollectCaps3",
+        "CollectCaps3",
+        "DwellerHappy3",
+        "CollectOutfits3",
+        "LevelUp3",
+        "CollectOutfitsHardcore3",
+        "KillRaiderAtVaultDoor3",
+        "RushRoom3_Survival",
+        "StopIncidents3",
+        "Pregnant3",
+        "SurviveDeathclawNoCasualties3_Survival",
+        "DwellerHappy3_Survival",
+        "StimpackHardcore3",
+        "OutfitsHardcore3",
+        "CompleteQuestInWasteland3_Survival",
+        "CollectRareWeapons3",
+        "SurviveDeathclawNoCasualties3",
+        "CollectWeaponsHardcore3",
+        "CollectJunk3",
+        "RaiseSpecialLevel3",
+        "CompleteQuestInOverseer3",
+        "Wasteland3",
+        "RandomEnemyKilledUnarmed3_Survival",
+        "KillDeathclawAtVaultDoor3",
+        "ExploreLocation3",
+        "EquipRandomWeapon3",
+        "Babies3",
+        "RightRoom3",
+        "CompleteQuestInWasteland3",
+        "MysteriousStranger3",
+        "QuestPerformPerfectCriticalHit3_Survival",
+        "CompleteQuestInOverseer3_Survival",
+        "SurviveRadscorpionNoCasualties3",
+        "MergeTwoRooms3",
+        "CollectRareOutfits3",
+        "WeaponsHardcore3",
+        "SellJunk3",
+        "Radaway3",
+        "Couple3",
+        "QuestCollectContainers3",
+        "KillRandomEnemyUnarmedHardcore3",
+        "RaiseSpecificSpecialLevel3",
+        "CollectPowerWithinOneMin3",
+        "CraftRareOutfits3",
+        "Food3_Survival",
+        "QuestPerformPerfectCriticalHit3",
+        "SurviveGhoulNoCasualties3_Survival",
+        "QuestCollectCaps3_Survival",
+        "QuestPerformCriticalHit3",
+        "BarberShopUse3",
+        "ExtinguishFire3"
+      ],
+      [
+        "CollectFoodWithinOneMin4",
+        "Couple4",
+        "EquipRandomWeapon4",
+        "RandomEnemyKilledUnarmed4",
+        "Pregnant4",
+        "Stimpack4",
+        "Weapons4",
+        "QuestCollectCaps4_Survival",
+        "SurviveGhoulNoCasualties4_Survival",
+        "KillCreature4",
+        "ExploreWastelandHoursWithoutRadaway4",
+        "StimpackHardcore4",
+        "ExploreWastelandHours4_Survival",
+        "KillRaiderAtVaultDoor4",
+        "QuestPerformPerfectCriticalHit4",
+        "CollectPowerWithinOneMin4",
+        "CollectCaps4",
+        "SurviveDeathclawNoCasualties4",
+        "SurviveRadscorpionNoCasualties4",
+        "CollectRareOutfits4",
+        "WastelandWithPet4",
+        "WastelandCollectCaps4",
+        "ExploreWastelandHours4",
+        "UpgradeRoom4",
+        "RightRoom4",
+        "OutfitsHardcore4",
+        "KillDeathclawAtVaultDoor4",
+        "StopIncidents4",
+        "Radaway4",
+        "CollectPets4",
+        "SurviveGhoulNoCasualties4",
+        "CraftRareOutfits4",
+        "ExtinguishFireHardcore4",
+        "LevelUp4",
+        "SellJunk4",
+        "BarberShopUse4",
+        "CraftWeapons4",
+        "Food4_Survival",
+        "QuestCollectCaps4",
+        "DwellerHappy4",
+        "CraftOutfits4",
+        "CollectWaterWithinOneMin4",
+        "StopIncidentsHardcore4",
+        "CompleteQuestInOverseer4",
+        "CollectWeaponsHardcore4",
+        "Power4",
+        "RandomEnemyKilledUnarmed4_Survival",
+        "QuestCollectContainers4_Survival",
+        "DwellerHappy4_Survival",
+        "QuestWinBattles4",
+        "WeaponsHardcore4",
+        "ScrapItems4",
+        "QuestPerformCriticalHit4_Survival",
+        "CollectOutfitsHardcore4",
+        "RaiseSpecificSpecialLevel4",
+        "StopMoleratWithoutPropagate4",
+        "QuestCollectContainers4",
+        "Water4_Survival",
+        "KillCreatureHardcore4",
+        "QuestWinBattles4_Survival",
+        "SurviveRadscorpionNoCasualties4_Survival",
+        "MakeFriend4",
+        "SurviveMoleratNoCasualties4_Survival",
+        "StopRadroachWithoutPropagate4",
+        "QuestPerformCriticalHit4",
+        "CollectJunk4",
+        "MysteriousStranger4",
+        "QuestPerformPerfectCriticalHit4_Survival",
+        "WastelandLevelUp4",
+        "SurviveDeathclawNoCasualtiesHardcore4",
+        "KillCreature4_Survival",
+        "RaiseSpecialLevel4",
+        "CollectRareWeapons4",
+        "SellItemHarcore4",
+        "RushRoomHardcore4",
+        "KillRandomEnemyUnarmedHardcore4",
+        "CompleteQuestInOverseer4_Survival",
+        "Babies4",
+        "RushRoom4",
+        "CollectWeapons4",
+        "Power4_Survival",
+        "Wasteland4",
+        "RushRoom4_Survival",
+        "PowerTut2",
+        "BaldDwellersInVault4",
+        "CompleteQuestInWasteland4",
+        "SurviveMoleratNoCasualties4",
+        "FoodTut2",
+        "SurviveHoursNoCasualties4",
+        "CraftRareWeapons4",
+        "Water4",
+        "SurviveDeathclawNoCasualties4_Survival",
+        "CompleteQuestInWasteland4_Survival",
+        "ExploreLocation4",
+        "SurviveMoleratNoCasualtiesHardcore4",
+        "StopIncidents4_Survival",
+        "Food4",
+        "CollectOutfits4",
+        "MergeTwoRooms4",
+        "Outfits4",
+        "ExtinguishFire4"
+      ],
+      [
+        "WeaponsHardcore5",
+        "SurviveRadscorpionNoCasualties5_Survival",
+        "SurviveMoleratNoCasualties5",
+        "CollectWeapons5",
+        "Water5_Survival",
+        "QuestCollectCaps5_Survival",
+        "KillCreature5",
+        "WastelandWithPet5",
+        "EquipRandomWeapon5",
+        "RushRoom5",
+        "ExtinguishFire5",
+        "SurviveHoursNoCasualties5",
+        "Weapons5",
+        "SurviveDeathclawNoCasualtiesHardcore5",
+        "KillCreature5_Survival",
+        "ExploreLocation5",
+        "SurviveMoleratNoCasualtiesHardcore5",
+        "BaldDwellersInVault5",
+        "KillRaiderAtVaultDoor5",
+        "CompleteQuestInOverseer5_Survival",
+        "CollectFoodWithinOneMin5",
+        "CollectJunk5",
+        "Radaway5",
+        "StimpackHardcore5",
+        "StopIncidents5",
+        "SurviveDeathclawNoCasualties5",
+        "ExploreWastelandHours5_Survival",
+        "DwellerHappy5",
+        "ExploreWastelandHoursWithoutRadaway5",
+        "DwellerHappyT1",
+        "RushRoom5_Survival",
+        "StopMoleratWithoutPropagate5",
+        "CollectWaterWithinOneMin5",
+        "QuestPerformPerfectCriticalHit5",
+        "SurviveDeathclawNoCasualties5_Survival",
+        "DwellerHappy5_Survival",
+        "Outfits5",
+        "CollectOutfitsHardcore5",
+        "SurviveRadscorpionNoCasualties5",
+        "StopIncidents5_Survival",
+        "RaiseSpecificSpecialLevel5",
+        "Power5",
+        "CollectPowerWithinOneMin5",
+        "UpgradeRoom5",
+        "CompleteQuestInOverseer5",
+        "CompleteQuestInWasteland5_Survival",
+        "RaiseSpecialLevel5",
+        "CollectPets5",
+        "CraftOutfits5",
+        "KillCreatureHardcore5",
+        "CollectCaps5",
+        "CraftWeapons5",
+        "CollectWeaponsHardcore5",
+        "QuestWinBattles5_Survival",
+        "BabiesT1",
+        "CollectRareOutfits5",
+        "Power5_Survival",
+        "QuestPerformCriticalHit5",
+        "SellItemHarcore5",
+        "CompleteQuestInWasteland5",
+        "QuestPerformCriticalHit5_Survival",
+        "Food5",
+        "SurviveGhoulNoCasualties5_Survival",
+        "WastelandLevelUp5",
+        "Stimpack5",
+        "Wasteland5",
+        "ExtinguishFireHardcore5",
+        "StopRadroachWithoutPropagate5",
+        "CollectOutfits5",
+        "ExtinguishFireT1",
+        "CollectRareWeapons5",
+        "WastelandCollectCaps5",
+        "OutfitsHardcore5",
+        "QuestCollectCaps5",
+        "MysteriousStranger5",
+        "SellJunk5",
+        "ExploreWastelandHours5",
+        "ScrapItems5",
+        "LevelUp5",
+        "KillDeathclawAtVaultDoor5",
+        "QuestCollectContainers5_Survival",
+        "CraftRareOutfits5",
+        "MergeTwoRooms5",
+        "Food5_Survival",
+        "MakeFriend5",
+        "RandomEnemyKilledUnarmed5_Survival",
+        "Water5",
+        "SurviveGhoulNoCasualties5",
+        "StopIncidentsHardcore5",
+        "KillRandomEnemyUnarmedHardcore5",
+        "SurviveMoleratNoCasualties5_Survival",
+        "QuestWinBattles5",
+        "Babies5",
+        "QuestCollectContainers5",
+        "CraftRareWeapons5",
+        "BarberShopUse5",
+        "RushRoomHardcore5",
+        "Couple5",
+        "RightRoom5",
+        "QuestPerformPerfectCriticalHit5_Survival",
+        "Pregnant5",
+        "RandomEnemyKilledUnarmed5"
+      ]
+    ],
+    "slotArray": [
+      {
+        "objective": {
+          "objectiveID": "WastelandT1",
+          "requirements": [
+            {
+              "requirementID": "r1",
+              "satisfied": false,
+              "currentDwellers": 0
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        "incLevel": 0,
+        "lottery": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      {
+        "objective": {
+          "objectiveID": "FoodTut1",
+          "requirements": [
+            {
+              "requirementID": "r1",
+              "satisfied": false,
+              "gainedRes": {
+                "Nuka": 0,
+                "Food": 48,
+                "Energy": 0,
+                "Water": 0,
+                "StimPack": 0,
+                "RadAway": 0,
+                "Lunchbox": 0,
+                "MrHandy": 0,
+                "PetCarrier": 0,
+                "CraftedOutfit": 0,
+                "CraftedWeapon": 0,
+                "NukaColaQuantum": 0,
+                "CraftedTheme": 0,
+                "DummyUltracite": 0,
+                "PokerChip": 0
+              }
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        "incLevel": 0,
+        "lottery": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      {
+        "objective": {
+          "objectiveID": "WaterTut2",
+          "requirements": [
+            {
+              "requirementID": "r1",
+              "satisfied": false,
+              "gainedRes": {
+                "Nuka": 0,
+                "Food": 0,
+                "Energy": 0,
+                "Water": 16,
+                "StimPack": 0,
+                "RadAway": 0,
+                "Lunchbox": 0,
+                "MrHandy": 0,
+                "PetCarrier": 0,
+                "CraftedOutfit": 0,
+                "CraftedWeapon": 0,
+                "NukaColaQuantum": 0,
+                "CraftedTheme": 0,
+                "DummyUltracite": 0,
+                "PokerChip": 0
+              }
+            }
+          ],
+          "completed": false,
+          "incrementLevel": 0
+        },
+        "incLevel": 0,
+        "lottery": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      }
+    ]
+  },
+  "unlockableMgr": {
+    "objectivesInProgress": [
+      {
+        "objectiveID": "MedbayUnlock",
+        "requirements": [
+          {
+            "requirementID": "unlock1",
+            "satisfied": false,
+            "currentCount": 12
+          }
+        ],
+        "completed": false,
+        "incrementLevel": 0
+      },
+      {
+        "objectiveID": "RadioStationUnlock",
+        "requirements": [
+          {
+            "requirementID": "unlock3",
+            "satisfied": false,
+            "currentCount": 12
+          }
+        ],
+        "completed": false,
+        "incrementLevel": 0
+      },
+      {
+        "objectiveID": "NukacolaUnlock",
+        "requirements": [
+          {
+            "requirementID": "unlock15",
+            "satisfied": false,
+            "currentCount": 12
+          }
+        ],
+        "completed": false,
+        "incrementLevel": 0
+      },
+      {
+        "objectiveID": "SciencelabUnlock",
+        "requirements": [
+          {
+            "requirementID": "unlock2",
+            "satisfied": false,
+            "currentCount": 12
+          }
+        ],
+        "completed": false,
+        "incrementLevel": 0
+      },
+      {
+        "objectiveID": "GymUnlock",
+        "requirements": [
+          {
+            "requirementID": "unlock4",
+            "satisfied": false,
+            "currentCount": 12
+          }
+        ],
+        "completed": false,
+        "incrementLevel": 0
+      },
+      {
+        "objectiveID": "ArmoryUnlock",
+        "requirements": [
+          {
+            "requirementID": "unlock6",
+            "satisfied": false,
+            "currentCount": 12
+          }
+        ],
+        "completed": false,
+        "incrementLevel": 0
+      },
+      {
+        "objectiveID": "PowerPlantUnlock",
+        "requirements": [
+          {
+            "requirementID": "unlock12",
+            "satisfied": false,
+            "currentCount": 12
+          }
+        ],
+        "completed": false,
+        "incrementLevel": 0
+      },
+      {
+        "objectiveID": "CardioUnlock",
+        "requirements": [
+          {
+            "requirementID": "unlock8",
+            "satisfied": false,
+            "currentCount": 12
+          }
+        ],
+        "completed": false,
+        "incrementLevel": 0
+      },
+      {
+        "objectiveID": "WaterroomUnlock",
+        "requirements": [
+          {
+            "requirementID": "unlock13",
+            "satisfied": false,
+            "currentCount": 12
+          }
+        ],
+        "completed": false,
+        "incrementLevel": 0
+      },
+      {
+        "objectiveID": "HydroponicUnlock",
+        "requirements": [
+          {
+            "requirementID": "unlock14",
+            "satisfied": false,
+            "currentCount": 12
+          }
+        ],
+        "completed": false,
+        "incrementLevel": 0
+      },
+      {
+        "objectiveID": "BarUnlock",
+        "requirements": [
+          {
+            "requirementID": "unlock9",
+            "satisfied": false,
+            "currentCount": 12
+          }
+        ],
+        "completed": false,
+        "incrementLevel": 0
+      },
+      {
+        "objectiveID": "ClassUnlock",
+        "requirements": [
+          {
+            "requirementID": "unlock7",
+            "satisfied": false,
+            "currentCount": 12
+          }
+        ],
+        "completed": false,
+        "incrementLevel": 0
+      },
+      {
+        "objectiveID": "DojoUnlock",
+        "requirements": [
+          {
+            "requirementID": "unlock5",
+            "satisfied": false,
+            "currentCount": 12
+          }
+        ],
+        "completed": false,
+        "incrementLevel": 0
+      },
+      {
+        "objectiveID": "GameRoomUnlock",
+        "requirements": [
+          {
+            "requirementID": "unlock10",
+            "satisfied": false,
+            "currentCount": 12
+          }
+        ],
+        "completed": false,
+        "incrementLevel": 0
+      },
+      {
+        "objectiveID": "WeaponFactoryUnlock",
+        "requirements": [
+          {
+            "requirementID": "unlock16",
+            "satisfied": false,
+            "currentCount": 12
+          }
+        ],
+        "completed": false,
+        "incrementLevel": 0
+      },
+      {
+        "objectiveID": "OutfitFactoryUnlock",
+        "requirements": [
+          {
+            "requirementID": "unlock17",
+            "satisfied": false,
+            "currentCount": 12
+          }
+        ],
+        "completed": false,
+        "incrementLevel": 0
+      },
+      {
+        "objectiveID": "BarberShopUnlock",
+        "requirements": [
+          {
+            "requirementID": "unlock18",
+            "satisfied": false,
+            "currentCount": 12
+          }
+        ],
+        "completed": false,
+        "incrementLevel": 0
+      },
+      {
+        "objectiveID": "OverseerUnlock",
+        "requirements": [
+          {
+            "requirementID": "unlock20",
+            "satisfied": false,
+            "currentCount": 12
+          }
+        ],
+        "completed": false,
+        "incrementLevel": 0
+      },
+      {
+        "objectiveID": "DesignFactoryUnlock",
+        "requirements": [
+          {
+            "requirementID": "unlock21",
+            "satisfied": false,
+            "currentCount": 12
+          }
+        ],
+        "completed": false,
+        "incrementLevel": 0
+      }
+    ],
+    "completed": [],
+    "claimed": [
+      "StorageUnlock"
+    ]
+  },
+  "survivalW": {
+    "weapons": [
+      "N99",
+      "N183",
+      "N173"
+    ],
+    "outfits": [
+      "N146",
+      "N34",
+      "N54",
+      "N101"
+    ],
+    "dwellers": [],
+    "pets": [],
+    "breeds": [
+      "N12"
+    ],
+    "decorations": [],
+    "junk": [
+      "NAlarmClock",
+      "NShovel"
+    ],
+    "recipes": [
+      "BOSUniform_Advanced",
+      "RadiationSuit_Advanced",
+      "UtilityJumpsuit",
+      "BattleArmor",
+      "CombatArmor",
+      "ScribeRobe_Elder",
+      "InstituteJumper_Expert",
+      "FormalWear_Fancy",
+      "FlightSuit",
+      "FormalWear",
+      "HandymanJumpsuit",
+      "BattleArmor_Heavy",
+      "RiotGear_Heavy",
+      "ScribeRobe_Initiate",
+      "ScientistScrubs",
+      "LabCoat",
+      "WandererArmor",
+      "MechanicJumpsuit",
+      "RiotGear",
+      "MilitaryJumpsuit",
+      "MoviefanSpecial",
+      "AllNightware",
+      "NinjaSuit",
+      "ScientistScrubs_Officer",
+      "PolkaDotDress",
+      "SweaterVest",
+      "RadiationSuit",
+      "RaiderArmor",
+      "WorkDress",
+      "CheckeredShirt",
+      "CombatArmor_Sturdy",
+      "PowerArmor",
+      "HunterGear_Treasure",
+      "SequinDress",
+      "HazmatSuit",
+      "WastelandSurgeon_Settler",
+      "WastelandSurgeon",
+      "PowerArmor_MkI",
+      "032Pistol",
+      "032Pistol_Enhanced",
+      "032Pistol_Rusty",
+      "AlienBlaster_Tuned",
+      "BBGun",
+      "BBGun_Enhanced",
+      "BBGun_Hardened",
+      "BBGun_Rusty",
+      "CombatShotgun_DoubleBarrelled",
+      "CombatShotgun_Enhanced",
+      "Flamer",
+      "GaussRifle_Enhanced",
+      "HuntingRifle",
+      "HuntingRifle_Enhanced",
+      "HuntingRifle_Hardened",
+      "HuntingRifle_Rusty",
+      "LaserPistol_Rusty",
+      "LaserPistol_Tuned",
+      "LaserRifle",
+      "LaserRifle_Amplified",
+      "Magnum",
+      "Magnum_ArmorPiercing",
+      "Magnum_Enhanced",
+      "Magnum_Rusty",
+      "Minigun_ArmorPiercing",
+      "MissilLauncher_Guided",
+      "MissilLauncher_Rusty",
+      "PipePistol",
+      "PipePistol_HairTrigger",
+      "PipePistol_Heavy",
+      "Pistol",
+      "Pistol_Enhanced",
+      "Pistol_Hardened",
+      "Pistol_Rusty",
+      "PlasmaPistol_Amplified",
+      "PlasmaPistol_Rusty",
+      "PlasmaRifle_Rusty",
+      "PlasmaRifle_Tuned",
+      "Railgun_Accelerated",
+      "Rifle",
+      "Rifle_Enhanced",
+      "Rifle_Rusty",
+      "SawedOffShotgun",
+      "SawedOffShotgun_DoubleBarrelled",
+      "SawedOffShotgun_Enhanced",
+      "SawedOffShotgun_Rusty",
+      "Shotgun",
+      "NewVegasNightExterior",
+      "UltraciteGatling1",
+      "UltraciteGatling2",
+      "UltracitePlasma1",
+      "UltracitePlasma2",
+      "UltraciteSword1",
+      "UltraciteSword2",
+      "NewVegasNightExterior"
+    ],
+    "claimedRecipes": [],
+    "collectedThemes": {
+      "themeList": [
+        {
+          "id": "NewVegasNightExterior",
+          "type": "Theme",
+          "hasBeenAssigned": false,
+          "hasRandonWeaponBeenAssigned": false,
+          "extraData": {
+            "partsCollectedCount": 9,
+            "IsCraftingInProgress": false,
+            "IsCrafted": true,
+            "IsClaimed": true,
+            "IsClaimedInCraftingRoom": true,
+            "IsNew": false
+          }
+        }
+      ]
+    }
+  },
+  "ShopWindow": {
+    "isStarterPackPurchased": false,
+    "hasStarterPackPopupShown": false
+  },
+  "happinessManager": {
+    "room35": [
+      {
+        "type": 3,
+        "rh": 0,
+        "in": true,
+        "dc": 4
+      }
+    ],
+    "rooms": [
+      35
+    ],
+    "dweller1": [
+      {
+        "type": 2,
+        "rh": 0,
+        "in": true
+      }
+    ],
+    "dweller3": [
+      {
+        "type": 2,
+        "rh": 0,
+        "in": true
+      }
+    ],
+    "dweller4": [
+      {
+        "type": 2,
+        "rh": 0,
+        "in": true
+      }
+    ],
+    "dweller5": [
+      {
+        "type": 2,
+        "rh": 0,
+        "in": true
+      }
+    ],
+    "dweller2": [
+      {
+        "type": 2,
+        "rh": 0,
+        "in": true
+      }
+    ],
+    "dweller7": [
+      {
+        "type": 2,
+        "rh": 0,
+        "in": true
+      }
+    ],
+    "dweller10": [
+      {
+        "type": 2,
+        "rh": 0,
+        "in": true
+      }
+    ],
+    "dweller12": [
+      {
+        "type": 2,
+        "rh": 0,
+        "in": true
+      }
+    ],
+    "dwellers": [
+      1,
+      3,
+      4,
+      5,
+      2,
+      7,
+      10,
+      12
+    ]
+  },
+  "refugeeSpawner": {
+    "newGameTask": -1,
+    "succeed": -1,
+    "currentPool": "Pool2",
+    "currentPoolData": {
+      "retrievedDwellers": 0,
+      "failedChances": 0
+    },
+    "globalTimerTask": 67,
+    "collectedAllRefugees": false
+  },
+  "LunchBoxCollectWindow": null,
+  "SeasonShopWarningModal": {},
+  "DeathclawManager": {
+    "deathclawTotalExtraChance": 0,
+    "canDeathclawEmergencyOccurs": true,
+    "deathclawCooldownID": -1
+  },
+  "PromoCodesWindow": null,
+  "JunkGiveAwayWindow": null,
+  "MysteriousStranger": {
+    "currentState": "Hiding",
+    "canAppear": false,
+    "timeToAppear": 60,
+    "remainingTimeToAppear": 60
+  },
+  "StatsWindow": {
+    "vaultData": {
+      "collectedRes": {
+        "Nuka": 442405,
+        "Food": 134.25,
+        "Energy": 116.25,
+        "Water": 126.25,
+        "StimPack": 0,
+        "RadAway": 0,
+        "Lunchbox": 0,
+        "MrHandy": 0,
+        "PetCarrier": 0,
+        "CraftedOutfit": 0,
+        "CraftedWeapon": 0,
+        "NukaColaQuantum": 0,
+        "CraftedTheme": 0,
+        "DummyUltracite": 0,
+        "PokerChip": 0
+      },
+      "collectedOutfits": 4,
+      "collectedWeapons": 3,
+      "collectedDecorations": 0,
+      "collectedPets": 1,
+      "raidersKilled": 0,
+      "elevatorRides": 41,
+      "lunchBoxesOpened": 2,
+      "petCarriersOpened": 0,
+      "totalLifetimeDwellers": 12,
+      "babiesBorn": 0,
+      "dwellersRevived": 0,
+      "levelsGained": 4,
+      "specialStatTrained": 0,
+      "takenStimpack": 0,
+      "takenRadaway": 0,
+      "deadDwellers": 0,
+      "evictedDwellers": 0,
+      "highestDwellerCount": 12,
+      "soldWeapons": 0,
+      "soldOutfits": 0,
+      "soldDecorations": 0,
+      "soldPets": 0,
+      "scrappedOutfits": 0,
+      "scrappedWeapons": 0,
+      "craftedWeapons": 0,
+      "craftedOutfits": 0,
+      "craftedDecorations": 0,
+      "craftedThemes": 0,
+      "collectedJunk": 2,
+      "soldJunk": 0,
+      "successfulRushes": 1,
+      "failRushes": 2,
+      "firesExtinguised": 1,
+      "emergencyStopRaider": 0,
+      "emergencyStopDeathClaw": 0,
+      "emergencyStopGhoul": 0,
+      "emergencyStopRadroach": 1,
+      "emergencyStopRadscorpion": 0,
+      "emergencyStopMolerat": 0,
+      "emergencyStopAlien": 0,
+      "emergencyStopScorched": 0,
+      "emergencyStopSecuritron": 0,
+      "dwellersSentWasteland": 0,
+      "wastelandTotalTime": 0,
+      "wastelandCreaturesKilled": 0,
+      "vaultCreatedBeforeUpdate": false,
+      "dwellersCustomized": 0,
+      "measuringSince": 638827246829292400,
+      "previousVResources": {
+        "Nuka": 421700,
+        "Food": 32.37,
+        "Energy": 40.45,
+        "Water": 24.37,
+        "StimPack": 0,
+        "RadAway": 0,
+        "Lunchbox": 0,
+        "MrHandy": 0,
+        "PetCarrier": 0,
+        "CraftedOutfit": 0,
+        "CraftedWeapon": 0,
+        "NukaColaQuantum": 0,
+        "CraftedTheme": 0,
+        "DummyUltracite": 0,
+        "PokerChip": 0
+      },
+      "weaponFactoryBuilt": false,
+      "outfitFactoryBuilt": false
+    }
+  },
+  "PromotionFlags": [
+    "PetGiveaway"
+  ],
+  "appVersion": " 2.1.1",
+  "BottleAndCappyMgrSerializeKey": {
+    "SerializeAccumulatedTriggerChance": 0,
+    "SerializeLocked": false
+  },
+  "completedQuestDataManager": {
+    "taskID": 14,
+    "completedQuests": [],
+    "foundClues": [],
+    "standaloneQuestPicker": {},
+    "dailyQuestPicker": {
+      "currentDailies": [],
+      "historyDailies": []
+    },
+    "weeklyQuestPicker": {
+      "currentWeeklies": [],
+      "historyWeeklies": []
+    },
+    "nukaQuantumIncrement": 0,
+    "standaloneQuestSkipper": {
+      "skippedQuests": []
+    },
+    "dailyQuestSkipper": {
+      "skippedQuests": []
+    },
+    "weeklyQuestSkipper": {
+      "skippedQuests": []
+    },
+    "eventQuestCompletedTimes": {}
+  },
+  "seasonEventData": {
+    "currentEvent": 0,
+    "nextEventTime": "2/4/2026 6:54:32 AM",
+    "claimedEvents": [],
+    "areAllSeasonEventsClaimed": false,
+    "isNewQuestUnlocked": false
+  },
+  "dayToDayRewardMgr": {
+    "states": [
+      {
+        "type": 14,
+        "next": 1770246000000
+      }
+    ]
+  },
+  "seasonId": "NewVegasB",
+  "versionCount": 60
+}

@@ -346,10 +346,14 @@ function populateVaultData() {
     const vaultNameElem = document.getElementById('vaultName');
     if (vaultNameElem) vaultNameElem.value = vault.VaultName || '';
     
+    // Resources are stored at vault.storage.resources
     const storage = vault.storage?.resources || {};
     
+    // Caps - stored as "Nuka" in the save file
+    const capsElem = document.getElementById('caps');
+    if (capsElem) capsElem.value = storage.Nuka || 0;
+    
     const fields = {
-        'caps': 'Caps',
         'food': 'Food',
         'water': 'Water',
         'power': 'Energy',
@@ -449,7 +453,7 @@ function selectDweller(dweller, index) {
     const radiationElem = document.getElementById('dwellerRadiation');
     if (healthElem) healthElem.value = dweller.health?.healthValue || dweller.health?.maxHealth || 100;
     if (maxHealthElem) maxHealthElem.value = dweller.health?.maxHealth || 100;
-    if (radiationElem) radiationElem.value = dweller.health?.radiationLevel || 0;
+    if (radiationElem) radiationElem.value = dweller.health?.radiationValue || 0;
     
     // Happiness (stored in happiness object)
     const happinessElem = document.getElementById('dwellerHappiness');
@@ -505,7 +509,7 @@ function updateDwellerData() {
     const radiationElem = document.getElementById('dwellerRadiation');
     if (healthElem) dweller.health.healthValue = parseInt(healthElem.value) || 100;
     if (maxHealthElem) dweller.health.maxHealth = parseInt(maxHealthElem.value) || 100;
-    if (radiationElem) dweller.health.radiationLevel = parseInt(radiationElem.value) || 0;
+    if (radiationElem) dweller.health.radiationValue = parseInt(radiationElem.value) || 0;
     
     // Happiness
     if (!dweller.happiness) dweller.happiness = {};
@@ -1082,8 +1086,11 @@ function updateVaultData() {
     if (!vault.storage) vault.storage = {};
     if (!vault.storage.resources) vault.storage.resources = {};
     
+    // Caps - save as "Nuka"
+    const capsElem = document.getElementById('caps');
+    if (capsElem) vault.storage.resources.Nuka = parseInt(capsElem.value) || 0;
+    
     const fields = {
-        'caps': 'Caps',
         'food': 'Food',
         'water': 'Water',
         'power': 'Energy',
