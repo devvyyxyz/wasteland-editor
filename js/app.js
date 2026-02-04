@@ -160,9 +160,11 @@ function initializeEventListeners() {
         if (e.target.classList.contains('back-link')) {
             e.preventDefault();
             const dwellersList = document.getElementById('dwellersList');
-            const dwellerDetails = document.getElementById('dwellerDetails');
+            const dwellerDetailsEmptyState = document.getElementById('dwellerDetailsEmptyState');
+            const dwellerDetailsContent = document.getElementById('dwellerDetailsContent');
             if (dwellersList) dwellersList.style.display = 'block';
-            if (dwellerDetails) dwellerDetails.style.display = 'none';
+            if (dwellerDetailsEmptyState) dwellerDetailsEmptyState.style.display = 'flex';
+            if (dwellerDetailsContent) dwellerDetailsContent.style.display = 'none';
             currentDweller = null;
         }
     });
@@ -700,9 +702,11 @@ function selectDweller(dweller, index) {
     document.querySelectorAll('.dweller-item').forEach(item => item.classList.remove('active'));
     event.target.closest('.dweller-item').classList.add('active');
     
-    const dwellerDetails = document.getElementById('dwellerDetails');
+    const dwellerDetailsEmptyState = document.getElementById('dwellerDetailsEmptyState');
+    const dwellerDetailsContent = document.getElementById('dwellerDetailsContent');
     
-    if (dwellerDetails) dwellerDetails.style.display = 'block';
+    if (dwellerDetailsEmptyState) dwellerDetailsEmptyState.style.display = 'none';
+    if (dwellerDetailsContent) dwellerDetailsContent.style.display = 'block';
     
     const nameElem = document.getElementById('dwellerName');
     const fullName = `${dweller.name || ''} ${dweller.lastName || ''}`.trim() || 'Unknown';
@@ -2381,10 +2385,10 @@ function editRoom(index, room) {
     });
     
     // Show the form
-    const roomDetails = document.getElementById('roomDetails');
-    if (roomDetails) {
-        roomDetails.style.display = 'block';
-    }
+    const roomDetailsEmptyState = document.getElementById('roomDetailsEmptyState');
+    const roomDetailsContent = document.getElementById('roomDetailsContent');
+    if (roomDetailsEmptyState) roomDetailsEmptyState.style.display = 'none';
+    if (roomDetailsContent) roomDetailsContent.style.display = 'block';
     
     // Highlight selected room
     document.querySelectorAll('.room-item').forEach((item, i) => {
@@ -2454,10 +2458,10 @@ function saveRoom() {
 
 function closeRoomEditor() {
     currentRoomIndex = null;
-    const roomDetails = document.getElementById('roomDetails');
-    if (roomDetails) {
-        roomDetails.style.display = 'none';
-    }
+    const roomDetailsEmptyState = document.getElementById('roomDetailsEmptyState');
+    const roomDetailsContent = document.getElementById('roomDetailsContent');
+    if (roomDetailsEmptyState) roomDetailsEmptyState.style.display = 'flex';
+    if (roomDetailsContent) roomDetailsContent.style.display = 'none';
     document.querySelectorAll('.room-item').forEach(item => {
         item.classList.remove('active');
     });
