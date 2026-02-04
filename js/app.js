@@ -134,8 +134,9 @@ function initializeEventListeners() {
 
     // Dweller panel listeners
     ['dwellerFirstName', 'dwellerLastName', 'dwellerGender', 'dwellerLevel', 'dwellerExp',
-     'dwellerHealth', 'dwellerHappiness', 'dwellerSkinColor', 'dwellerHairColor',
-     'dwellerOutfit', 'dwellerWeapon', 'dwellerMaxHealth', 'dwellerRadiation'].forEach(id => {
+     'dwellerHealth', 'dwellerHappiness', 'dwellerSkinColor', 'dwellerHairColor', 'dwellerHairStyle',
+     'dwellerOutfit', 'dwellerWeapon', 'dwellerMaxHealth', 'dwellerRadiation', 'dwellerRarity',
+     'dwellerSavedRoom', 'dwellerPregnant', 'dwellerBabyReady', 'dwellerPartner'].forEach(id => {
         const elem = document.getElementById(id);
         if (elem) {
             elem.addEventListener('change', updateDwellerData);
@@ -751,6 +752,62 @@ function selectDweller(dweller, index) {
     trackFieldChange('dwellerSkinColor');
     trackFieldChange('dwellerHairColor');
     
+    // Hair style
+    const hairStyleElem = document.getElementById('dwellerHairStyle');
+    if (hairStyleElem) {
+        const hairStyle = dweller.hair || '10';
+        hairStyleElem.value = hairStyle;
+        storeOriginalValue('dwellerHairStyle', hairStyle);
+        trackFieldChange('dwellerHairStyle');
+    }
+    
+    // Dweller info
+    const serializeIdElem = document.getElementById('dwellerSerializeId');
+    if (serializeIdElem) {
+        serializeIdElem.value = dweller.serializeId || 1;
+    }
+    
+    const rarityElem = document.getElementById('dwellerRarity');
+    if (rarityElem) {
+        const rarity = dweller.rarity || 'Common';
+        rarityElem.value = rarity;
+        storeOriginalValue('dwellerRarity', rarity);
+        trackFieldChange('dwellerRarity');
+    }
+    
+    const savedRoomElem = document.getElementById('dwellerSavedRoom');
+    if (savedRoomElem) {
+        const savedRoom = dweller.savedRoom !== undefined ? dweller.savedRoom : -1;
+        savedRoomElem.value = savedRoom;
+        storeOriginalValue('dwellerSavedRoom', savedRoom);
+        trackFieldChange('dwellerSavedRoom');
+    }
+    
+    // Relationships
+    const pregnantElem = document.getElementById('dwellerPregnant');
+    if (pregnantElem) {
+        const pregnant = dweller.pregnant || false;
+        pregnantElem.value = pregnant.toString();
+        storeOriginalValue('dwellerPregnant', pregnant.toString());
+        trackFieldChange('dwellerPregnant');
+    }
+    
+    const babyReadyElem = document.getElementById('dwellerBabyReady');
+    if (babyReadyElem) {
+        const babyReady = dweller.babyReady || false;
+        babyReadyElem.value = babyReady.toString();
+        storeOriginalValue('dwellerBabyReady', babyReady.toString());
+        trackFieldChange('dwellerBabyReady');
+    }
+    
+    const partnerElem = document.getElementById('dwellerPartner');
+    if (partnerElem) {
+        const partner = dweller.relations?.partner !== undefined ? dweller.relations.partner : -1;
+        partnerElem.value = partner;
+        storeOriginalValue('dwellerPartner', partner);
+        trackFieldChange('dwellerPartner');
+    }
+    
     // Update SPECIAL stats - array of objects with {value, mod, exp}
     const statsArray = dweller.stats?.stats || [];
     const statIds = ['stat-s', 'stat-p', 'stat-e', 'stat-c', 'stat-i', 'stat-a', 'stat-l'];
@@ -837,6 +894,30 @@ function updateDwellerData() {
         // Example: #2c1810 → 0xFF2C1810 → 4283215887
         const rgb = parseInt(hairColorElem.value.replace('#', ''), 16);
         dweller.hairColor = (0xFF000000 | rgb) >>> 0; // >>> 0 converts to unsigned 32-bit integer
+    }
+    
+    // Hair style
+    const hairStyleElem = document.getElementById('dwellerHairStyle');
+    if (hairStyleElem) dweller.hair = hairStyleElem.value || '10';
+    
+    // Dweller info
+    const rarityElem = document.getElementById('dwellerRarity');
+    if (rarityElem) dweller.rarity = rarityElem.value || 'Common';
+    
+    const savedRoomElem = document.getElementById('dwellerSavedRoom');
+    if (savedRoomElem) dweller.savedRoom = parseInt(savedRoomElem.value) || -1;
+    
+    // Relationships
+    const pregnantElem = document.getElementById('dwellerPregnant');
+    if (pregnantElem) dweller.pregnant = pregnantElem.value === 'true';
+    
+    const babyReadyElem = document.getElementById('dwellerBabyReady');
+    if (babyReadyElem) dweller.babyReady = babyReadyElem.value === 'true';
+    
+    const partnerElem = document.getElementById('dwellerPartner');
+    if (partnerElem) {
+        if (!dweller.relations) dweller.relations = { relations: [], partner: -1, lastPartner: -1, ascendants: [-1, -1, -1, -1, -1, -1] };
+        dweller.relations.partner = parseInt(partnerElem.value) || -1;
     }
     
     // SPECIAL stats - array of objects with {value, mod, exp}
