@@ -2155,3 +2155,152 @@ footer p {
     border-radius: 8px;
     font-weight: 700;
 }
+
+/* Extra small screens: improve layout and touch usability */
+@media (max-width: 480px) {
+    /* reduce heavy paddings that cause horizontal overflow */
+    body {
+        padding: 10px;
+        background-attachment: scroll; /* avoid fixed backgrounds on mobile */
+    }
+
+    .container {
+        max-width: 100%;
+        margin: 0;
+        border-radius: 0;
+        min-height: auto;
+    }
+
+    header {
+        padding: 16px 12px;
+        text-align: center;
+    }
+
+    header h1 {
+        font-size: 1.4em;
+        line-height: 1.1;
+    }
+
+    header p, header .subtitle {
+        font-size: 0.95em;
+    }
+
+    main {
+        padding: 12px;
+    }
+
+    .panel-section,
+    .section,
+    .upload-section,
+    .inventory-modal-content,
+    .inventory-modal {
+        padding: 12px;
+    }
+
+    .control-panel {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+    }
+
+    .btn {
+        min-width: 0;
+        padding: 10px 12px;
+        font-size: 0.95em;
+    }
+
+    .button-grid .btn {
+        min-width: 0;
+        flex: 1 1 100%;
+    }
+
+    .upload-label {
+        padding: 18px;
+        font-size: 0.98em;
+    }
+
+    /* Collapse multi-column layouts */
+    .dwellers-panel,
+    .rooms-panel,
+    .wasteland-panel,
+    .guides-panel {
+        grid-template-columns: 1fr;
+    }
+
+    .dwellers-list-container,
+    .rooms-list-container,
+    .guides-list-container {
+        border-right: none;
+        border-bottom: 2px solid var(--border-color);
+        padding-right: 0;
+        padding-bottom: 12px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .vault-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .vault-grid-container,
+    .stats-grid-container {
+        padding: 8px;
+        max-width: 100%;
+    }
+
+    .editor-tabs {
+        overflow-x: auto;
+    }
+
+    .tab-btn {
+        min-width: 80px;
+        padding: 10px 12px;
+        font-size: 0.85em;
+    }
+
+    .tab-content {
+        min-height: 240px;
+    }
+
+    .search-results {
+        grid-template-columns: 1fr;
+    }
+
+    table {
+        font-size: 0.85em;
+    }
+
+    th, td {
+        padding: 6px 8px;
+    }
+
+    footer {
+        padding: 12px 10px;
+    }
+
+    /* Make interactive targets larger for touch */
+    .nav-link,
+    .btn,
+    .tab-btn,
+    .dweller-item,
+    .room-item,
+    .wasteland-team-item {
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(0,0,0,0.05);
+    }
+
+    /* Prevent accidental horizontal overflow from long code/text */
+    .json-editor,
+    .search-result-value,
+    .info-item code {
+        word-break: break-word;
+        white-space: normal;
+    }
+}
