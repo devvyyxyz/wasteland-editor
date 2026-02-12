@@ -8,19 +8,187 @@ let originalFileName = null;
 let seasonPassFileName = null;
 let originalFieldValues = {}; // Track original values from save file
 
-// Guides data: each guide may have `videoUrl` (embed URL) and `content` (HTML string)
-const GUIDES = [
+// Guides organized into sections. Each section has `id`, `title`, and `guides` array.
+const GUIDE_SECTIONS = [
     {
-        id: 'guide1',
-        title: 'How to Edit Dwellers',
-        videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-        content: '<p>Learn how to safely edit dweller properties like name, stats, and equipment. Always backup your save before editing.</p>'
+        id: 'getting-started',
+        title: 'Getting Started',
+        guides: [
+            {
+                id: 'intro',
+                title: 'Introduction & UI Overview',
+                videoUrl: '',
+                content: `
+                    <p>Welcome to Wasteland Editor. This walkthrough explains the main UI areas: file upload, tabs for Vault/Dwellers/Rooms, and the Raw JSON editor. Start by uploading a save file using the <strong>Upload Save File</strong> control.</p>
+                    <ul>
+                        <li><strong>Upload</strong>: Supports .sav, .dat, .json files.</li>
+                        <li><strong>Tabs</strong>: Switch between Vault, Dwellers, Rooms, Inventory and more.</li>
+                        <li><strong>Backups</strong>: The editor creates automatic backups—use them if you need to revert changes.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'backup-restore',
+                title: 'Backup & Restore Best Practices',
+                videoUrl: '',
+                content: `
+                    <p>Before making any edits, create a copy of your original save file and use the editor's backup functionality. This guide explains how to create and restore backups safely.</p>
+                    <ol>
+                        <li>Download a local copy of your save file.</li>
+                        <li>Use the editor's <em>Create Backup</em> or rely on automatic snapshots.</li>
+                        <li>If something goes wrong, use <em>Restore Backup</em> to revert.</li>
+                    </ol>
+                `
+            }
+        ]
     },
     {
-        id: 'guide2',
-        title: 'Season Pass Editor Overview',
-        videoUrl: '',
-        content: '<p>This guide explains the season pass fields and how to modify levels and rewards. Text and screenshots will be added.</p>'
+        id: 'dwellers',
+        title: 'Dwellers',
+        guides: [
+            {
+                id: 'edit-dwellers',
+                title: 'Edit Names, Stats & Level',
+                videoUrl: '',
+                content: `
+                    <p>This guide covers safely changing dweller attributes: first/last name, S.P.E.C.I.A.L. stats, level and experience. Always check the <strong>Serialize ID</strong> field before creating new dwellers.</p>
+                    <p>Tip: Use <strong>Max All Stats</strong> sparingly—it changes gameplay progression.</p>
+                `
+            },
+            {
+                id: 'equipment-outfits',
+                title: 'Weapons, Outfits & Inventory',
+                videoUrl: '',
+                content: `
+                    <p>Assign weapons and outfits via the dweller panel or the inventory tab. Removing or adding items directly modifies the vault inventory array.</p>
+                    <p>Note: The game stores items as individual entries—there is no quantity field.</p>
+                `
+            },
+            {
+                id: 'relationships',
+                title: 'Relationships & Babies',
+                videoUrl: '',
+                content: `
+                    <p>Manage relationships by editing partner IDs and pregnancy flags. Incorrect values may produce unexpected game behavior—always back up first.</p>
+                `
+            }
+        ]
+    },
+    {
+        id: 'rooms',
+        title: 'Rooms & Vault Layout',
+        guides: [
+            {
+                id: 'upgrade-rooms',
+                title: 'Upgrading and Unlocking Rooms',
+                videoUrl: '',
+                content: `
+                    <p>This guide explains how room tiers and unlock flags are represented in the save file. Use the <strong>Unlock All Rooms</strong> bulk action to set unlock flags across your vault.</p>
+                `
+            },
+            {
+                id: 'bulk-actions',
+                title: 'Bulk Actions & Safety',
+                videoUrl: '',
+                content: `
+                    <p>Bulk actions can corrupt saves if used without care. Always keep a backup and apply one action at a time to verify results.</p>
+                `
+            }
+        ]
+    },
+    {
+        id: 'inventory',
+        title: 'Inventory',
+        guides: [
+            {
+                id: 'add-remove-items',
+                title: 'Add / Remove Items Safely',
+                videoUrl: '',
+                content: `
+                    <p>Use the Add Item modal to append new items. When removing items, verify the correct item instance is removed to avoid unintended deletions.</p>
+                `
+            },
+            {
+                id: 'equip-weapons',
+                title: 'Equip Items to Dwellers',
+                videoUrl: '',
+                content: `
+                    <p>Assign equipment via the dweller panel to ensure references and indices remain consistent. For large-scale changes, prefer exporting, editing, and re-importing as JSON.</p>
+                `
+            }
+        ]
+    },
+    {
+        id: 'wasteland',
+        title: 'Wasteland',
+        guides: [
+            {
+                id: 'teams',
+                title: 'Managing Wasteland Teams',
+                videoUrl: '',
+                content: `
+                    <p>This guide explains how to create, save, and recall wasteland teams. You can max team resources or recall teams back to the vault safely.</p>
+                `
+            },
+            {
+                id: 'resources',
+                title: 'Maximizing Team Resources',
+                videoUrl: '',
+                content: `
+                    <p>Optimize team compositions to increase resource yields. The editor allows you to tweak team stats and carried resources directly.</p>
+                `
+            }
+        ]
+    },
+    {
+        id: 'season-pass',
+        title: 'Season Pass',
+        guides: [
+            {
+                id: 'season-overview',
+                title: 'Season Pass Editor Overview',
+                videoUrl: '',
+                content: `
+                    <p>The season pass contains level, tokens, and reward unlock flags. Modifying these values can violate service terms—use the download warning modal before exporting.</p>
+                `
+            }
+        ]
+    },
+    {
+        id: 'advanced',
+        title: 'Advanced / Raw JSON',
+        guides: [
+            {
+                id: 'raw-json',
+                title: 'Using the Raw JSON Editor',
+                videoUrl: '',
+                content: `
+                    <p>The Raw JSON editor exposes the entire save file. Make minimal changes and validate JSON syntax before saving. Use the Format JSON button to pretty-print content.</p>
+                `
+            },
+            {
+                id: 'history',
+                title: 'Change History & Backups',
+                videoUrl: '',
+                content: `
+                    <p>Review the change history panel to inspect edits and restore previous backups if needed. The editor maintains up to 10 backups automatically.</p>
+                `
+            }
+        ]
+    },
+    {
+        id: 'safety',
+        title: 'Safety & Legal',
+        guides: [
+            {
+                id: 'legal',
+                title: 'Legal Disclaimer & Best Practices',
+                videoUrl: '',
+                content: `
+                    <p>Modifying save files can violate Terms of Service. This tool is for educational purposes. Always keep backups and do not use modified files in competitive or online contexts.</p>
+                `
+            }
+        ]
     }
 ];
 
@@ -201,6 +369,15 @@ function initializeEventListeners() {
             if (dwellerDetailsEmptyState) dwellerDetailsEmptyState.style.display = 'flex';
             if (dwellerDetailsContent) dwellerDetailsContent.style.display = 'none';
             currentDweller = null;
+        }
+    });
+    // Also handle generic guide back-links
+    document.addEventListener('click', (e) => {
+        if (e.target.classList && e.target.classList.contains('back-link')) {
+            const guideDetailsContent = document.getElementById('guideDetailsContent');
+            const guideDetailsEmptyState = document.getElementById('guideDetailsEmptyState');
+            if (guideDetailsContent) guideDetailsContent.style.display = 'none';
+            if (guideDetailsEmptyState) guideDetailsEmptyState.style.display = 'flex';
         }
     });
     // Render guides list (populates Guides tab)
@@ -1593,43 +1770,101 @@ function renderGuidesList() {
     const container = document.getElementById('guidesList');
     if (!container) return;
     container.innerHTML = '';
-    GUIDES.forEach(g => {
+    // Render sections as left-sidebar items
+    GUIDE_SECTIONS.forEach(section => {
         const item = document.createElement('div');
-        item.className = 'dweller-item guide-item';
-        item.dataset.id = g.id;
+        item.className = 'dweller-item guide-section-item';
+        item.dataset.sectionId = section.id;
         item.innerHTML = `
-            <div style="display:flex; flex-direction:column; gap:6px;">
-                <strong>${g.title}</strong>
-                <span class="guide-excerpt">${(g.content || '').replace(/(<([^>]+)>)/gi, '').slice(0,120)}${(g.content||'').length>120? '…':''}</span>
+            <div>
+                <strong>${section.title}</strong>
             </div>
         `;
-        item.addEventListener('click', () => showGuideDetails(g.id));
+        item.addEventListener('click', () => selectGuideSection(section.id));
         container.appendChild(item);
     });
 }
 
+function findGuideById(id) {
+    for (const s of GUIDE_SECTIONS) {
+        for (const g of s.guides) {
+            if (g.id === id) return g;
+        }
+    }
+    return null;
+}
+
 function showGuideDetails(id) {
-    const guide = GUIDES.find(g => g.id === id);
+    const guide = findGuideById(id);
     if (!guide) return;
     document.getElementById('guideDetailsEmptyState').style.display = 'none';
     const content = document.getElementById('guideDetailsContent');
     content.style.display = 'block';
-    document.getElementById('guideDetailsTitle').textContent = guide.title;
-    document.getElementById('guideDetailsExcerpt').innerHTML = guide.content || '<p>No content yet.</p>';
-    const openBtn = document.getElementById('openGuideBtn');
-    openBtn.onclick = () => openGuideModal(guide.id);
+    content.innerHTML = `
+        <a href="#" class="back-link">← Back</a>
+        <div class="panel-section">
+            <h3>${guide.title}</h3>
+            <div id="guideDetailBody">${guide.content || '<p>No content yet.</p>'}</div>
+            <div style="margin-top:12px;">
+                <button class="btn btn-primary" id="openGuideBtnInner">Open Guide</button>
+            </div>
+        </div>
+    `;
+    document.getElementById('openGuideBtnInner').onclick = () => openGuideModal(guide.id);
 }
 
 function filterGuides(term) {
     const t = (term || '').toLowerCase();
-    document.querySelectorAll('#guidesList .guide-item').forEach(item => {
-        const text = item.textContent.toLowerCase();
-        item.style.display = text.includes(t) ? 'flex' : 'none';
+    document.querySelectorAll('#guidesList .guide-section-item').forEach(item => {
+        const sectionId = item.dataset.sectionId;
+        const section = GUIDE_SECTIONS.find(s => s.id === sectionId);
+        if (!section) return;
+        const matchesSection = section.title.toLowerCase().includes(t);
+        const matchesGuide = section.guides.some(g => (g.title + ' ' + (g.content||'')).toLowerCase().includes(t));
+        item.style.display = (matchesSection || matchesGuide) ? 'flex' : 'none';
+    });
+}
+
+function selectGuideSection(sectionId) {
+    const section = GUIDE_SECTIONS.find(s => s.id === sectionId);
+    if (!section) return;
+    // highlight selected
+    document.querySelectorAll('#guidesList .guide-section-item').forEach(i => i.classList.remove('active'));
+    const el = document.querySelector(`#guidesList .guide-section-item[data-section-id="${sectionId}"]`);
+    if (el) el.classList.add('active');
+
+    document.getElementById('guideDetailsEmptyState').style.display = 'none';
+    const content = document.getElementById('guideDetailsContent');
+    content.style.display = 'block';
+    const guidesHtml = section.guides.map(g => `
+        <div class="guide-card" data-guide-id="${g.id}">
+            <h4>${g.title}</h4>
+            <div class="guide-excerpt">${(g.content||'').replace(/(<([^>]+)>)/gi, '').slice(0,180)}${(g.content||'').length>180? '…':''}</div>
+            <div style="margin-top:10px; display:flex; gap:8px;">
+                <button class="btn btn-secondary" data-action="view" data-id="${g.id}">View</button>
+                <button class="btn btn-primary" data-action="open" data-id="${g.id}">Open</button>
+            </div>
+        </div>
+    `).join('');
+
+    content.innerHTML = `<a href="#" class="back-link">← Back</a><div class="panel-section"><h3>${section.title}</h3>${guidesHtml}</div>`;
+
+    content.querySelectorAll('button[data-action="view"]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const id = e.currentTarget.dataset.id;
+            showGuideDetails(id);
+        });
+    });
+    content.querySelectorAll('button[data-action="open"]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const id = e.currentTarget.dataset.id;
+            openGuideModal(id);
+        });
     });
 }
 
 function openGuideModal(id) {
-    const guide = GUIDES.find(g => g.id === id);
+    const guide = findGuideById(id);
     if (!guide) return;
     const modal = document.getElementById('guideModal');
     const title = document.getElementById('guideModalTitle');
