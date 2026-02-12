@@ -856,35 +856,7 @@
                     <textarea id="jsonEditor" class="json-editor" placeholder="Raw JSON editor..."></textarea>
                 </div>
 
-                <!-- GUIDES / TUTORIALS TAB -->
-                <div id="guides" class="tab-content">
-                    <div class="guides-panel">
-                        <div class="guides-list-container">
-                            <h3><i class="fas fa-book-open"></i> Guides & Tutorials</h3>
-                            <input type="text" id="guideSearch" class="search-input" placeholder="Search guides...">
-                            <div id="guidesList" class="dwellers-list" style="margin-top:8px;">
-                                <!-- JS will populate guide items here -->
-                            </div>
-                        </div>
-                        <div class="guide-details">
-                            <div id="guideDetailsEmptyState" class="no-data-message">
-                                <span class="no-data-icon"><i class="fas fa-book-open"></i></span>
-                                <p>No guide selected</p>
-                                <small>Select a guide from the left to view details</small>
-                            </div>
-                            <div id="guideDetailsContent" style="display:none;">
-                                <a href="#" class="back-link">← Back</a>
-                                <div class="panel-section">
-                                    <h3 id="guideDetailsTitle"></h3>
-                                    <div id="guideDetailsExcerpt"></div>
-                                    <div style="margin-top:12px;">
-                                        <button class="btn btn-primary" id="openGuideBtn">Open Guide</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!-- GUIDES removed from editor tabs; displayed below editor -->
 
                 <div class="editor-info">
                     <span id="fileSize">Size: 0 B</span>
@@ -897,6 +869,38 @@
                 <div id="searchResults" class="search-results"></div>
             </section>
         </main>
+
+        <!-- Guides / Tutorials Section (placed below editor, above Vault Statistics) -->
+        <section class="guides-section">
+            <div class="panel-section">
+                <div class="guides-panel">
+                    <div class="guides-list-container">
+                        <h3><i class="fas fa-book-open"></i> Guides & Tutorials</h3>
+                        <input type="text" id="guideSearch" class="search-input" placeholder="Search guides...">
+                        <div id="guidesList" class="dwellers-list" style="margin-top:8px;">
+                            <!-- JS will populate guide items here -->
+                        </div>
+                    </div>
+                    <div class="guide-details">
+                        <div id="guideDetailsEmptyState" class="no-data-message">
+                            <span class="no-data-icon"><i class="fas fa-book-open"></i></span>
+                            <p>No guide selected</p>
+                            <small>Select a guide from the left to view details</small>
+                        </div>
+                        <div id="guideDetailsContent" style="display:none;">
+                            <a href="#" class="back-link">← Back</a>
+                            <div class="panel-section">
+                                <h3 id="guideDetailsTitle"></h3>
+                                <div id="guideDetailsExcerpt"></div>
+                                <div style="margin-top:12px;">
+                                    <button class="btn btn-primary" id="openGuideBtn">Open Guide</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- Vault Statistics Section -->
         <section class="vault-stats-section" id="vaultStatsSection">
