@@ -8,6 +8,22 @@ let originalFileName = null;
 let seasonPassFileName = null;
 let originalFieldValues = {}; // Track original values from save file
 
+// Guides data: each guide may have `videoUrl` (embed URL) and `content` (HTML string)
+const GUIDES = [
+    {
+        id: 'guide1',
+        title: 'How to Edit Dwellers',
+        videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+        content: '<p>Learn how to safely edit dweller properties like name, stats, and equipment. Always backup your save before editing.</p>'
+    },
+    {
+        id: 'guide2',
+        title: 'Season Pass Editor Overview',
+        videoUrl: '',
+        content: '<p>This guide explains the season pass fields and how to modify levels and rewards. Text and screenshots will be added.</p>'
+    }
+];
+
 // DOM Elements
 const fileInput = document.getElementById('fileInput');
 const fileInfo = document.getElementById('fileInfo');
@@ -138,6 +154,10 @@ function initializeEventListeners() {
     if (outfitSearch) outfitSearch.addEventListener('input', (e) => filterInventory('outfits', e.target.value));
     if (junkSearch) junkSearch.addEventListener('input', (e) => filterInventory('junk', e.target.value));
 
+    // Guides search listener
+    const guideSearch = document.getElementById('guideSearch');
+    if (guideSearch) guideSearch.addEventListener('input', debounce((e) => filterGuides(e.target.value), 200));
+
     // Inventory add buttons
     const addWeaponBtn = document.getElementById('addWeaponBtn');
     const addOutfitBtn = document.getElementById('addOutfitBtn');
@@ -183,6 +203,8 @@ function initializeEventListeners() {
             currentDweller = null;
         }
     });
+    // Render guides list (populates Guides tab)
+    renderGuidesList();
 }
 
 // File Upload Handler
@@ -1565,6 +1587,74 @@ function filterInventory(type, searchTerm) {
         item.style.display = text.includes(term) ? 'flex' : 'none';
     });
 }
+
+// --- Guides / Tutorials ---
+function renderGuidesList() {
+    const container = document.getElementById('guidesList');
+    if (!container) return;
+    container.innerHTML = '';
+    GUIDES.forEach(g => {
+        const item = document.createElement('div');
+        item.className = 'dweller-item guide-item';
+        item.dataset.id = g.id;
+        item.innerHTML = `
+            <div style="display:flex; flex-direction:column; gap:6px;">
+                <strong>${g.title}</strong>
+                <span class="guide-excerpt">${(g.content || '').replace(/(<([^>]+)>)/gi, '').slice(0,120)}${(g.content||'').length>120? '…':''}</span>
+            </div>
+        `;
+        item.addEventListener('click', () => showGuideDetails(g.id));
+        container.appendChild(item);
+    });
+}
+
+function showGuideDetails(id) {
+    const guide = GUIDES.find(g => g.id === id);
+    if (!guide) return;
+    document.getElementById('guideDetailsEmptyState').style.display = 'none';
+    const content = document.getElementById('guideDetailsContent');
+    content.style.display = 'block';
+    document.getElementById('guideDetailsTitle').textContent = guide.title;
+    document.getElementById('guideDetailsExcerpt').innerHTML = guide.content || '<p>No content yet.</p>';
+    const openBtn = document.getElementById('openGuideBtn');
+    openBtn.onclick = () => openGuideModal(guide.id);
+}
+
+function filterGuides(term) {
+    const t = (term || '').toLowerCase();
+    document.querySelectorAll('#guidesList .guide-item').forEach(item => {
+        const text = item.textContent.toLowerCase();
+        item.style.display = text.includes(t) ? 'flex' : 'none';
+    });
+}
+
+function openGuideModal(id) {
+    const guide = GUIDES.find(g => g.id === id);
+    if (!guide) return;
+    const modal = document.getElementById('guideModal');
+    const title = document.getElementById('guideModalTitle');
+    const videoContainer = document.getElementById('guideVideoContainer');
+    const content = document.getElementById('guideContent');
+
+    title.textContent = guide.title || 'Guide';
+    // Video or placeholder
+    if (guide.videoUrl) {
+        videoContainer.innerHTML = `<div class="video-wrapper"><iframe src="${guide.videoUrl}" frameborder="0" allowfullscreen></iframe></div>`;
+    } else {
+        videoContainer.innerHTML = `<div class="video-placeholder">Video coming soon</div>`;
+    }
+
+    content.innerHTML = guide.content || '<p>No content yet.</p>';
+    modal.classList.add('active');
+}
+
+function closeGuideModal() {
+    const modal = document.getElementById('guideModal');
+    const videoContainer = document.getElementById('guideVideoContainer');
+    modal.classList.remove('active');
+    if (videoContainer) videoContainer.innerHTML = '';
+}
+
 
 // Update Vault Data
 function updateVaultData() {

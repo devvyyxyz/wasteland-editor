@@ -856,6 +856,36 @@
                     <textarea id="jsonEditor" class="json-editor" placeholder="Raw JSON editor..."></textarea>
                 </div>
 
+                <!-- GUIDES / TUTORIALS TAB -->
+                <div id="guides" class="tab-content">
+                    <div class="guides-panel">
+                        <div class="guides-list-container">
+                            <h3><i class="fas fa-book-open"></i> Guides & Tutorials</h3>
+                            <input type="text" id="guideSearch" class="search-input" placeholder="Search guides...">
+                            <div id="guidesList" class="dwellers-list" style="margin-top:8px;">
+                                <!-- JS will populate guide items here -->
+                            </div>
+                        </div>
+                        <div class="guide-details">
+                            <div id="guideDetailsEmptyState" class="no-data-message">
+                                <span class="no-data-icon"><i class="fas fa-book-open"></i></span>
+                                <p>No guide selected</p>
+                                <small>Select a guide from the left to view details</small>
+                            </div>
+                            <div id="guideDetailsContent" style="display:none;">
+                                <a href="#" class="back-link">← Back</a>
+                                <div class="panel-section">
+                                    <h3 id="guideDetailsTitle"></h3>
+                                    <div id="guideDetailsExcerpt"></div>
+                                    <div style="margin-top:12px;">
+                                        <button class="btn btn-primary" id="openGuideBtn">Open Guide</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="editor-info">
                     <span id="fileSize">Size: 0 B</span>
                     <span id="errorMessage" class="error"></span>
@@ -990,6 +1020,25 @@
                 </div>
                 <div class="button-grid" style="margin-top: 20px;">
                     <button class="btn btn-secondary" onclick="closeHistoryModal()">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Guide Modal -->
+        <div id="guideModal" class="inventory-modal">
+            <div class="inventory-modal-content" style="max-width: 900px;">
+                <div class="inventory-modal-header">
+                    <h3 id="guideModalTitle">Guide</h3>
+                    <button class="inventory-modal-close" onclick="closeGuideModal()">×</button>
+                </div>
+                <div class="panel-section">
+                    <div id="guideVideoContainer" style="margin-bottom: 15px;">
+                        <!-- Video iframe or placeholder inserted by JS -->
+                    </div>
+                    <div id="guideContent"></div>
+                </div>
+                <div class="button-grid" style="margin-top: 20px;">
+                    <button class="btn btn-secondary" onclick="closeGuideModal()">Close</button>
                 </div>
             </div>
         </div>
